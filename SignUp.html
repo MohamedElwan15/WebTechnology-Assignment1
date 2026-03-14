@@ -6,133 +6,139 @@
     <title>Recipe Finder - Create Account</title>
   </head>
   <body background="https://www.simplyrecipes.com/thmb/FRlM2EEuix3dh1WxFD2R_Gp-V4c=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes-Most-Popular-Recipes-Feature-LEAD-04-b4cc7e7bcfbe486586053a8e0a927d2f.jpg">
+      <nav>
+          <strong>Recipe Finder</strong>
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          <a href="homepage.html">Home</a>
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          <a href="recList.html">All Recipes</a>
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          <a href="search.html">Search</a> <!--Not functional till JavaScript implementation-->
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          <a href="favorites.html">My Favorites</a>
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          <a href="admin_recipes.html">Admin Dashboard</a>
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          <a href="EntryPage.html">Logout</a>
+      </nav>
 
-    <br /><br /><br /><br />
+      <hr />
+      <br /><br /><br /><br />
 
-    <center>
+      <center>
 
-      <table width="460" bgcolor="#ffffff" cellpadding="36" cellspacing="0" border="0">
-        <tr>
-          <td align="center">
+          <table width="460" bgcolor="#ffffff" cellpadding="36" cellspacing="0" border="0">
+              <tr>
+                  <td align="center">
 
-            <h1>Recipe Finder</h1>
-            <p>Create your account to start exploring recipes.</p>
+                      <h1>Recipe Finder</h1>
+                      <p>Create your account to start exploring recipes.</p>
 
-            <hr width="320" />
+                      <hr width="320" />
 
-            <br />
+                      <br />
 
-            <h2>Create an Account</h2>
+                      <h2>Create an Account</h2>
 
-            <br />
+                      <br />
 
-            <!--
-              ACTION: Phase 2 will point this to the backend signup endpoint.
-              Fields match the project spec: username, password, confirm_password, email, is_admin.
-              On successful signup -> redirect to login.html so the user logs in with new credentials.
-            -->
-            <form action="./LogIn.html" method="get">
+                      <!--
+                      ACTION: Phase 2 will point this to the backend signup endpoint.
+                      Fields match the project spec: username, password, confirm_password, email, is_admin.
+                      On successful signup -> redirect to login.html so the user logs in with new credentials.
+                    -->
+                      <form action="./LogIn.html" method="get">
 
-              <table border="0" cellpadding="8">
+                          <table border="0" cellpadding="8">
 
-                <tr>
-                  <td align="right"><label for="username">Username</label></td>
-                  <td>
-                    <input
-                      type="text"
-                      id="username"
-                      name="username"
-                      size="28"
-                      required
-                    />
+                              <tr>
+                                  <td align="right"><label for="username">Username</label></td>
+                                  <td>
+                                      <input type="text"
+                                             id="username"
+                                             name="username"
+                                             size="28"
+                                             required />
+                                  </td>
+                              </tr>
+
+                              <tr>
+                                  <td align="right"><label for="email">Email Address</label></td>
+                                  <td>
+                                      <input type="email"
+                                             id="email"
+                                             name="email"
+                                             size="28"
+                                             required />
+                                  </td>
+                              </tr>
+
+                              <tr>
+                                  <td align="right"><label for="password">Password</label></td>
+                                  <td>
+                                      <input type="password"
+                                             id="password"
+                                             name="password"
+                                             size="28"
+                                             required />
+                                  </td>
+                              </tr>
+
+                              <tr>
+                                  <td align="right"><label for="confirm_password">Confirm Password</label></td>
+                                  <td>
+                                      <input type="password"
+                                             id="confirm_password"
+                                             name="confirm_password"
+                                             size="28"
+                                             required />
+                                  </td>
+                              </tr>
+
+                              <tr>
+                                  <td align="right"><label for="is_admin">Register as Admin</label></td>
+                                  <td>
+                                      <input type="checkbox"
+                                             id="is_admin"
+                                             name="is_admin"
+                                             value="true" />
+                                      &nbsp;
+                                      <small>Check only if you are an administrator.</small>
+                                  </td>
+                              </tr>
+
+                              <tr>
+                                  <td></td>
+                                  <td>
+                                      <br />
+                                      <button type="submit">Create Account</button>
+                                  </td>
+                              </tr>
+
+                          </table>
+
+                      </form>
+
+                      <br />
+                      <hr width="320" />
+                      <br />
+
+                      <p>
+                          Already have an account?
+                          <a href="./LogIn.html">Log in here</a>
+                      </p>
+
+                      <p>
+                          <a href="./EntryPage.html">Back to Welcome Page</a>
+                      </p>
+
                   </td>
-                </tr>
+              </tr>
+          </table>
 
-                <tr>
-                  <td align="right"><label for="email">Email Address</label></td>
-                  <td>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      size="28"
-                      required
-                    />
-                  </td>
-                </tr>
+      </center>
 
-                <tr>
-                  <td align="right"><label for="password">Password</label></td>
-                  <td>
-                    <input
-                      type="password"
-                      id="password"
-                      name="password"
-                      size="28"
-                      required
-                    />
-                  </td>
-                </tr>
-
-                <tr>
-                  <td align="right"><label for="confirm_password">Confirm Password</label></td>
-                  <td>
-                    <input
-                      type="password"
-                      id="confirm_password"
-                      name="confirm_password"
-                      size="28"
-                      required
-                    />
-                  </td>
-                </tr>
-
-                <tr>
-                  <td align="right"><label for="is_admin">Register as Admin</label></td>
-                  <td>
-                    <input
-                      type="checkbox"
-                      id="is_admin"
-                      name="is_admin"
-                      value="true"
-                    />
-                    &nbsp;
-                    <small>Check only if you are an administrator.</small>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td></td>
-                  <td>
-                    <br />
-                    <button type="submit">Create Account</button>
-                  </td>
-                </tr>
-
-              </table>
-
-            </form>
-
-            <br />
-            <hr width="320" />
-            <br />
-
-            <p>
-              Already have an account?
-              <a href="./LogIn.html">Log in here</a>
-            </p>
-
-            <p>
-              <a href="./EntryPage.html">Back to Welcome Page</a>
-            </p>
-
-          </td>
-        </tr>
-      </table>
-
-    </center>
-
-    <br /><br /><br /><br />
+      <br /><br /><br /><br />
 
   </body>
 </html>
