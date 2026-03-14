@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recipe Finder - Log In</title>
+  </head>
+  <body background="https://www.simplyrecipes.com/thmb/FRlM2EEuix3dh1WxFD2R_Gp-V4c=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes-Most-Popular-Recipes-Feature-LEAD-04-b4cc7e7bcfbe486586053a8e0a927d2f.jpg">
+
+    <br /><br /><br /><br />
+
+    <center>
+
+      <table width="420" bgcolor="#ffffff" cellpadding="36" cellspacing="0" border="0">
+        <tr>
+          <td align="center">
+
+            <h1>FCAI - SOFRA</h1>
+            <p>Welcome back. Please log in to continue.</p>
+
+            <hr width="300" />
+
+            <br />
+
+            <h2>Log In</h2>
+
+            <br />
+
+            <!--
+              ACTION: Phase 2 will point this to the backend login endpoint.
+              On successful login:
+                Regular user -> redirect to homepage.html
+                Admin user   -> redirect to homepage.html (nav shows Admin Dashboard)
+            -->
+            <form action="homepage.html" method="get"> <!-- UPDATE THIS TO THE HOMPAGE YOU DID ya -->
+
+              <table border="0" cellpadding="8">
+
+                <tr>
+                  <td align="right"><label for="username">Username</label></td>
+                  <td>
+                    <input
+                      type="text"
+                      id="username"
+                      name="username"
+                      size="28"
+                      required
+                    />
+                  </td>
+                </tr>
+
+                <tr>
+                  <td align="right"><label for="password">Password</label></td>
+                  <td>
+                    <input
+                      type="password"
+                      id="password"
+                      name="password"
+                      size="28"
+                      required
+                    />
+                  </td>
+                </tr>
+
+                <tr>
+                  <td></td>
+                  <td>
+                    <br />
+                    <button type="submit">Log In</button>
+                  </td>
+                </tr>
+
+              </table>
+
+            </form>
+
+            <br />
+            <hr width="300" />
+            <br />
+
+            <p>
+              Don't have an account?
+              <a href="./SignUp.html">Create one here</a>
+            </p>
+
+            <p>
+              <a href="./EntryPage.html">Back to Welcome Page</a>
+            </p>
+
+          </td>
+        </tr>
+      </table>
+
+    </center>
+
+    <br /><br /><br /><br />
+
+  </body>
+</html>
