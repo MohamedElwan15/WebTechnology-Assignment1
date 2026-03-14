@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Recipes</title>
+</head>
+
+<body>
+    <header>
+        <h1>My Recipes</h1>
+    </header>
+    <main>
+        <button type="button" onclick="window.location.href='admin_add.html'">Add Recipe</button>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Recipe ID</th>
+                    <th>Recipe Name</th>
+                    <th>Course</th>
+                    <th>Image</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>R001</td>
+                    <td>Makarona Bashamel</td>
+                    <td>Main Course</td>
+                    <td><img src="bashamel.jpg" alt="Makarona Bashamel" width="150"></td>
+                    <td>
+                        <a href="admin_edit.html">Edit</a>
+                        <button type="submit">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>R002</td>
+                    <td>Koshari</td>
+                    <td>Main Course</td>
+                    <td><img src="https://silkroadrecipes.com/wp-content/uploads/2021/06/Egyptian-Koshari-square.jpg"
+                            alt="Koshari" width="150"></td>
+                    <td>
+                        <a href="admin_edit.html">Edit</a>
+                        <button type="submit">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>R003</td>
+                    <td>Om Ali</td>
+                    <td>Dessert</td>
+                    <td><img src="https://www.cairo24.com/Upload/libfiles/100/2/26.jpeg" alt="Om Ali" width="150"></td>
+                    <td>
+                        <a href="admin_edit.html">Edit</a>
+                        <button type="submit">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+    <footer>
+    </footer>
+</body>
+
+</html>
