@@ -7,9 +7,9 @@
   </head>
   <body>
 
-    <a name="top"></a>
+      <a name="top"></a>
 
-    <!-- ========================================================
+      <!-- ========================================================
          NAVIGATION BAR
          NOTE TO TEAM: Copy this exact <nav> into every page.
          This nav is for LOGGED-IN users only (shown after login).
@@ -17,337 +17,321 @@
            My Favorites     -> regular users only
            Admin Dashboard  -> admin users only
          ======================================================== -->
-    <nav>
-      <strong>Recipe Finder</strong>
-      &nbsp;&nbsp;|&nbsp;&nbsp;
-      <a href="homepage.html">Home</a>
-      &nbsp;&nbsp;|&nbsp;&nbsp;
-      <a href="recipes.html">All Recipes</a>
-      &nbsp;&nbsp;|&nbsp;&nbsp;
-      <a href="search.html">Search</a>
-      &nbsp;&nbsp;|&nbsp;&nbsp;
-      <a href="favorites.html">My Favorites</a>
-      &nbsp;&nbsp;|&nbsp;&nbsp;
-      <a href="admin-dashboard.html">Admin Dashboard</a>
-      &nbsp;&nbsp;|&nbsp;&nbsp;
-      <a href="entry.html">Logout</a>
-    </nav>
+      <nav>
+          <strong>Recipe Finder</strong>
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          <a href="homepage.html">Home</a>
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          <a href="recipes.html">All Recipes</a>
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          <a href="search.html">Search</a>
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          <a href="favorites.html">My Favorites</a>
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          <a href="admin_recipes.html">Admin Dashboard</a>
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          <a href="EntryPage.html">Logout</a>
+      </nav>
 
-    <hr />
+      <hr />
 
-    <!-- HERO IMAGE + INTRO -->
-    <header>
-      <table width="100%" border="0" cellpadding="0" cellspacing="0">
-        <tr>
-          <td
-            background="https://www.egginfo.co.uk/sites/default/files/2025-01/egg-week-2024-1140x518.jpg"
-            align="center"
-            height="500"
-          >
-            <br /><br /><br />
-            <table border="0" cellpadding="24" cellspacing="0" width="560" bgcolor="#FFFFFF">
+      <!-- HERO IMAGE + INTRO -->
+      <header>
+          <table width="100%" border="0" cellpadding="0" cellspacing="0">
               <tr>
-                <td align="center">
-                  <font color="#000000">
-                    <h1>Recipe Finder</h1>
-                    <p>
-                      A curated collection of recipes crafted by Egypt's most celebrated chefs.<br />
-                      From light appetizers to rich desserts — every dish, at your fingertips.
-                    </p>
-                    <p>
-                      <a href="recipes.html"><font color="#000000"><strong>Explore All Recipes</strong></font></a>
-                      &nbsp;&nbsp;&nbsp;&nbsp;
-                      <a href="search.html"><font color="#000000"><strong>Search by Dish or Ingredient</strong></font></a>
-                    </p>
-                  </font>
-                </td>
+                  <td background="https://www.egginfo.co.uk/sites/default/files/2025-01/egg-week-2024-1140x518.jpg"
+                      align="center"
+                      height="500">
+                      <br /><br /><br />
+                      <table border="0" cellpadding="24" cellspacing="0" width="560" bgcolor="#FFFFFF">
+                          <tr>
+                              <td align="center">
+                                  <font color="#000000">
+                                      <h1>Recipe Finder</h1>
+                                      <p>
+                                          A curated collection of recipes crafted by Egypt's most celebrated chefs.<br />
+                                          From light appetizers to rich desserts — every dish, at your fingertips.
+                                      </p>
+                                      <p>
+                                          <a href="recipes.html"><font color="#000000"><strong>Explore All Recipes</strong></font></a>
+                                          &nbsp;&nbsp;&nbsp;&nbsp;
+                                          <a href="search.html"><font color="#000000"><strong>Search by Dish or Ingredient</strong></font></a>
+                                      </p>
+                                  </font>
+                              </td>
+                          </tr>
+                      </table>
+                      <br /><br /><br />
+                  </td>
               </tr>
-            </table>
-            <br /><br /><br />
-          </td>
-        </tr>
-      </table>
-    </header>
-
-    <hr />
-
-    <main>
-
-      <!-- BROWSE BY COURSE -->
-      <section>
-        <center><h2>Browse by Course</h2></center>
-
-        <table width="88%" align="center" border="0" cellpadding="16">
-
-          <!-- APPETIZERS -->
-          <tr valign="middle">
-            <td width="220">
-              <img
-                src="https://rms-media-prod.generalmills.com/1cc79a45-02d1-47ec-8af6-8c326c32a522.jpg"
-                alt="Appetizers"
-                width="200"
-                height="140"
-              />
-            </td>
-            <td>
-              <h3>Appetizers</h3>
-              <p>
-                Light, inviting starters to open any meal. From dips and salads
-                to small bites, our appetizer collection sets the perfect tone
-                for what is to come.
-              </p>
-              <p><a href="search.html?course=appetizers">View Appetizers</a></p>
-            </td>
-          </tr>
-
-          <tr><td colspan="2"><hr /></td></tr>
-
-          <!-- MAIN COURSE -->
-          <tr valign="middle">
-            <td width="220">
-              <img
-                src="https://www.southernliving.com/thmb/XIHmbOagRrWxoOOrYnQih5VEV9A=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/2548301_QFSHe_646_0_0_0-fbd2a27e126942c8b33dbc3d696b0501.jpg"
-                alt="Main Course"
-                width="200"
-                height="140"
-              />
-            </td>
-            <td>
-              <h3>Main Course</h3>
-              <p>
-                Hearty, satisfying dishes that take center stage. Grilled meats,
-                slow-cooked stews, and everything in between — built to impress
-                and nourish.
-              </p>
-              <p><a href="search.html?course=main-course">View Main Courses</a></p>
-            </td>
-          </tr>
-
-          <tr><td colspan="2"><hr /></td></tr>
-
-          <!-- DESSERTS -->
-          <tr valign="middle">
-            <td width="220">
-              <img
-                src="https://www.mrsfields.com/cdn/shop/articles/AdobeStock_481628869_1.jpg?v=1752101290&width=1100"
-                alt="Desserts"
-                width="200"
-                height="140"
-              />
-            </td>
-            <td>
-              <h3>Desserts</h3>
-              <p>
-                Sweet finales for every occasion. Whether you prefer rich
-                creamy pastries or light fruit-based treats, the perfect
-                dessert is waiting.
-              </p>
-              <p><a href="search.html?course=dessert">View Desserts</a></p>
-            </td>
-          </tr>
-
-        </table>
-      </section>
-
-      <hr />
-
-      <!-- SEARCH BAR -->
-      <!--
-        ACTION points to search.html so pressing Enter or clicking Search
-        navigates directly to the search page with the query in the URL.
-        Phase 2 will read the query parameter and filter results there.
-      -->
-      <section>
-        <center>
-          <h2>Find a Recipe</h2>
-          <p>
-            Search the full collection by dish name or by a specific ingredient
-            you have on hand.
-          </p>
-          <form action="search.html" method="get">
-            <input
-              type="text"
-              name="query"
-              id="home-search"
-              size="48"
-              placeholder="e.g. grilled chicken, garlic, tiramisu..."
-            />
-            &nbsp;
-            <button type="submit">Search</button>
-          </form>
-          <br />
-        </center>
-      </section>
-
-      <hr />
-
-      <!-- MEET THE CHEFS -->
-      <section>
-        <center>
-          <h2>Meet Our Chefs</h2>
-          <p>
-            Our recipes are curated by Egypt's most recognized culinary talents.<br />
-            Click on a chef to learn more about their story and signature dishes.
-          </p>
-          <br />
-
-          <table border="1" cellpadding="24" cellspacing="0" width="88%">
-            <tr align="center" valign="top">
-
-              <td width="33%">
-                <a href="./chef-el-sherbiny.html">
-                  <img
-                    src="https://assets.minly.com/assets/avatars/zPtgfPwF2LsozVn2g6MEl.jpg"
-                    alt="Chef El Sherbiny"
-                    width="180"
-                    height="180"
-                  />
-                  <br /><br />
-                  <strong>Chef El Sherbiny</strong>
-                </a>
-                <br />
-                <em>Egyptian &amp; Oriental Cuisine</em>
-                <br /><br />
-                <p>
-                  One of the most celebrated names in Egyptian cooking,
-                  known for blending authentic oriental flavors with
-                  modern presentation.
-                </p>
-                <a href="./chef-el-sherbiny.html">View Profile</a>
-              </td>
-
-              <td width="33%">
-                <a href="./chef-hassan.html">
-                  <img
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJYSpXwt07ODmH4Lw1r8uQLuTHqijHV-bZmA&s"
-                    alt="Chef Hassan"
-                    width="180"
-                    height="180"
-                  />
-                  <br /><br />
-                  <strong>Chef Hassan</strong>
-                </a>
-                <br />
-                <em>Grills &amp; Main Courses</em>
-                <br /><br />
-                <p>
-                  A master of hearty mains and bold flavors, celebrated
-                  for his grilled dishes and rich slow-cooked recipes
-                  inspired by Egyptian tradition.
-                </p>
-                <a href="./chef-hassan.html">View Profile</a>
-              </td>
-
-              <td width="33%">
-                <a href="./chef-nadia-elsayed.html">
-                  <img
-                    src="https://yt3.googleusercontent.com/wEwWYlGQVCpenDDdkc_CNYQiFHzzixW6Bd7gGlGrOlbnq3XpPzytMa3mOq48Wxcj_qOx1xmXOw=s900-c-k-c0x00ffffff-no-rj"
-                    alt="Chef Nadia El Sayed"
-                    width="180"
-                    height="180"
-                  />
-                  <br /><br />
-                  <strong>Chef Nadia El Sayed</strong>
-                </a>
-                <br />
-                <em>Desserts &amp; International Cuisine</em>
-                <br /><br />
-                <p>
-                  One of Egypt's most-followed culinary personalities,
-                  known for precise recipes that bridge Egyptian and
-                  international cooking.
-                </p>
-                <a href="./chef-nadia-elsayed.html">View Profile</a>
-              </td>
-
-            </tr>
           </table>
-
-        </center>
-      </section>
+      </header>
 
       <hr />
 
-      <!-- FEATURED RECIPES -->
-      <section>
-        <center><h2>Featured Recipes</h2></center>
+      <main>
 
-        <table width="88%" align="center" border="1" cellpadding="14" cellspacing="0">
-          <thead>
-            <tr>
-              <th>Recipe</th>
-              <th>Course</th>
-              <th>Key Ingredients</th>
-              <th>Chef</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Classic Hummus</strong></td>
-              <td>Appetizer</td>
-              <td>Chickpeas, tahini, lemon juice, garlic, olive oil</td>
-              <td>Chef El Sherbiny</td>
-              <td><a href="recipe-detail.html?id=1">View Recipe</a></td>
-            </tr>
-            <tr>
-              <td><strong>Grilled Kofta</strong></td>
-              <td>Main Course</td>
-              <td>Ground beef, onion, parsley, cumin, coriander</td>
-              <td>Chef Hassan</td>
-              <td><a href="recipe-detail.html?id=2">View Recipe</a></td>
-            </tr>
-            <tr>
-              <td><strong>Om Ali</strong></td>
-              <td>Dessert</td>
-              <td>Puff pastry, milk, cream, mixed nuts, raisins</td>
-              <td>Chef Nadia El Sayed</td>
-              <td><a href="recipe-detail.html?id=3">View Recipe</a></td>
-            </tr>
-            <tr>
-              <td><strong>Fattoush Salad</strong></td>
-              <td>Appetizer</td>
-              <td>Romaine, tomato, cucumber, radish, sumac, pita chips</td>
-              <td>Chef El Sherbiny</td>
-              <td><a href="recipe-detail.html?id=4">View Recipe</a></td>
-            </tr>
-            <tr>
-              <td><strong>Lamb Ouzi</strong></td>
-              <td>Main Course</td>
-              <td>Lamb shoulder, basmati rice, almonds, saffron, spices</td>
-              <td>Chef Hassan</td>
-              <td><a href="recipe-detail.html?id=5">View Recipe</a></td>
-            </tr>
-            <tr>
-              <td><strong>Basbousa</strong></td>
-              <td>Dessert</td>
-              <td>Semolina, yogurt, sugar syrup, coconut, almonds</td>
-              <td>Chef Nadia El Sayed</td>
-              <td><a href="recipe-detail.html?id=6">View Recipe</a></td>
-            </tr>
-          </tbody>
-        </table>
+          <!-- BROWSE BY COURSE -->
+          <section>
+              <center><h2>Browse by Course</h2></center>
 
-        <br />
-        <center>
-          <p><a href="recipes.html">View the Full Recipe Collection</a></p>
-        </center>
-      </section>
+              <table width="88%" align="center" border="0" cellpadding="16">
 
-    </main>
+                  <!-- APPETIZERS -->
+                  <tr valign="middle">
+                      <td width="220">
+                          <img src="https://rms-media-prod.generalmills.com/1cc79a45-02d1-47ec-8af6-8c326c32a522.jpg"
+                               alt="Appetizers"
+                               width="200"
+                               height="140" />
+                      </td>
+                      <td>
+                          <h3>Appetizers</h3>
+                          <p>
+                              Light, inviting starters to open any meal. From dips and salads
+                              to small bites, our appetizer collection sets the perfect tone
+                              for what is to come.
+                          </p>
+                          <p><a href="search.html?course=appetizers">View Appetizers</a></p>
+                      </td>
+                  </tr>
 
-    <hr />
+                  <tr><td colspan="2"><hr /></td></tr>
 
-    <footer>
-      <center>
-        <p>
-          <small>
-            FCAI - SOFRA
-          </small>
-        </p>
-        <p><a href="#top">Back to Top</a></p>
-      </center>
-    </footer>
+                  <!-- MAIN COURSE -->
+                  <tr valign="middle">
+                      <td width="220">
+                          <img src="https://www.southernliving.com/thmb/XIHmbOagRrWxoOOrYnQih5VEV9A=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/2548301_QFSHe_646_0_0_0-fbd2a27e126942c8b33dbc3d696b0501.jpg"
+                               alt="Main Course"
+                               width="200"
+                               height="140" />
+                      </td>
+                      <td>
+                          <h3>Main Course</h3>
+                          <p>
+                              Hearty, satisfying dishes that take center stage. Grilled meats,
+                              slow-cooked stews, and everything in between — built to impress
+                              and nourish.
+                          </p>
+                          <p><a href="search.html?course=main-course">View Main Courses</a></p>
+                      </td>
+                  </tr>
+
+                  <tr><td colspan="2"><hr /></td></tr>
+
+                  <!-- DESSERTS -->
+                  <tr valign="middle">
+                      <td width="220">
+                          <img src="https://www.mrsfields.com/cdn/shop/articles/AdobeStock_481628869_1.jpg?v=1752101290&width=1100"
+                               alt="Desserts"
+                               width="200"
+                               height="140" />
+                      </td>
+                      <td>
+                          <h3>Desserts</h3>
+                          <p>
+                              Sweet finales for every occasion. Whether you prefer rich
+                              creamy pastries or light fruit-based treats, the perfect
+                              dessert is waiting.
+                          </p>
+                          <p><a href="search.html?course=dessert">View Desserts</a></p>
+                      </td>
+                  </tr>
+
+              </table>
+          </section>
+
+          <hr />
+
+          <!-- SEARCH BAR -->
+          <!--
+          ACTION points to search.html so pressing Enter or clicking Search
+          navigates directly to the search page with the query in the URL.
+          Phase 2 will read the query parameter and filter results there.
+        -->
+          <section>
+              <center>
+                  <h2>Find a Recipe</h2>
+                  <p>
+                      Search the full collection by dish name or by a specific ingredient
+                      you have on hand.
+                  </p>
+                  <form action="search.html" method="get">
+                      <input type="text"
+                             name="query"
+                             id="home-search"
+                             size="48"
+                             placeholder="e.g. grilled chicken, garlic, tiramisu..." />
+                      &nbsp;
+                      <button type="submit">Search</button>
+                  </form>
+                  <br />
+              </center>
+          </section>
+
+          <hr />
+
+          <!-- MEET THE CHEFS -->
+          <section>
+              <center>
+                  <h2>Meet Our Chefs</h2>
+                  <p>
+                      Our recipes are curated by Egypt's most recognized culinary talents.<br />
+                      Click on a chef to learn more about their story and signature dishes.
+                  </p>
+                  <br />
+
+                  <table border="1" cellpadding="24" cellspacing="0" width="88%">
+                      <tr align="center" valign="top">
+
+                          <td width="33%">
+                              <a href="./chef-el-sherbiny.html">
+                                  <img src="https://assets.minly.com/assets/avatars/zPtgfPwF2LsozVn2g6MEl.jpg"
+                                       alt="Chef El Sherbiny"
+                                       width="180"
+                                       height="180" />
+                                  <br /><br />
+                                  <strong>Chef El Sherbiny</strong>
+                              </a>
+                              <br />
+                              <em>Egyptian &amp; Oriental Cuisine</em>
+                              <br /><br />
+                              <p>
+                                  One of the most celebrated names in Egyptian cooking,
+                                  known for blending authentic oriental flavors with
+                                  modern presentation.
+                              </p>
+                              <a href="./chef-el-sherbiny.html">View Profile</a>
+                          </td>
+
+                          <td width="33%">
+                              <a href="./chef-hassan.html">
+                                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJYSpXwt07ODmH4Lw1r8uQLuTHqijHV-bZmA&s"
+                                       alt="Chef Hassan"
+                                       width="180"
+                                       height="180" />
+                                  <br /><br />
+                                  <strong>Chef Hassan</strong>
+                              </a>
+                              <br />
+                              <em>Grills &amp; Main Courses</em>
+                              <br /><br />
+                              <p>
+                                  A master of hearty mains and bold flavors, celebrated
+                                  for his grilled dishes and rich slow-cooked recipes
+                                  inspired by Egyptian tradition.
+                              </p>
+                              <a href="./chef-hassan.html">View Profile</a>
+                          </td>
+
+                          <td width="33%">
+                              <a href="./chef-nadia-elsayed.html">
+                                  <img src="https://yt3.googleusercontent.com/wEwWYlGQVCpenDDdkc_CNYQiFHzzixW6Bd7gGlGrOlbnq3XpPzytMa3mOq48Wxcj_qOx1xmXOw=s900-c-k-c0x00ffffff-no-rj"
+                                       alt="Chef Nadia El Sayed"
+                                       width="180"
+                                       height="180" />
+                                  <br /><br />
+                                  <strong>Chef Nadia El Sayed</strong>
+                              </a>
+                              <br />
+                              <em>Desserts &amp; International Cuisine</em>
+                              <br /><br />
+                              <p>
+                                  One of Egypt's most-followed culinary personalities,
+                                  known for precise recipes that bridge Egyptian and
+                                  international cooking.
+                              </p>
+                              <a href="./chef-nadia-elsayed.html">View Profile</a>
+                          </td>
+
+                      </tr>
+                  </table>
+
+              </center>
+          </section>
+
+          <hr />
+
+          <!-- FEATURED RECIPES -->
+          <section>
+              <center><h2>Featured Recipes</h2></center>
+
+              <table width="88%" align="center" border="1" cellpadding="14" cellspacing="0">
+                  <thead>
+                      <tr>
+                          <th>Recipe</th>
+                          <th>Course</th>
+                          <th>Key Ingredients</th>
+                          <th>Chef</th>
+                          <th></th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                          <td><strong>Classic Hummus</strong></td>
+                          <td>Appetizer</td>
+                          <td>Chickpeas, tahini, lemon juice, garlic, olive oil</td>
+                          <td>Chef El Sherbiny</td>
+                          <td><a href="recipe-detail.html?id=1">View Recipe</a></td>
+                      </tr>
+                      <tr>
+                          <td><strong>Grilled Kofta</strong></td>
+                          <td>Main Course</td>
+                          <td>Ground beef, onion, parsley, cumin, coriander</td>
+                          <td>Chef Hassan</td>
+                          <td><a href="recipe-detail.html?id=2">View Recipe</a></td>
+                      </tr>
+                      <tr>
+                          <td><strong>Om Ali</strong></td>
+                          <td>Dessert</td>
+                          <td>Puff pastry, milk, cream, mixed nuts, raisins</td>
+                          <td>Chef Nadia El Sayed</td>
+                          <td><a href="recipe-detail.html?id=3">View Recipe</a></td>
+                      </tr>
+                      <tr>
+                          <td><strong>Fattoush Salad</strong></td>
+                          <td>Appetizer</td>
+                          <td>Romaine, tomato, cucumber, radish, sumac, pita chips</td>
+                          <td>Chef El Sherbiny</td>
+                          <td><a href="recipe-detail.html?id=4">View Recipe</a></td>
+                      </tr>
+                      <tr>
+                          <td><strong>Lamb Ouzi</strong></td>
+                          <td>Main Course</td>
+                          <td>Lamb shoulder, basmati rice, almonds, saffron, spices</td>
+                          <td>Chef Hassan</td>
+                          <td><a href="recipe-detail.html?id=5">View Recipe</a></td>
+                      </tr>
+                      <tr>
+                          <td><strong>Basbousa</strong></td>
+                          <td>Dessert</td>
+                          <td>Semolina, yogurt, sugar syrup, coconut, almonds</td>
+                          <td>Chef Nadia El Sayed</td>
+                          <td><a href="recipe-detail.html?id=6">View Recipe</a></td>
+                      </tr>
+                  </tbody>
+              </table>
+
+              <br />
+              <center>
+                  <p><a href="recipes.html">View the Full Recipe Collection</a></p>
+              </center>
+          </section>
+
+      </main>
+
+      <hr />
+
+      <footer>
+          <center>
+              <p>
+                  <small>
+                      FCAI - SOFRA
+                  </small>
+              </p>
+              <p><a href="#top">Back to Top</a></p>
+          </center>
+      </footer>
 
   </body>
 </html>
