@@ -529,3 +529,22 @@ body, body * {
 body *:not(.hero__bg):not(.course-card__img):not(.chef-card__img):not(.recipe-card__img) {
   transition: background-color 0.3s ease, border-color 0.3s ease, color 0.2s ease;
 }
+
+/* Strong visible orange button for light mode */
+body.light-mode .theme-toggle {
+  background: #ff6b1a;
+  border-color: #ff6b1a;
+  color: #ffffff;
+  box-shadow: 0 2px 12px rgba(255,107,26,0.4);
+}
+
+body.light-mode .theme-toggle i {
+  color: #ffffff;
+}
+
+body.light-mode .theme-toggle:hover {
+  background: #ff8c45;
+  border-color: #ff8c45;
+  color: #ffffff;
+  box-shadow: 0 4px 16px rgba(255,107,26,0.5);
+}
