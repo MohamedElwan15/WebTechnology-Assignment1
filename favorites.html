@@ -2,10 +2,12 @@
 <html>
 <head>
     <title>My Favorite Recipes</title>
+    <link rel="stylesheet" href="base.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <nav>
-        <strong>FCAI-SOFRA</strong>
+        <strong>Recipe Finder</strong>
         &nbsp;&nbsp;|&nbsp;&nbsp;
         <a href="homepage.html">Home</a>
         &nbsp;&nbsp;|&nbsp;&nbsp;
@@ -18,6 +20,9 @@
         <a href="admin_recipes.html">Admin Dashboard</a>
         &nbsp;&nbsp;|&nbsp;&nbsp;
         <a href="EntryPage.html">Logout</a>
+        <button id="themeToggle" class="theme-toggle" style="margin-left: auto;">
+        <i class="fas fa-moon"></i>
+        </button>
     </nav>
     <hr />
     <h1>My Favorite Recipes</h1>
@@ -38,7 +43,7 @@
     </ul>
     <button>Remove from Favorites</button>
     <hr>
-    <h2><a href="chikenranch.html">Chicken-ranch pizza</a></h2>
+    <h2><a href="chickenranch.html">Chicken-ranch pizza</a></h2>
     <p>
         Chicken-ranch pizza is a delicious combination of crispy pizza crust, creamy ranch dressing, tender chicken pieces, and melted mozzarella cheese. It is a popular choice for pizza lovers who enjoy a savory and tangy flavor profile.
     </p>
@@ -80,5 +85,7 @@
     </ul>
     <button>Remove from Favorites</button>
     <hr>
+    <div id="toast"></div>
+    <script src="base.js"></script>
 </body>
 </html>

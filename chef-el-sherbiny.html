@@ -1,197 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FCAI-SOFRA - Chef El Sherbiny</title>
-  </head>
-  <body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FCAI - Sofra | Chef El Sherbiny</title>
+  
+  <!-- CSS Files -->
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="chef-profile.css">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
 
-      <a name="top"></a>
+<a name="top"></a>
 
-      <nav>
-          <strong>FCAI-SOFRA</strong>
-          &nbsp;&nbsp;|&nbsp;&nbsp;
-          <a href="homepage.html">Home</a>
-          &nbsp;&nbsp;|&nbsp;&nbsp;
-          <a href="recList.html">All Recipes</a>
-          &nbsp;&nbsp;|&nbsp;&nbsp;
-          <a href="search.html">Search</a> <!--Not functional till JavaScript implementation-->
-          &nbsp;&nbsp;|&nbsp;&nbsp;
-          <a href="favorites.html">My Favorites</a>
-          &nbsp;&nbsp;|&nbsp;&nbsp;
-          <a href="admin_recipes.html">Admin Dashboard</a>
-          &nbsp;&nbsp;|&nbsp;&nbsp;
-          <a href="EntryPage.html">Logout</a>
-      </nav>
+<!-- Navigation -->
+<nav>
+  <strong>FCAI - SOFRA</strong>
+  <a href="homepage.html">Home</a>
+  <a href="recList.html">All Recipes</a>
+  <a href="search.html">Search</a>
+  <a href="favorites.html">My Favorites</a>
+  <a href="admin_recipes.html">Admin Dashboard</a>
+  <a href="EntryPage.html">Logout</a>
+  <button id="themeToggle" class="theme-toggle" style="margin-left: auto;">
+    <i class="fas fa-moon"></i>
+  </button>
+</nav>
 
-      <hr />
+<!-- Hero Section -->
+<section class="chef-hero">
+  <div class="chef-hero__bg" style="background-image: url('https://blog.swiggy.com/wp-content/uploads/2024/11/Image-2_-Chinese-Cuisine-1024x538.png');"></div>
+  <div class="chef-hero__overlay"></div>
+  <div class="chef-hero__content">
+    <img class="chef-avatar" src="https://assets.minly.com/assets/avatars/zPtgfPwF2LsozVn2g6MEl.jpg" alt="Chef El Sherbiny">
+    <div class="chef-hero__text">
+      <div class="chef-hero__eyebrow">Master Chef</div>
+      <h1 class="chef-hero__name">Chef El Sherbiny</h1>
+      <div class="chef-hero__specialty">Egyptian & Oriental Cuisine — East-West Fusion Presentation</div>
+    </div>
+  </div>
+</section>
 
-      <main>
-          <center>
-              <br />
+<!-- Main Profile Content -->
+<main class="profile-body">
 
-              <img src="https://assets.minly.com/assets/avatars/zPtgfPwF2LsozVn2g6MEl.jpg"
-                   alt="Chef El Sherbiny"
-                   width="200"
-                   height="200" />
+  <!-- Audio Player -->
+  <div class="audio-card reveal">
+    <p><i class="fas fa-music"></i> Background Music</p>
+    <audio controls loop>
+      <source src="Music.mpeg" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
 
-              <br /><br />
-              <h1>Chef El Sherbiny</h1>
-              <p><em>Egyptian &amp; Oriental Cuisine &mdash; Master Chef</em></p>
-              <br />
-              <audio autoplay loop controls>
-                  <source src="Music.mpeg" type="audio/mpeg">
-              </audio>
+  <!-- Quick Facts -->
+  <div class="profile-section reveal">
+    <h2>Quick Facts</h2>
+    <table class="facts-table">
+      <tr><td>Full Name</td><td>Abdel-Samea Mohamed Ali El-Sherbiny</td></tr>
+      <tr><td>Nationality</td><td>Egyptian</td></tr>
+      <tr><td>Specialty</td><td>Oriental Egyptian Cuisine, East-West Fusion Presentation</td></tr>
+      <tr><td>Education</td><td>Faculty of Tourism and Hotel Management, Italy</td></tr>
+      <tr><td>Notable Positions</td><td>Master Chef, Ramses Hilton Hotel, Cairo</td></tr>
+      <tr><td>Television</td><td>Egyptian satellite TV cooking shows</td></tr>
+    </table>
+  </div>
 
-          </center>
+  <!-- Biography -->
+  <div class="profile-section reveal">
+    <h2>Biography</h2>
+    <p>Chef El Sherbiny, whose full name is Abdel-Samea Mohamed Ali El-Sherbiny, is one of the most recognized and beloved chefs in Egypt and the wider Arab world. His passion for cooking was not self-discovered — it was inherited. His father served as executive chef at the Armed Forces Officers Club in Zamalek, and El Sherbiny recalls working alongside him as a young boy during school vacations in the 1970s. His father cooked for heads of state, kings, and presidents, including former Egyptian President Gamal Abdel Nasser.</p>
+    <p>El Sherbiny pursued his culinary education formally, graduating from the Faculty of Tourism and Hotel Management in Italy. This international foundation shaped his unique perspective on food — one that honors the depth of Egyptian and oriental flavors while embracing the elegance of European presentation.</p>
+    <p>He spent twelve years living in Europe, working his way up from the bottom. Early in his career, he spent three years as an assistant cook on a large boat in the Caribbean Sea, an experience he credits with sharpening his skills and broadening his culinary horizons. He was later nominated by Egypt's Ministry of Tourism to represent and promote Egyptian cuisine in Europe from 1986 to 2002.</p>
+    <p>Upon returning to Cairo, El Sherbiny became Master Chef at the Ramses Hilton Hotel, one of the city's most prestigious culinary posts. He went on to become one of the first Egyptian chefs to gain national fame through television, hosting cooking shows on Egyptian satellite television. His philosophy is clear: oriental food deserves thoughtful presentation. He has been quoted saying that traditional Egyptian food was often "simply slapped on a plate," and that he dedicated his career to changing that — creating a harmonious blend between Eastern flavors and Western styling.</p>
+    <p>His legacy extends to his family: his son, Alaa El Sherbiny, followed in his footsteps and is himself a recognized chef, crediting his father for his own passion for cooking.</p>
+  </div>
 
-          <hr width="600" />
+  <!-- Culinary Philosophy -->
+  <div class="profile-section reveal">
+    <h2>Culinary Philosophy</h2>
+    <p>El Sherbiny believes that food presentation is as important as flavor. He has long argued that Egyptian and oriental cuisine deserves the same visual care and refinement given to French or Italian cooking. His dishes are characterized by a careful balance: deeply rooted Egyptian and Middle Eastern flavors, elevated by techniques and presentation styles borrowed from his European training.</p>
+    <p>He regards the kitchen as a place of discipline, craft, and storytelling — every dish is an opportunity to communicate culture and identity on a plate.</p>
+  </div>
 
-          <table width="680" align="center" border="0" cellpadding="10">
-              <tr>
-                  <td>
+  <!-- Recipes -->
+  <div class="profile-section reveal">
+  <h2>Recipes on FCAI - Sofra</h2>
+  <table class="recipes-table">
+    <thead>
+      <tr><th>Recipe</th><th>Course</th><th></th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Macaroni Bashamel</td><td>Main Course</td><td><a href="bachamel.html">View Recipe →</a></td></tr>
+      <tr><td>Molokhia</td><td>Main Course</td><td><a href="molokhya.html">View Recipe →</a></td></tr>
+      <tr><td>Koshari</td><td>Main Course</td><td><a href="koshary.html">View Recipe →</a></td></tr>
+    </tbody>
+  </table>
+</div>
 
-                      <!-- QUICK FACTS -->
-                      <h2>Quick Facts</h2>
-                      <table border="1" cellpadding="10" cellspacing="0" width="100%">
-                          <tr>
-                              <td><strong>Full Name</strong></td>
-                              <td>Abdel-Samea Mohamed Ali El-Sherbiny</td>
-                          </tr>
-                          <tr>
-                              <td><strong>Nationality</strong></td>
-                              <td>Egyptian</td>
-                          </tr>
-                          <tr>
-                              <td><strong>Specialty</strong></td>
-                              <td>Oriental Egyptian Cuisine, East-West Fusion Presentation</td>
-                          </tr>
-                          <tr>
-                              <td><strong>Education</strong></td>
-                              <td>Faculty of Tourism and Hotel Management, Italy</td>
-                          </tr>
-                          <tr>
-                              <td><strong>Notable Positions</strong></td>
-                              <td>Master Chef, Ramses Hilton Hotel, Cairo</td>
-                          </tr>
-                          <tr>
-                              <td><strong>Television</strong></td>
-                              <td>Egyptian satellite TV cooking shows; first show with presenter Sherif Madkour</td>
-                          </tr>
-                      </table>
+</main>
 
-                      <br />
+<footer>
+  <small>FCAI - SOFRA • Authentic Egyptian Flavors</small><br>
+  <a href="#top">Back to Top <i class="fas fa-chevron-up"></i></a>
+</footer>
 
-                      <!-- BIOGRAPHY -->
-                      <h2>Biography</h2>
-                      <p>
-                          Chef El Sherbiny, whose full name is Abdel-Samea Mohamed Ali El-Sherbiny,
-                          is one of the most recognized and beloved chefs in Egypt and the wider Arab world.
-                          His passion for cooking was not self-discovered — it was inherited. His father
-                          served as executive chef at the Armed Forces Officers Club in Zamalek, and El Sherbiny
-                          recalls working alongside him as a young boy during school vacations in the 1970s.
-                          His father cooked for heads of state, kings, and presidents, including former Egyptian
-                          President Gamal Abdel Nasser.
-                      </p>
-                      <p>
-                          El Sherbiny pursued his culinary education formally, graduating from the Faculty of
-                          Tourism and Hotel Management in Italy. This international foundation shaped his unique
-                          perspective on food — one that honors the depth of Egyptian and oriental flavors while
-                          embracing the elegance of European presentation.
-                      </p>
-                      <p>
-                          He spent twelve years living in Europe, working his way up from the bottom. Early in
-                          his career, he spent three years as an assistant cook on a large boat in the Caribbean
-                          Sea, an experience he credits with sharpening his skills and broadening his culinary
-                          horizons. He was later nominated by Egypt's Ministry of Tourism to represent and
-                          promote Egyptian cuisine in Europe from 1986 to 2002.
-                      </p>
-                      <p>
-                          Upon returning to Cairo, El Sherbiny became Master Chef at the Ramses Hilton Hotel,
-                          one of the city's most prestigious culinary posts. He went on to become one of the
-                          first Egyptian chefs to gain national fame through television, hosting cooking shows
-                          on Egyptian satellite television. His philosophy is clear: oriental food deserves
-                          thoughtful presentation. He has been quoted saying that traditional Egyptian food
-                          was often "simply slapped on a plate," and that he dedicated his career to changing
-                          that — creating a harmonious blend between Eastern flavors and Western styling.
-                      </p>
-                      <p>
-                          His legacy extends to his family: his son, Alaa El Sherbiny, followed in his footsteps
-                          and is himself a recognized chef, crediting his father for his own passion for cooking.
-                      </p>
+<div id="toast"></div>
 
-                      <br />
+<!-- JavaScript Files -->
+<script src="base.js"></script>
+<script src="chef-profile.js"></script>
 
-                      <!-- CULINARY PHILOSOPHY -->
-                      <h2>Culinary Philosophy</h2>
-                      <p>
-                          El Sherbiny believes that food presentation is as important as flavor. He has
-                          long argued that Egyptian and oriental cuisine deserves the same visual care and
-                          refinement given to French or Italian cooking. His dishes are characterized by a
-                          careful balance: deeply rooted Egyptian and Middle Eastern flavors, elevated by
-                          techniques and presentation styles borrowed from his European training.
-                      </p>
-                      <p>
-                          He regards the kitchen as a place of discipline, craft, and storytelling — every
-                          dish is an opportunity to communicate culture and identity on a plate.
-                      </p>
-
-                      <br />
-
-                      <!-- SIGNATURE DISHES ON THIS PLATFORM -->
-                      <h2>Recipes on FCAI-SOFRA</h2>
-                      <table border="1" cellpadding="10" cellspacing="0" width="100%">
-                          <thead>
-                              <tr>
-                                  <th>Recipe</th>
-                                  <th>Course</th>
-                                  <th></th>
-                              </tr>
-                          </thead>
-                          <tbody>
-                              <tr>
-                                  <td>Classic Hummus</td>
-                                  <td>Appetizer</td>
-                                  <td><a href="recipe-detail.html?id=1">View Recipe</a></td>
-                              </tr>
-                              <tr>
-                                  <td>Fattoush Salad</td>
-                                  <td>Appetizer</td>
-                                  <td><a href="recipe-detail.html?id=4">View Recipe</a></td>
-                              </tr>
-                              <tr>
-                                  <td>Egyptian Stuffed Cabbage (Mahshi Cromb)</td>
-                                  <td>Main Course</td>
-                                  <td><a href="recipe-detail.html?id=7">View Recipe</a></td>
-                              </tr>
-                          </tbody>
-                      </table>
-
-                      <br />
-
-                  </td>
-              </tr>
-          </table>
-
-      </main>
-
-      <hr />
-
-      <footer>
-          <center>
-              <p>
-                  <a href="homepage.html">Home</a>
-                  &nbsp;|&nbsp;
-                  <a href="recipes.html">All Recipes</a>
-                  &nbsp;|&nbsp;
-                  <a href="#top">Back to Top</a>
-              </p>
-              <p>
-                  <small>FCAI-SOFRA - By A7la Tab5a</small>
-              </p>
-          </center>
-      </footer>
-
-  </body>
+</body>
 </html>
