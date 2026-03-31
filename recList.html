@@ -2,6 +2,8 @@
 <html>
 <head>
     <title>Recipes List</title>
+    <link rel="stylesheet" href="base.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <nav>
@@ -18,6 +20,9 @@
         <a href="admin_recipes.html">Admin Dashboard</a>
         &nbsp;&nbsp;|&nbsp;&nbsp;
         <a href="EntryPage.html">Logout</a>
+        <button id="themeToggle" class="theme-toggle" style="margin-left: auto;">
+        <i class="fas fa-moon"></i>
+        </button>
     </nav>
     <hr />
     <h1 style="color: black; text-decoration: underline;">Recipes list: </h1>
@@ -74,7 +79,7 @@
     </fieldset>
     <fieldset>
         <legend style="font-weight: bold; font-size: large;">
-            <a href="chikenranch.html">Chicken Ranch Pizza</a>
+            <a href="chickenranch.html">Chicken Ranch Pizza</a>
         </legend>
         <p>
             <img src="images/chickenranch.png" width="225" height="150">
@@ -89,5 +94,7 @@
             making it a "white pizza" that is rich, tangy, and incredibly satisfying.
         </p>
     </fieldset>
+    <div id="toast"></div>
+    <script src="base.js"></script>
 </body>
 </html>
