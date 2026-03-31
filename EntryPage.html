@@ -5,60 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FCAI-SOFRA - Welcome</title>
     <link rel="stylesheet" href="base.css">
+    <link rel="stylesheet" href="auth.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   </head>
-  <body background="https://www.simplyrecipes.com/thmb/FRlM2EEuix3dh1WxFD2R_Gp-V4c=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes-Most-Popular-Recipes-Feature-LEAD-04-b4cc7e7bcfbe486586053a8e0a927d2f.jpg">
+  <body>
 
-    <br /><br /><br /><br />
+    <button id="themeToggle" class="auth-theme-toggle">
+      <i class="fas fa-moon"></i>
+    </button>
 
-    <center>
-      <button id="themeToggle" class="theme-toggle" style="position: absolute; top: 20px; right: 20px;">
-        <i class="fas fa-moon"></i>
-      </button>
+    <div class="auth-bg" style="background-image: url('https://orientasian.in/wp-content/uploads/2018/12/What-Makes-Oriental-Cuisine-Appealing.jpg');">
 
-      <table width="420" bgcolor="#ffffff" cellpadding="32" cellspacing="0" border="0">
-        <tr>
-          <td align="center">
+      <div class="auth-card">
 
-            <h1>FCAI - SOFRA</h1>
+        <div class="auth-logo">FCAI-SOFRA</div>
+        <p class="auth-subtitle">Discover, explore, and save your favourite recipes.</p>
 
-            <p>
-              Discover, explore, and save recipes from a curated collection
-              of dishes &mdash; appetizers, main courses, and desserts.
-            </p>
+        <hr />
 
-            <hr width="300" />
+        <h2>Welcome</h2>
 
-            <br />
+        <p style="font-size:0.92rem; margin-bottom:1.6rem;">
+          Please log in or create a new account to get started.
+        </p>
 
-            <h2>Welcome</h2>
+        <a href="./SignUp.html" class="entry-btn entry-btn-primary">Create an Account</a>
+        <a href="./LogIn.html"  class="entry-btn entry-btn-ghost">Log In</a>
 
-            <p>Please log in or create a new account to get started.</p>
+      </div>
 
-            <br />
-            
-            <p>
-          
-              <a href="./SignUp.html"><strong>Create an Account</strong></a>
-            </p>
-
-            <br />
-
-            <hr width="300" />
-
-            <p>
-              <small>
-                Already have an account? <a href="./LogIn.html"><strong> Log In</strong></a> 
-              </small>
-            </p>
-
-          </td>
-        </tr>
-      </table>
-
-    </center>
-
-    <br /><br /><br /><br />
+    </div>
 
     <div id="toast"></div>
     <script src="base.js"></script>

@@ -5,129 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FCAI-SOFRA - Create Account</title>
     <link rel="stylesheet" href="base.css">
+    <link rel="stylesheet" href="auth.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   </head>
-  <body background="https://www.simplyrecipes.com/thmb/FRlM2EEuix3dh1WxFD2R_Gp-V4c=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes-Most-Popular-Recipes-Feature-LEAD-04-b4cc7e7bcfbe486586053a8e0a927d2f.jpg">
+  <body>
 
-    <br /><br /><br /><br />
+    <button id="themeToggle" class="auth-theme-toggle">
+      <i class="fas fa-moon"></i>
+    </button>
 
-    <center>
-      <button id="themeToggle" class="theme-toggle" style="position: absolute; top: 20px; right: 20px;">
-        <i class="fas fa-moon"></i>
-      </button>
+    <div class="auth-bg" style="background-image: url('https://www.simplyrecipes.com/thmb/FRlM2EEuix3dh1WxFD2R_Gp-V4c=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes-Most-Popular-Recipes-Feature-LEAD-04-b4cc7e7bcfbe486586053a8e0a927d2f.jpg');">
 
-      <table width="460" bgcolor="#ffffff" cellpadding="36" cellspacing="0" border="0">
-        <tr>
-          <td align="center">
+      <div class="auth-card">
 
-            <h1>FCAI-SOFRA</h1>
-            <p>Create your account to start exploring recipes.</p>
+        <div class="auth-logo">FCAI-SOFRA</div>
+        <p class="auth-subtitle">Create your account to start exploring recipes.</p>
 
-            <hr width="320" />
+        <hr />
 
-            <br />
+        <h2>Create an Account</h2>
 
-            <h2>Create an Account</h2>
+        <form action="./LogIn.html" method="get">
 
-            <br />
+          <div class="auth-field">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="Choose a username" required />
+          </div>
 
-            <!--
-              ACTION: Phase 2 will point this to the backend signup endpoint.
-              Fields match the project spec: username, password, confirm_password, email, is_admin.
-              On successful signup -> redirect to login.html so the user logs in with new credentials.
-            -->
-            <form action="./LogIn.html" method="get">
+          <div class="auth-field">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required />
+          </div>
 
-              <table border="0" cellpadding="8">
+          <div class="auth-field">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="At least 8 characters" required />
+          </div>
 
-                <tr>
-                  <td align="right"><label for="username">Username</label></td>
-                  <td>
-                    <input type="text"
-                           id="username"
-                           name="username"
-                           size="28"
-                           required />
-                  </td>
-                </tr>
+          <div class="auth-field">
+            <label for="confirm_password">Confirm Password</label>
+            <input type="password" id="confirm_password" name="confirm_password" placeholder="Repeat your password" required />
+          </div>
 
-                <tr>
-                  <td align="right"><label for="email">Email Address</label></td>
-                  <td>
-                    <input type="email"
-                           id="email"
-                           name="email"
-                           size="28"
-                           required />
-                  </td>
-                </tr>
+          <div class="auth-checkbox">
+            <input type="checkbox" id="is_admin" name="is_admin" value="true" />
+            <label for="is_admin">Register as Admin</label>
+            <small>(admin only)</small>
+          </div>
 
-                <tr>
-                  <td align="right"><label for="password">Password</label></td>
-                  <td>
-                    <input type="password"
-                           id="password"
-                           name="password"
-                           size="28"
-                           required />
-                  </td>
-                </tr>
+          <button type="submit" class="auth-btn">Create Account</button>
 
-                <tr>
-                  <td align="right"><label for="confirm_password">Confirm Password</label></td>
-                  <td>
-                    <input type="password"
-                           id="confirm_password"
-                           name="confirm_password"
-                           size="28"
-                           required />
-                  </td>
-                </tr>
+        </form>
 
-                <tr>
-                  <td align="right"><label for="is_admin">Register as Admin</label></td>
-                  <td>
-                    <input type="checkbox"
-                           id="is_admin"
-                           name="is_admin"
-                           value="true" />
-                    &nbsp;
-                    <small>Check only if you are an administrator.</small>
-                  </td>
-                </tr>
+        <div class="auth-links">
+          <p>Already have an account? <a href="./LogIn.html">Log in here</a></p>
+          <p><a href="./EntryPage.html">Back to Welcome Page</a></p>
+        </div>
 
-                <tr>
-                  <td></td>
-                  <td>
-                    <br />
-                    <button type="submit">Create Account</button>
-                  </td>
-                </tr>
+      </div>
 
-              </table>
+    </div>
 
-            </form>
-
-            <br />
-            <hr width="320" />
-            <br />
-
-            <p>
-              Already have an account?
-              <a href="./LogIn.html">Log in here</a>
-            </p>
-
-            <p>
-              <a href="./EntryPage.html">Back to Welcome Page</a>
-            </p>
-
-          </td>
-        </tr>
-      </table>
-
-    </center>
-
-    <br /><br /><br /><br />
     <div id="toast"></div>
     <script src="base.js"></script>
 

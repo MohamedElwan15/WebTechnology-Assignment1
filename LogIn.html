@@ -5,100 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FCAI-SOFRA - Log In</title>
     <link rel="stylesheet" href="base.css">
+    <link rel="stylesheet" href="auth.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   </head>
-  <body background="https://www.simplyrecipes.com/thmb/FRlM2EEuix3dh1WxFD2R_Gp-V4c=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes-Most-Popular-Recipes-Feature-LEAD-04-b4cc7e7bcfbe486586053a8e0a927d2f.jpg">
+  <body>
 
-    <br /><br /><br /><br />
+    <button id="themeToggle" class="auth-theme-toggle">
+      <i class="fas fa-moon"></i>
+    </button>
 
-    <center>
-      <button id="themeToggle" class="theme-toggle" style="position: absolute; top: 20px; right: 20px;">
-        <i class="fas fa-moon"></i>
-      </button>
+    <div class="auth-bg" style="background-image: url('https://www.simplyrecipes.com/thmb/FRlM2EEuix3dh1WxFD2R_Gp-V4c=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes-Most-Popular-Recipes-Feature-LEAD-04-b4cc7e7bcfbe486586053a8e0a927d2f.jpg');">
 
-      <table width="420" bgcolor="#ffffff" cellpadding="36" cellspacing="0" border="0">
-        <tr>
-          <td align="center">
+      <div class="auth-card">
 
-            <h1>FCAI - SOFRA</h1>
-            <p>Welcome back. Please log in to continue.</p>
+        <div class="auth-logo">FCAI-SOFRA</div>
+        <p class="auth-subtitle">Welcome back. Please log in to continue.</p>
 
-            <hr width="300" />
+        <hr />
 
-            <br />
+        <h2>Log In</h2>
 
-            <h2>Log In</h2>
+        <form action="homepage.html" method="get">
 
-            <br />
+          <div class="auth-field">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="Your username" required />
+          </div>
 
-            <!--
-              ACTION: Phase 2 will point this to the backend login endpoint.
-              On successful login:
-                Regular user -> redirect to homepage.html
-                Admin user   -> redirect to homepage.html (nav shows Admin Dashboard)
-            -->
-            <form action="homepage.html" method="get"> <!-- UPDATE THIS TO THE HOMPAGE YOU DID ya -->
+          <div class="auth-field">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Your password" required />
+          </div>
 
-              <table border="0" cellpadding="8">
+          <button type="submit" class="auth-btn">Log In</button>
 
-                <tr>
-                  <td align="right"><label for="username">Username</label></td>
-                  <td>
-                    <input
-                      type="text"
-                      id="username"
-                      name="username"
-                      size="28"
-                      required
-                    />
-                  </td>
-                </tr>
+        </form>
 
-                <tr>
-                  <td align="right"><label for="password">Password</label></td>
-                  <td>
-                    <input
-                      type="password"
-                      id="password"
-                      name="password"
-                      size="28"
-                      required
-                    />
-                  </td>
-                </tr>
+        <div class="auth-links">
+          <p>Don't have an account? <a href="./SignUp.html">Create one here</a></p>
+          <p><a href="./EntryPage.html">Back to Welcome Page</a></p>
+        </div>
 
-                <tr>
-                  <td></td>
-                  <td>
-                    <br />
-                    <button type="submit">Log In</button>
-                  </td>
-                </tr>
+      </div>
 
-              </table>
+    </div>
 
-            </form>
-
-            <br />
-            <hr width="300" />
-            <br />
-
-            <p>
-              Don't have an account?
-              <a href="./SignUp.html">Create one here</a>
-            </p>
-
-            <p>
-              <a href="./EntryPage.html">Back to Welcome Page</a>
-            </p>
-
-          </td>
-        </tr>
-      </table>
-
-    </center>
-
-    <br /><br /><br /><br />
     <div id="toast"></div>
     <script src="base.js"></script>
 
