@@ -237,4 +237,51 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollReveal();
   initSignup();
   initLogin();
+  initSearch();
 });
+
+
+/* ==== Search page ==== */
+function initSearch() {
+  const searchInput = document.getElementById('mysearch');
+  const searchButton = document.querySelector('button[type="button"]');
+  
+  // run if we are on the search page
+  if (!searchInput || !searchButton) return;
+
+  const performSearch = () => {
+    const query = searchInput.value.trim().toLowerCase();
+
+    if (!query) {
+      showToast('Please enter a recipe name.');
+      return;
+    }
+
+    // Mapping search terms to existing filenames
+    const recipeMap = {
+      'koshary': 'koshary.html',
+      'molokhya': 'molokhya.html',
+      'bachamel': 'bachamel.html',
+      'macarona bechamel': 'bachamel.html',
+      'chicken ranch': 'chikenranch.html',
+      'pizza': 'chikenranch.html'
+    };
+
+    if (recipeMap[query]) {
+      showToast(`🔍 Searching for ${query}...`);
+      setTimeout(() => {
+        window.location.href = recipeMap[query];
+      }, 1000);
+    } else {
+      showToast(`❌ Sorry, "${query}" was not found.`);
+    }
+  };
+
+  // Trigger on button click
+  searchButton.addEventListener('click', performSearch);
+
+  // Trigger on "Enter" key
+  searchInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') performSearch();
+  });
+}
