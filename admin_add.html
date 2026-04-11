@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Add Recipe</title>
     <link rel="stylesheet" href="base.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="admin.css">
 </head>
 
 <body>
@@ -31,16 +32,16 @@
 
     <hr />
     <header>
-        <h1>Add Recipe</h1>
+        <h1><i class="fas fa-plus-circle"></i> Add Recipe</h1>
     </header>
     <main>
-        <form action="/submit-recipe" method="POST">
+        <form action="/submit-recipe" method="POST" id="addRecipeForm">
             <!--Admin name and Recipe ID are hardcoded now since html has no trace of the real data of the user-->
             <div>
-                <input type="hidden" value="Chef Emad" name="Admin name">
+                <input type="hidden" name="Admin name" id="adminName">
             </div>
             <div>
-                <input type="hidden" value="Recipe23" name="RecipedID">
+                <input type="hidden" name="RecipedID" id="recipeId">
             </div>
             <div>
                 <label for="Recipe_name">Recipe Name</label>
@@ -64,52 +65,34 @@
             <div>
                 <label for="recipe_img">Recipe Image</label>
                 <br>
-                <input required type="file" id="recipe_img" name="recipe_img" accept="image/*">
+                <label for="recipe_img" class="file-upload-label">
+                    Click to upload image
+                    <input type="file" id="recipe_img" name="recipe_img" accept="image/*">
+                </label>
+                <img id="imagePreview" src="" alt="Preview" style="display:none; width:200px; margin-top:10px;">
             </div>
             <fieldset>
-                <legend>Ingredients</legend>
-                <div class="row">
-                    <label for="Ingredient_1">Ingredient 1</label>
-                    <input type="hidden" name="ingredient_1_id" value="ID">
-                    <input required type="text" id="Ingredient_1" name="ingredient_1_name" placeholder="Name">
-                    <input required type="text" name="ingredient_1_qty" placeholder="Quantity">
+                <legend><i class="fas fa-list"></i> Ingredients</legend>
+                <div id="ingredientsList">
                 </div>
-                <div class="row">
-                    <label for="Ingredient_2">Ingredient 2</label>
-                    <input type="hidden" name="ingredient_2_id" value="ID">
-                    <input type="text" id="Ingredient_2" name="ingredient_2_name" placeholder="Name">
-                    <input type="text" name="ingredient_2_qty" placeholder="Quantity">
-                </div>
-                <div class="row">
-                    <label for="Ingredient_10">Ingredient 10</label>
-                    <input type="hidden" name="ingredient_3_id" value="ID">
-                    <input type="text" id="Ingredient_10" name="ingredient_10_name" placeholder="Name">
-                    <input type="text" name="ingredient_10_qty" placeholder="Quantity">
-                </div>
+                <button type="button" id="addIngredientBtn"><i class="fas fa-plus"></i> Add Ingredient</button>
             </fieldset>
+            
             <fieldset>
-                <legend>Instructions</legend>
-                <div>
-                    <label for="step_1">Step 1</label>
-                    <input required type="text" id="step_1" name="Step_1" placeholder="Step Description">
-                </div>
-                <div>
-                    <label for="step_2">Step 2</label>
-                    <input type="text" id="step_2" name="Step_2" placeholder="Step Description">
-                </div>
-                <div>
-                    <label for="step_10">Step 10</label>
-                    <input type="text" id="step_10" name="Step_10" placeholder="Step Description">
-                </div>
+                <legend><i class="fas fa-clipboard-list"></i> Instructions</legend>
+                <div id="stepsList"></div>
+                <button type="button" id="addStepBtn"><i class="fas fa-plus"></i> Add Step</button>
             </fieldset>
+            
 
-            <button type="submit">Submit Recipe</button>
+            <button type="submit"><i class="fas fa-save"></i> Submit Recipe</button>
         </form>
     </main>
     <footer>
     </footer>
     <div id="toast"></div>
         <script src="base.js"></script>
+        <script src="admin.js"></script>
 </body>
 
 </html>
