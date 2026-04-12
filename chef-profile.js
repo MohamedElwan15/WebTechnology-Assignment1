@@ -73,4 +73,49 @@ document.addEventListener('DOMContentLoaded', () => {
   initFactsCopy();
   initAudioHint();
   initBackToTop();
+  loadChefRecipes();
 });
+/* ── DYNAMIC RECIPE TABLE FROM JSON ── */
+async function loadChefRecipes() {
+  const container = document.getElementById('chefRecipesContainer');
+  if (!container) return;
+
+  // CHEF_NAME is defined inline in each chef HTML file
+  const chefName = (typeof CHEF_NAME !== 'undefined') ? CHEF_NAME : null;
+  if (!chefName) {
+    container.innerHTML = '<p style="color:var(--clr-muted)">No chef name set.</p>';
+    return;
+  }
+
+  let allRecipes = [];
+  try {
+    allRecipes = await RecipesAPI.getAll();
+    // Also merge localStorage recipes
+    const local = Store.get('sofra_recipes') || [];
+    local.forEach(lr => { if (!allRecipes.find(r => r.id === lr.id)) allRecipes.push(lr); });
+  } catch {
+    allRecipes = Store.get('sofra_recipes') || [];
+  }
+
+  const courseLabel = c => ({ main_course: 'Main Course', appetizers: 'Appetizers', dessert: 'Dessert' }[c] || c);
+
+  const chefRecipes = allRecipes.filter(r => r.chef === chefName);
+
+  if (!chefRecipes.length) {
+    container.innerHTML = '<p style="color:var(--clr-muted)">No recipes listed yet for this chef.</p>';
+    return;
+  }
+
+  const rows = chefRecipes.map(r => `
+    <tr>
+      <td>${r.name}</td>
+      <td>${courseLabel(r.course)}</td>
+      <td><a href="recipeInfo.html?id=${r.id}" style="color:var(--clr-orange);font-weight:600;">View Recipe →</a></td>
+    </tr>`).join('');
+
+  container.innerHTML = `
+    <table class="recipes-table">
+      <thead><tr><th>Recipe</th><th>Course</th><th></th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+}

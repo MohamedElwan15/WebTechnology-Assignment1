@@ -2,79 +2,39 @@
    FCAI - SOFRA  |  HOMEPAGE JAVASCRIPT
    ============================================================ */
 
-// Recipe Data
-const RECIPES = [
-  {
-    id: 'bashamel',
-    title: 'Macaroni Bashamel',
-    course: 'Main Course',
-    ingredients: 'Macaroni, béchamel sauce, minced meat, onion, tomato paste',
-    chef: 'Chef El Sherbiny',
-    chefImg: 'https://assets.minly.com/assets/avatars/zPtgfPwF2LsozVn2g6MEl.jpg',
-    img: 'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=600&q=75',
-    link: 'bachamel.html'
-  },
-  {
-    id: 'koshari',
-    title: 'Koshari',
-    course: 'Main Course',
-    ingredients: 'Rice, lentils, macaroni, tomato sauce, crispy onions, garlic vinegar',
-    chef: 'Chef Hassan',
-    chefImg: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJYSpXwt07ODmH4Lw1r8uQLuTHqijHV-bZmA&s',
-    img: 'koshary.png',
-    link: 'koshary.html'
-  },
-  {
-    id: 'molokhia',
-    title: 'Molokhia',
-    course: 'Main Course',
-    ingredients: 'Molokhia leaves, chicken broth, garlic, coriander, butter',
-    chef: 'Chef Hassan',
-    chefImg: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJYSpXwt07ODmH4Lw1r8uQLuTHqijHV-bZmA&s',
-    img: 'molokhya.png',
-    link: 'molokhya.html'
-  },
-  {
-    id: 'chickenranch',
-    title: 'Chicken Ranch Pizza',
-    course: 'Main Course',
-    ingredients: 'Pizza dough, ranch sauce, grilled chicken, mozzarella, bell peppers',
-    chef: 'Chef Nadia El Sayed',
-    chefImg: 'https://yt3.googleusercontent.com/wEwWYlGQVCpenDDdkc_CNYQiFHzzixW6Bd7gGlGrOlbnq3XpPzytMa3mOq48Wxcj_qOx1xmXOw=s900-c-k-c0x00ffffff-no-rj',
-    img: 'chickenranch.png',
-    link: 'chikenranch.html'
-  }
-];
+function courseLabel(c) {
+  return { main_course: 'Main Course', appetizers: 'Appetizers', dessert: 'Dessert' }[c] || c;
+}
 
 // Build Course Cards
 function buildCourseCards() {
   const container = document.getElementById('courseGrid');
   if (!container) return;
-  
+
   const courses = [
     {
       title: 'Appetizers',
       desc: 'Light, inviting starters to open any meal.',
       img: 'https://images.unsplash.com/photo-1541014741259-de529411b96a?w=700&q=75',
-      link: 'search.html?course=appetizers'
+      link: 'recList.html?course=appetizers'
     },
     {
       title: 'Main Course',
       desc: 'Hearty, satisfying dishes that take center stage.',
       img: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=700&q=75',
-      link: 'search.html?course=main-course'
+      link: 'recList.html?course=main_course'
     },
     {
       title: 'Desserts',
       desc: 'Sweet finales for every occasion.',
       img: 'https://images.unsplash.com/photo-1488477181946-6428a0291777?w=700&q=75',
-      link: 'search.html?course=dessert'
+      link: 'recList.html?course=dessert'
     }
   ];
-  
+
   container.innerHTML = courses.map((c, idx) => `
     <a href="${c.link}" class="course-card reveal" style="animation-delay: ${idx * 0.1}s">
-      <img class="course-card__img" src="${c.img}" alt="${c.title}" 
+      <img class="course-card__img" src="${c.img}" alt="${c.title}"
            onerror="this.src='https://images.unsplash.com/photo-1547592180-85f173990554?w=400&q=60'">
       <div class="course-card__overlay"></div>
       <div class="course-card__info">
@@ -90,7 +50,7 @@ function buildCourseCards() {
 function buildChefCards() {
   const container = document.getElementById('chefsGrid');
   if (!container) return;
-  
+
   const chefs = [
     {
       name: 'Chef El Sherbiny',
@@ -109,16 +69,16 @@ function buildChefCards() {
     {
       name: 'Chef Nadia El Sayed',
       specialty: 'Desserts & International Cuisine',
-      bio: 'One of Egypt\'s most-followed culinary personalities, known for precise recipes bridging Egyptian and international cooking.',
+      bio: "One of Egypt's most-followed culinary personalities, known for precise recipes bridging Egyptian and international cooking.",
       img: 'https://yt3.googleusercontent.com/wEwWYlGQVCpenDDdkc_CNYQiFHzzixW6Bd7gGlGrOlbnq3XpPzytMa3mOq48Wxcj_qOx1xmXOw=s900-c-k-c0x00ffffff-no-rj',
       link: 'chef-nadia-elsayed.html'
     }
   ];
-  
+
   container.innerHTML = chefs.map(c => `
     <a href="${c.link}" class="chef-card reveal">
       <div class="chef-card__img-wrap">
-        <img class="chef-card__img" src="${c.img}" alt="${c.name}" 
+        <img class="chef-card__img" src="${c.img}" alt="${c.name}"
              onerror="this.src='https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=400&q=60'">
       </div>
       <div class="chef-card__body">
@@ -131,40 +91,95 @@ function buildChefCards() {
   `).join('');
 }
 
-// Build Featured Recipes
-function buildFeaturedRecipes() {
+// Build Featured Recipes — loaded from JSON (includes admin-added ones)
+async function buildFeaturedRecipes() {
   const container = document.getElementById('featuredGrid');
   if (!container) return;
-  
-  container.innerHTML = RECIPES.map((r, i) => `
-    <div class="recipe-card reveal" style="animation-delay: ${i * 0.05}s">
-      <div class="recipe-card__img-wrap">
-        <img class="recipe-card__img" src="${r.img}" alt="${r.title}" 
-             onerror="this.src='https://images.unsplash.com/photo-1547592180-85f173990554?w=400&q=60'">
-        <span class="badge">${r.course}</span>
-      </div>
-      <div class="recipe-card__body">
-        <div class="recipe-card__title">${r.title}</div>
-        <div class="recipe-card__ingredients">${r.ingredients}</div>
-        <div class="recipe-card__footer">
-          <span class="recipe-card__chef">
-            <img class="recipe-card__chef-icon" src="${r.chefImg}" alt="${r.chef}" 
-                 onerror="this.style.display='none'">
-            ${r.chef}
-          </span>
-          <a class="recipe-card__view" href="${r.link}">View →</a>
+
+  let recipes = [];
+  try {
+    recipes = await RecipesAPI.getAll();
+    // Also include localStorage recipes (admin-added when no server)
+    const local = Store.get('sofra_recipes') || [];
+    local.forEach(lr => {
+      if (!recipes.find(r => r.id === lr.id)) recipes.push(lr);
+    });
+  } catch {
+    recipes = Store.get('sofra_recipes') || [];
+  }
+
+  if (!recipes.length) {
+    container.innerHTML = '<p style="color:var(--clr-muted);text-align:center">No recipes yet.</p>';
+    return;
+  }
+
+  const isAdmin = Session.isAdmin();
+
+  container.innerHTML = recipes.map((r, i) => {
+    const isFav = Favorites.has(r.id);
+    const heartBtn = isAdmin ? '' : `
+      <button class="hp-heart" title="${isFav ? 'Remove from favorites' : 'Add to favorites'}"
+              onclick="toggleHomeFav('${r.id}', this)">
+        <i class="${isFav ? 'fas' : 'far'} fa-heart"></i>
+      </button>`;
+
+    return `
+      <div class="recipe-card reveal" style="animation-delay: ${i * 0.05}s">
+        <div class="recipe-card__img-wrap">
+          <img class="recipe-card__img" src="${r.imageUrl || ''}" alt="${r.name}"
+               onerror="this.src='https://images.unsplash.com/photo-1547592180-85f173990554?w=400&q=60'">
+          <span class="badge">${courseLabel(r.course)}</span>
+          ${heartBtn}
         </div>
-      </div>
-    </div>
-  `).join('');
+        <div class="recipe-card__body">
+          <div class="recipe-card__title">${r.name}</div>
+          <div class="recipe-card__ingredients">${r.description ? r.description.substring(0, 90) + '…' : ''}</div>
+          <div class="recipe-card__footer">
+            <span class="recipe-card__chef">
+              <img class="recipe-card__chef-icon" src="${r.chefImg || ''}" alt="${r.chef || ''}"
+                   onerror="this.style.display='none'">
+              ${r.chef || ''}
+            </span>
+            <a class="recipe-card__view" href="recipeInfo.html?id=${r.id}">View →</a>
+          </div>
+        </div>
+      </div>`;
+  }).join('');
+
+  if (typeof initScrollReveal === 'function') {
+    setTimeout(initScrollReveal, 80);
+  }
 }
 
-// Initialize Search
-function initSearch() {
+// Heart toggle on homepage cards
+window.toggleHomeFav = function (recipeId, btn) {
+  if (Favorites.has(recipeId)) {
+    Favorites.remove(recipeId);
+    btn.innerHTML = '<i class="far fa-heart"></i>';
+    btn.title = 'Add to favorites';
+    showToast('💔 Removed from favorites');
+  } else {
+    Favorites.add(recipeId);
+    btn.innerHTML = '<i class="fas fa-heart"></i>';
+    btn.title = 'Remove from favorites';
+    showToast('❤️ Added to favorites!');
+  }
+};
+
+// Hero Parallax
+function initHeroParallax() {
+  const heroBg = document.querySelector('.hero__bg');
+  if (!heroBg) return;
+  window.addEventListener('scroll', () => {
+    heroBg.style.transform = `scale(1.05) translateY(${window.scrollY * 0.15}px)`;
+  }, { passive: true });
+}
+
+// Homepage search
+function initHomeSearch() {
   const form = document.getElementById('homeSearchForm');
   if (!form) return;
-  
-  form.addEventListener('submit', function(e) {
+  form.addEventListener('submit', function (e) {
     const input = document.getElementById('home-search');
     if (input.value.trim() === '') {
       e.preventDefault();
@@ -173,27 +188,11 @@ function initSearch() {
   });
 }
 
-// Hero Parallax Effect
-function initHeroParallax() {
-  const heroBg = document.querySelector('.hero__bg');
-  if (!heroBg) return;
-  
-  window.addEventListener('scroll', () => {
-    const y = window.scrollY;
-    heroBg.style.transform = `scale(1.05) translateY(${y * 0.15}px)`;
-  }, { passive: true });
-}
-
-// Initialize Everything
+// Init
 document.addEventListener('DOMContentLoaded', () => {
   buildCourseCards();
   buildChefCards();
   buildFeaturedRecipes();
-  initSearch();
+  initHomeSearch();
   initHeroParallax();
-  
-  // Re-run scroll reveal for dynamically added content
-  if (typeof initScrollReveal === 'function') {
-    setTimeout(initScrollReveal, 100);
-  }
 });

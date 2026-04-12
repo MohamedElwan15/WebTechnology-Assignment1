@@ -1,120 +1,70 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Recipes List</title>
-    <link rel="stylesheet" href="base.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FCAI - SOFRA | All Recipes</title>
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="recList.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <nav>
-        <strong>FCAI-SOFRA</strong>
-        &nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="homepage.html">Home</a>
-        &nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="recList.html">All Recipes</a>
-        &nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="search.html">Search</a> <!--Not functional till JavaScript implementation-->
-        &nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="favorites.html">My Favorites</a>
-        &nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="admin_recipes.html">Admin Dashboard</a>
-        &nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="EntryPage.html">Logout</a>
-        <button id="themeToggle" class="theme-toggle" style="margin-left: auto;">
-            <i class="fas fa-moon"></i>
-        </button>
-    </nav>
-    <hr />
-    <h1 style="color: black; text-decoration: underline;">Recipes list: </h1>
-    <br>
-    <fieldset>
-        <legend style="font-weight: bold; font-size: large;">
-            <a href="bachamel.html">Macaroni Bashamel</a>
-        </legend>
-        <img src="images/Bashamel2.jpg" width="225" height="150">
-        <p>
-            Macaroni Béchamel is the ultimate Egyptian soul food. It is a hearty,
-            <br>
-            layered pasta bake that defines family gatherings and holiday feasts.
-            <br>
-            Unlike Greek Pastitsio or Italian Lasagna, the Egyptian version is distinct for its thick,
-            <br>
-            velvety blankets of sauce and deeply seasoned meat
-        </p>
-        <button onclick="addToFavorites(
-    'Macaroni Bashamel',
-    'bachamel.html',
-)">
-            Add to Favorites
-        </button>
-    </fieldset>
-    <fieldset>
-        <legend style="font-weight: bold; font-size: large;">
-            <a href="koshary.html">Koshari</a>
-        </legend>
-        <p>
-            <img src="images/koshary.png" width="225" height="150">
-            <br>
-            Koshari is Egypt's most famous street food—a high-energy,
-            <br>
-            flavorful carb-fest that brings together an unlikely mix of
-            <br>
-            ingredients into a masterpiece of textures. It's affordable,
-            <br>
-            and found on almost every street corner in Cairo.
-        </p>
-        <button onclick="addToFavorites(
-    'Koshari',
-    'koshary.html',
-)">
-            Add to Favorites
-        </button>
-    </fieldset>
-    <fieldset>
-        <legend style="font-weight: bold; font-size: large;">
-            <a href="molokhya.html">Molokhia</a>
-        </legend>
-        <p>
-            <img src="images/molokhya.png" width="225" height="150">
-            <br>
-            <br>
-            Molokhia is perhaps Egypt's most iconic and beloved dish,
-            <br>
-            dating back to the time of the Pharaohs. It is a silky,
-            <br>
-            jute leaf soup that is as much about the aroma as it is about the taste.
-            <br>
-            It's famous for its unique, viscous texture and the legendary
-            <br>
-            "Tasha"—the final sizzle of garlic and coriander
-        </p>
-        <button onclick="addToFavorites(
-    'Molokhia',
-    'molokhya.html',
-)">
-            Add to Favorites
-        </button>
-    </fieldset>
-    <fieldset>
-        <legend style="font-weight: bold; font-size: large;">
-            <a href="chickenranch.html">Chicken Ranch Pizza</a>
-        </legend>
-        <p>
-            <img src="images/chickenranch.png" width="225" height="150">
-            <br>
-            <br>
-            While not a traditional Egyptian dish, Chicken Ranch Pizza
-            <br>
-            has become a massive favorite in modern pizzerias across Egypt.
-            <br>
-            It swaps the traditional red sauce for a creamy, zesty base,
-            <br>
-            making it a "white pizza" that is rich, tangy, and incredibly satisfying.
-        </p>
-        <button onclick="addToFavorites('Chicken Ranch Pizza', 'chikenranch.html')">Add to Favorites</button> 
-    </fieldset>
-    <div id="toast"></div>
-    <div id="dynamicRecipes"></div> <div id="toast"></div>
-    <script src="base.js"></script>
+
+<nav>
+  <strong>FCAI - SOFRA</strong>
+  <a href="homepage.html">Home</a>
+  <a href="recList.html">All Recipes</a>
+  <a href="search.html">Search</a>
+  <a href="favorites.html">My Favorites</a>
+  <a href="admin_recipes.html">Admin Dashboard</a>
+  <a href="EntryPage.html">Logout</a>
+  <button id="themeToggle" class="theme-toggle" style="margin-left: auto;">
+    <i class="fas fa-moon"></i>
+  </button>
+</nav>
+
+<section class="page-hero">
+  <div class="page-hero__overlay"></div>
+  <div class="page-hero__content">
+    <span class="page-hero__eyebrow"><i class="fas fa-book-open"></i> Full Collection</span>
+    <h1 class="page-hero__title">All Recipes</h1>
+    <p class="page-hero__sub">Browse every dish in our curated Egyptian culinary archive.</p>
+  </div>
+</section>
+
+<main>
+  <div class="filter-bar">
+    <button class="filter-btn active" data-course="all">All</button>
+    <button class="filter-btn" data-course="main_course">Main Course</button>
+    <button class="filter-btn" data-course="appetizers">Appetizers</button>
+    <button class="filter-btn" data-course="dessert">Dessert</button>
+    <div class="view-toggle">
+      <button class="view-btn active" id="gridViewBtn" title="Grid view"><i class="fas fa-th"></i></button>
+      <button class="view-btn" id="listViewBtn" title="List view"><i class="fas fa-list"></i></button>
+    </div>
+  </div>
+
+  <div class="rl-grid" id="recipeGrid">
+    <div class="rl-loading">
+      <i class="fas fa-utensils fa-spin"></i>
+      <p>Loading recipes...</p>
+    </div>
+  </div>
+
+  <div class="rl-empty" id="emptyState" style="display:none;">
+    <i class="fas fa-search"></i>
+    <h3>No recipes in this category yet.</h3>
+    <p>Check back soon or explore another course.</p>
+  </div>
+</main>
+
+<footer>
+  <small>FCAI - SOFRA • Authentic Egyptian Flavors</small><br>
+  <a href="#" style="font-size:0.8rem;">Back to Top <i class="fas fa-chevron-up"></i></a>
+</footer>
+
+<div id="toast"></div>
+<script src="base.js"></script>
+<script src="recList.js"></script>
 </body>
 </html>

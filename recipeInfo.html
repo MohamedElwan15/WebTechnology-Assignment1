@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FCAI - SOFRA | Recipe</title>
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="recipeInfo.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+<nav>
+  <strong>FCAI - SOFRA</strong>
+  <a href="homepage.html">Home</a>
+  <a href="recList.html">All Recipes</a>
+  <a href="search.html">Search</a>
+  <a href="favorites.html">My Favorites</a>
+  <a href="admin_recipes.html">Admin Dashboard</a>
+  <a href="EntryPage.html">Logout</a>
+  <button id="themeToggle" class="theme-toggle" style="margin-left: auto;">
+    <i class="fas fa-moon"></i>
+  </button>
+</nav>
+
+<!-- Hero - filled dynamically -->
+<section class="ri-hero" id="recipeHero">
+  <div class="ri-hero__img" id="heroImg"></div>
+  <div class="ri-hero__overlay"></div>
+  <div class="ri-hero__content">
+    <a href="recList.html" class="ri-back"><i class="fas fa-arrow-left"></i> All Recipes</a>
+    <span class="ri-hero__course" id="heroCourse"></span>
+    <h1 class="ri-hero__title" id="heroTitle">Loading…</h1>
+    <div class="ri-hero__chef" id="heroChef"></div>
+  </div>
+</section>
+
+<main class="ri-main">
+  <!-- Not found state -->
+  <div class="ri-notfound" id="notFound" style="display:none;">
+    <i class="fas fa-exclamation-triangle"></i>
+    <h2>Recipe not found</h2>
+    <p>The recipe you're looking for doesn't exist or was removed.</p>
+    <a href="recList.html" class="btn btn-primary">Browse All Recipes</a>
+  </div>
+
+  <!-- Content (filled by JS) -->
+  <div id="recipeContent" style="display:none;">
+    <div class="ri-layout">
+
+      <!-- Left: description + steps -->
+      <div class="ri-main-col">
+        <div class="ri-section reveal">
+          <h2 class="ri-section__title"><i class="fas fa-info-circle"></i> About this Dish</h2>
+          <p class="ri-desc" id="recipeDesc"></p>
+        </div>
+
+        <div class="ri-section reveal">
+          <h2 class="ri-section__title"><i class="fas fa-list-ol"></i> Instructions</h2>
+          <ol class="ri-steps" id="recipeSteps"></ol>
+        </div>
+      </div>
+
+      <!-- Right: ingredients + fav -->
+      <aside class="ri-sidebar">
+        <div class="ri-ingredients-box reveal">
+          <h3 class="ri-ing-title"><i class="fas fa-mortar-pestle"></i> Ingredients</h3>
+          <ul class="ri-ingredients" id="recipeIngredients"></ul>
+        </div>
+
+        <!-- Fav button (users only) -->
+        <button class="ri-fav-btn" id="favBtn" style="display:none;" onclick="handleFav()">
+          <i class="far fa-heart"></i>
+          <span>Add to Favorites</span>
+        </button>
+      </aside>
+
+    </div>
+  </div>
+</main>
+
+<footer>
+  <small>FCAI - SOFRA • Authentic Egyptian Flavors</small><br>
+  <a href="recList.html" style="font-size:0.8rem;"><i class="fas fa-arrow-left"></i> Back to Recipes</a>
+</footer>
+
+<div id="toast"></div>
+<script src="base.js"></script>
+<script src="recipeInfo.js"></script>
+</body>
+</html>

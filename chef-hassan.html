@@ -66,17 +66,11 @@
     <p>He often says that a great main course is not just a centerpiece — it is the memory a guest carries home. That belief drives every dish he prepares.</p>
   </div>
 
-  <div class="profile-section reveal">
-  <h2>Recipes on FCAI - Sofra</h2>
-  <table class="recipes-table">
-    <thead><tr><th>Recipe</th><th>Course</th><th></th></tr></thead>
-    <tbody>
-      <tr><td>Macaroni Bashamel</td><td>Main Course</td><td><a href="bachamel.html">View Recipe →</a></td></tr>
-      <tr><td>Koshari</td><td>Main Course</td><td><a href="koshary.html">View Recipe →</a></td></tr>
-      <tr><td>Chicken Ranch Pizza</td><td>Main Course</td><td><a href="chikenranch.html">View Recipe →</a></td></tr>
-    </tbody>
-  </table>
-</div>
+  <!-- Recipes — loaded dynamically from recipes.json -->
+  <div class="profile-section reveal" id="chefRecipesSection">
+    <h2>Recipes on FCAI - Sofra</h2>
+    <div id="chefRecipesContainer"><p style="color:var(--clr-muted)">Loading recipes…</p></div>
+  </div>
 
 </main>
 
@@ -87,6 +81,8 @@
 
 <div id="toast"></div>
 
+<!-- JavaScript Files -->
+<script>const CHEF_NAME = "Chef Hassan";</script>
 <script src="base.js"></script>
 <script src="chef-profile.js"></script>
 

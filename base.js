@@ -3,6 +3,85 @@
    Shared utilities used on every page
    ============================================================ */
 
+/* ── CONFIG ── */
+const API_BASE = ''; // empty = same origin (server.js serves static + API)
+
+/* ── RECIPES JSON LOADER ── */
+const RecipesAPI = {
+  _cache: null,
+  async getAll() {
+    if (this._cache) return this._cache;
+    try {
+      // Use /api/recipes so server always reads from disk (no browser cache issues)
+      const res = await fetch(API_BASE + '/api/recipes');
+      if (res.ok) {
+        this._cache = await res.json();
+        return this._cache;
+      }
+    } catch { /* server not running, fall through */ }
+    try {
+      // Fallback: static JSON file with cache-bust
+      const res = await fetch(API_BASE + '/recipes.json?t=' + Date.now());
+      this._cache = await res.json();
+      return this._cache;
+    } catch {
+      return [];
+    }
+  },
+  async getById(id) {
+    const all = await this.getAll();
+    return all.find(r => r.id === id) || null;
+  },
+  async save(recipe) {
+    try {
+      const res = await fetch(API_BASE + '/api/recipes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(recipe)
+      });
+      this._cache = null; // invalidate cache
+      return await res.json();
+    } catch {
+      // Fallback: store in localStorage if server not running
+      const recipes = Store.get('sofra_recipes') || [];
+      const idx = recipes.findIndex(r => r.id === recipe.id);
+      if (idx !== -1) recipes[idx] = recipe; else recipes.push(recipe);
+      Store.set('sofra_recipes', recipes);
+      this._cache = null;
+      return { success: true, recipe };
+    }
+  },
+  async delete(id) {
+    try {
+      await fetch(API_BASE + '/api/recipes/' + id, { method: 'DELETE' });
+      this._cache = null;
+    } catch {
+      const recipes = (Store.get('sofra_recipes') || []).filter(r => r.id !== id);
+      Store.set('sofra_recipes', recipes);
+      this._cache = null;
+    }
+  }
+};
+
+/* ── CHEFS JSON LOADER ── */
+const ChefsAPI = {
+  _cache: null,
+  async getAll() {
+    if (this._cache) return this._cache;
+    try {
+      const res = await fetch(API_BASE + '/chefs.json?t=' + Date.now());
+      this._cache = await res.json();
+      return this._cache;
+    } catch {
+      return [];
+    }
+  },
+  async getByName(name) {
+    const all = await this.getAll();
+    return all.find(c => c.name === name) || null;
+  }
+};
+
 /* ── TOAST NOTIFICATION ── */
 function showToast(message, duration = 3000) {
   let toast = document.getElementById('toast');
@@ -34,7 +113,7 @@ function initScrollReveal() {
 
 /* ── ACTIVE NAV LINK ── */
 function setActiveNavLink() {
-  const current = location.pathname.split('/').pop();
+  const current = location.pathname.split('/').pop() || 'homepage.html';
   document.querySelectorAll('nav a').forEach(a => {
     const href = a.getAttribute('href');
     if (href && href === current) a.classList.add('active');
@@ -70,6 +149,7 @@ const Session = {
 };
 
 /* ── NAV ROLE-BASED VISIBILITY ── */
+/* Uses display:none so no ghost space is left */
 function applyNavRoles() {
   const user = Session.getUser();
   const favLink   = document.querySelector('nav a[href="favorites.html"]');
@@ -104,125 +184,90 @@ function initThemeToggle() {
   });
 }
 
-/* ============================================================
-   SIGN-UP PAGE
-   ============================================================ */
+/* ── FAVORITES (localStorage) ── */
+const Favorites = {
+  getAll() { return Store.get('sofra_favorites') || []; },
+  add(recipeId) {
+    const favs = this.getAll();
+    if (!favs.includes(recipeId)) {
+      favs.push(recipeId);
+      Store.set('sofra_favorites', favs);
+    }
+  },
+  remove(recipeId) {
+    Store.set('sofra_favorites', this.getAll().filter(id => id !== recipeId));
+  },
+  has(recipeId) { return this.getAll().includes(recipeId); }
+};
+
+/* ── SIGN-UP PAGE ── */
 function initSignup() {
   const form = document.querySelector('form[action="./LogIn.html"]');
   if (!form) return;
 
-  /* --- Password strength indicator --- */
   const passwordInput = document.getElementById('password');
   if (passwordInput) {
     const strengthBar = document.createElement('div');
-    strengthBar.style.cssText = `
-      height: 4px; border-radius: 4px; margin-top: 6px;
-      width: 0%; transition: width 0.4s ease, background 0.4s ease;
-    `;
-
+    strengthBar.style.cssText = `height:4px;border-radius:4px;margin-top:6px;width:0%;transition:width 0.4s ease,background 0.4s ease;`;
     const strengthLabel = document.createElement('small');
-    strengthLabel.style.cssText = 'display:block; margin-top:3px;';
-
+    strengthLabel.style.cssText = 'display:block;margin-top:3px;';
     passwordInput.insertAdjacentElement('afterend', strengthLabel);
     passwordInput.insertAdjacentElement('afterend', strengthBar);
-
     passwordInput.addEventListener('input', () => {
       const val = passwordInput.value;
       let score = 0;
-      if (val.length >= 8)          score++;
-      if (/[A-Z]/.test(val))        score++;
-      if (/[0-9]/.test(val))        score++;
+      if (val.length >= 8) score++;
+      if (/[A-Z]/.test(val)) score++;
+      if (/[0-9]/.test(val)) score++;
       if (/[^A-Za-z0-9]/.test(val)) score++;
-
       const levels = [
-        { label: '',       color: 'transparent', width: '0%'   },
-        { label: 'Weak',   color: '#e74c3c',     width: '25%'  },
-        { label: 'Fair',   color: '#e67e22',     width: '50%'  },
-        { label: 'Good',   color: '#f1c40f',     width: '75%'  },
-        { label: 'Strong', color: '#2ecc71',     width: '100%' },
+        { label: '', color: 'transparent', width: '0%' },
+        { label: 'Weak', color: '#e74c3c', width: '25%' },
+        { label: 'Fair', color: '#e67e22', width: '50%' },
+        { label: 'Good', color: '#f1c40f', width: '75%' },
+        { label: 'Strong', color: '#2ecc71', width: '100%' },
       ];
-
-      strengthBar.style.width      = levels[score].width;
+      strengthBar.style.width = levels[score].width;
       strengthBar.style.background = levels[score].color;
-      strengthLabel.textContent    = val.length ? levels[score].label : '';
-      strengthLabel.style.color    = levels[score].color;
+      strengthLabel.textContent = val.length ? levels[score].label : '';
+      strengthLabel.style.color = levels[score].color;
     });
   }
 
-  /* --- Submit handler --- */
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-
-    const username        = document.getElementById('username').value.trim();
-    const email           = document.getElementById('email').value.trim();
-    const password        = document.getElementById('password').value;
+    const username = document.getElementById('username').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirm_password').value;
-    const isAdmin         = document.getElementById('is_admin').checked;
-
-    // Validations
-    if (username.length < 3) {
-      showToast('⚠️ Username must be at least 3 characters.'); return;
-    }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      showToast('⚠️ Please enter a valid email address.'); return;
-    }
-    if (password.length < 8) {
-      showToast('⚠️ Password must be at least 8 characters.'); return;
-    }
-    if (password !== confirmPassword) {
-      showToast('⚠️ Passwords do not match.'); return;
-    }
-
-    // Check if username already exists
+    const isAdmin = document.getElementById('is_admin').checked;
+    if (username.length < 3) { showToast('⚠️ Username must be at least 3 characters.'); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showToast('⚠️ Please enter a valid email address.'); return; }
+    if (password.length < 8) { showToast('⚠️ Password must be at least 8 characters.'); return; }
+    if (password !== confirmPassword) { showToast('⚠️ Passwords do not match.'); return; }
     const users = Store.get('sofra_users') || [];
     if (users.find(u => u.username.toLowerCase() === username.toLowerCase())) {
-      showToast('⚠️ Username already taken. Please choose another.'); return;
+      showToast('⚠️ Username already taken.'); return;
     }
-
-    // Save new user
-    const newUser = {
-      username,
-      email,
-      password,   // Phase 2: hash this on the backend
-      role: isAdmin ? 'admin' : 'user'
-    };
-    users.push(newUser);
+    users.push({ username, email, password, role: isAdmin ? 'admin' : 'user' });
     Store.set('sofra_users', users);
-
     showToast('✅ Account created! Redirecting to login…', 2000);
     setTimeout(() => { window.location.href = './LogIn.html'; }, 2000);
   });
 }
 
-/* ============================================================
-   LOGIN PAGE
-   ============================================================ */
+/* ── LOGIN PAGE ── */
 function initLogin() {
   const form = document.querySelector('form[action="homepage.html"]');
   if (!form) return;
-
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-
     const username = document.getElementById('username').value.trim();
     const password = document.getElementById('password').value;
-
-    if (!username || !password) {
-      showToast('⚠️ Please fill in all fields.'); return;
-    }
-
-    // Look up user in storage
+    if (!username || !password) { showToast('⚠️ Please fill in all fields.'); return; }
     const users = Store.get('sofra_users') || [];
-    const user  = users.find(
-      u => u.username.toLowerCase() === username.toLowerCase()
-        && u.password === password
-    );
-
-    if (!user) {
-      showToast('❌ Invalid username or password.'); return;
-    }
-
-    // Save session and redirect
+    const user = users.find(u => u.username.toLowerCase() === username.toLowerCase() && u.password === password);
+    if (!user) { showToast('❌ Invalid username or password.'); return; }
     Session.setUser({ username: user.username, email: user.email, role: user.role });
     showToast(`✅ Welcome back, ${user.username}! Redirecting…`, 2000);
     setTimeout(() => { window.location.href = 'homepage.html'; }, 2000);
@@ -237,142 +282,4 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollReveal();
   initSignup();
   initLogin();
-  initSearch();
-  initRecipeGallery(); // This
-});
-
-
-/* ==== Search page ==== */
-function initSearch() {
-  const searchInput = document.getElementById('mysearch');
-  const searchButton = document.querySelector('button[type="button"]');
-  
-  // run if we are on the search page
-  if (!searchInput || !searchButton) return;
-
-  const performSearch = () => {
-    const query = searchInput.value.trim().toLowerCase();
-
-    if (!query) {
-      showToast('Please enter a recipe name.');
-      return;
-    }
-
-    // Mapping search terms to existing filenames
-    const recipeMap = {
-      'koshary': 'koshary.html',
-      'molokhya': 'molokhya.html',
-      'bachamel': 'bachamel.html',
-      'macarona bechamel': 'bachamel.html',
-      'chicken ranch': 'chikenranch.html',
-      'pizza': 'chikenranch.html'
-    };
-
-    if (recipeMap[query]) {
-      showToast(`🔍 Searching for ${query}...`);
-      setTimeout(() => {
-        window.location.href = recipeMap[query];
-      }, 1000);
-    } else {
-      showToast(`❌ Sorry, "${query}" was not found.`);
-    }
-  };
-
-  // Trigger on button click
-  searchButton.addEventListener('click', performSearch);
-
-  // Trigger on "Enter" key
-  searchInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') performSearch();
-  });
-}
-
-function initRecipeGallery() {
-    const galleryContainer = document.getElementById('dynamicRecipes');
-    if (!galleryContainer) return;
-
-    const localRecipes = RecipeStore.getAll();
-    if (!localRecipes.length) return;
-
-    galleryContainer.innerHTML = localRecipes.map(function (recipe) {
-        return '<fieldset>' +
-            '<legend style="font-weight: bold; font-size: large;">' +
-            '<a href="recipe_details.html?id=' + recipe.id + '">' + recipe.name + '</a>' +
-            '</legend>' +
-            (recipe.imageUrl
-                ? '<img src="' + recipe.imageUrl + '" width="225" height="150">'
-                : '') +
-            '<p style="max-width: 400px;">' + recipe.description + '</p>' +
-            '<button onclick="addToFavorites(\'' + recipe.name + '\', \'recipe_details.html?id=' + recipe.id + '\')">' +
-            'Add to Favorites' +
-            '</button>' +
-            '</fieldset>';
-    }).join('');
-}
-
-function addToFavorites(recipeName, recipeFile) {
-    let data = localStorage.getItem("favorites");
-    let favs = data ? JSON.parse(data) : [];
-
-    // Check for duplicates
-    if (favs.some(f => f.name === recipeName)) {
-        alert("Already in favorites!");
-        return;
-    }
-
-    // Save both values
-    favs.push({ name: recipeName, link: recipeFile });
-    localStorage.setItem("favorites", JSON.stringify(favs));
-    alert("Saved: " + recipeName);
-}
-
-function loadFavorites() {
-    const container = document.getElementById("favoritesList");
-    if (!container) return;
-
-    const data = localStorage.getItem("favorites");
-    const favs = data ? JSON.parse(data) : [];
-
-    if (favs.length === 0) {
-        container.innerHTML = "<p>Empty favorites.</p>";
-        return;
-    }
-
-    let html = "";
-    favs.forEach((recipe, index) => {
-        html += `<fieldset style="margin-bottom:15px; padding:10px;">
-                    <legend><strong>${recipe.name}</strong></legend>
-                    <a href="${recipe.link}">View Recipe</a><br><br>
-                    <button onclick="removeFavorite(${index})">Remove</button>
-                 </fieldset>`;
-    });
-    container.innerHTML = html;
-}
-
-// Helper to remove items
-window.removeFavorite = function(i) {
-    let favs = JSON.parse(localStorage.getItem("favorites"));
-    favs.splice(i, 1);
-    localStorage.setItem("favorites", JSON.stringify(favs));
-    loadFavorites();
-};
-
-// Start the loader
-window.addEventListener('load', loadFavorites);
-// THIS PART IS CRITICAL: It forces the function to run when the page opens
-window.addEventListener('load', loadFavorites);
-
-// 3. The Remove Function
-function removeFavorite(index) {
-    var favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-    favorites.splice(index, 1);
-    localStorage.setItem("favorites", JSON.stringify(favorites));
-    loadFavorites(); // Refresh the list
-}
-
-// 4. Force a check when the page loads
-window.addEventListener('load', function() {
-    if (document.getElementById("favoritesList")) {
-        loadFavorites();
-    }
 });

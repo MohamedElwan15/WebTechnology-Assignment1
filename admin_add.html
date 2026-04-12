@@ -12,25 +12,19 @@
 
 <body>
     <nav>
-        <strong>FCAI-SOFRA</strong>
-        &nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="homepage.html">Home</a>
-        &nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="recList.html">All Recipes</a>
-        &nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="search.html">Search</a> <!--Not functional till JavaScript implementation-->
-        &nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="favorites.html">My Favorites</a>
-        &nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="admin_recipes.html">Admin Dashboard</a>
-        &nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="EntryPage.html">Logout</a>
-        <button id="themeToggle" class="theme-toggle" style="margin-left: auto;">
-            <i class="fas fa-moon"></i>
-            </button>
-    </nav>
+  <strong>FCAI - SOFRA</strong>
+  <a href="homepage.html">Home</a>
+  <a href="recList.html">All Recipes</a>
+  <a href="search.html">Search</a>
+  <a href="favorites.html">My Favorites</a>
+  <a href="admin_recipes.html">Admin Dashboard</a>
+  <a href="EntryPage.html">Logout</a>
+  <button id="themeToggle" class="theme-toggle" style="margin-left: auto;">
+    <i class="fas fa-moon"></i>
+  </button>
+</nav>
 
-    <hr />
+    
     <header>
         <h1><i class="fas fa-plus-circle"></i> Add Recipe</h1>
     </header>
@@ -55,6 +49,16 @@
                     <option value="main_course">Main Course</option>
                     <option value="dessert">Dessert</option>
                 </select>
+            </div>
+            <div>
+                <label for="chefSelect">Chef</label>
+                <select id="chefSelect" name="chefSelect">
+                    <option value="">Self-Made (No Chef)</option>
+                    <option value="Chef El Sherbiny">Chef El Sherbiny</option>
+                    <option value="Chef Hassan">Chef Hassan</option>
+                    <option value="Chef Nadia El Sayed">Chef Nadia El Sayed</option>
+                </select>
+                <small id="chefHint" style="display:block;margin-top:5px;color:var(--clr-muted);"></small>
             </div>
             <div>
                 <label for="Descriptionn">Description</label>

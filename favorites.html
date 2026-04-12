@@ -1,34 +1,66 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My Favorite Recipes</title>
-    <link rel="stylesheet" href="base.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FCAI - SOFRA | My Favorites</title>
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="favorites.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <nav>
-        <strong>FCAI-SOFRA</strong>
-        &nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="homepage.html">Home</a>
-        &nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="recList.html">All Recipes</a>
-        &nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="search.html">Search</a> <!--Not functional till JavaScript implementation-->
-        &nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="favorites.html">My Favorites</a>
-        &nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="admin_recipes.html">Admin Dashboard</a>
-        &nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="EntryPage.html">Logout</a>
-        <button id="themeToggle" class="theme-toggle" style="margin-left: auto;">
-            <i class="fas fa-moon"></i>
-        </button>
-    </nav>
-    <hr />
-    <h1>My Favorite Recipes</h1>
-    <div id="favoritesList"></div>
-    <script src="base.js"></script>
 
-    <hr>
+<nav>
+  <strong>FCAI - SOFRA</strong>
+  <a href="homepage.html">Home</a>
+  <a href="recList.html">All Recipes</a>
+  <a href="search.html">Search</a>
+  <a href="favorites.html">My Favorites</a>
+  <a href="admin_recipes.html">Admin Dashboard</a>
+  <a href="EntryPage.html">Logout</a>
+  <button id="themeToggle" class="theme-toggle" style="margin-left: auto;">
+    <i class="fas fa-moon"></i>
+  </button>
+</nav>
+
+<!-- Page Hero -->
+<section class="page-hero fav-hero">
+  <div class="page-hero__overlay"></div>
+  <div class="page-hero__content">
+    <span class="page-hero__eyebrow"><i class="fas fa-heart"></i> Your Collection</span>
+    <h1 class="page-hero__title">My Favorites</h1>
+    <p class="page-hero__sub">Recipes you've saved for later.</p>
+  </div>
+</section>
+
+<main>
+  <!-- Loading state -->
+  <div class="fav-loading" id="favLoading">
+    <i class="fas fa-heart fa-spin"></i>
+    <p>Loading your favorites…</p>
+  </div>
+
+  <!-- Empty state -->
+  <div class="fav-empty" id="favEmpty" style="display:none;">
+    <div class="fav-empty__icon">
+      <i class="far fa-heart"></i>
+    </div>
+    <h2>No favorites yet</h2>
+    <p>Browse our recipe collection and tap the <i class="fas fa-heart" style="color:var(--clr-orange)"></i> to save dishes you love.</p>
+    <a href="recList.html" class="btn btn-primary"><i class="fas fa-book-open"></i> Browse Recipes</a>
+  </div>
+
+  <!-- Favorites grid -->
+  <div class="fav-grid" id="favGrid"></div>
+</main>
+
+<footer>
+  <small>FCAI - SOFRA • Authentic Egyptian Flavors</small><br>
+  <a href="#" style="font-size:0.8rem;">Back to Top <i class="fas fa-chevron-up"></i></a>
+</footer>
+
+<div id="toast"></div>
+<script src="base.js"></script>
+<script src="favorites.js"></script>
 </body>
 </html>
