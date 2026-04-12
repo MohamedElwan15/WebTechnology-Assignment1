@@ -1,8 +1,3 @@
-/* ============================================================
-   FCAI - SOFRA  |  ADMIN JS
-   RecipeStore: wraps server API + localStorage fallback
-   ============================================================ */
-
 const RecipeStore = {
   getAll() {
     return Store.get('sofra_recipes') || [];
@@ -28,7 +23,6 @@ const RecipeStore = {
   getForCurrentAdmin() {
     const user = Session.getUser();
     if (!user) return [];
-    // Admins see all recipes they added (by adminName)
     return this.getAll().filter(r => r.adminName === user.username);
   },
   generateId() {
@@ -36,7 +30,6 @@ const RecipeStore = {
   }
 };
 
-/* ── Save recipe to server (POST) + localStorage fallback ── */
 async function saveRecipeToServer(recipe) {
   try {
     const res = await fetch('/api/recipes', {
@@ -45,23 +38,19 @@ async function saveRecipeToServer(recipe) {
       body: JSON.stringify(recipe)
     });
     if (res.ok) {
-      // Also keep in localStorage for instant access
       const isEdit = RecipeStore.getById(recipe.id);
       if (isEdit) RecipeStore.update(recipe.id, recipe);
       else RecipeStore.add(recipe);
       return true;
     }
   } catch {
-    // Server not running — fall back to localStorage only
   }
-  // localStorage fallback
   const isEdit = RecipeStore.getById(recipe.id);
   if (isEdit) RecipeStore.update(recipe.id, recipe);
   else RecipeStore.add(recipe);
   return true;
 }
 
-/* ── Delete recipe from server ── */
 async function deleteRecipeFromServer(id) {
   try {
     await fetch('/api/recipes/' + id, { method: 'DELETE' });
@@ -69,7 +58,6 @@ async function deleteRecipeFromServer(id) {
   RecipeStore.delete(id);
 }
 
-/* ── PAGE: admin_recipes.html ── */
 function initDashboard() {
   const tableBody = document.getElementById('recipesTableBody');
   if (!tableBody) return;
@@ -140,7 +128,6 @@ function initDashboard() {
   }
 }
 
-/* ── PAGE: admin_add.html / Edit ── */
 function initRecipeForm() {
   const form = document.getElementById('addRecipeForm');
   if (!form) return;
@@ -156,7 +143,6 @@ function initRecipeForm() {
   const editId = params.get('id');
   const isEdit = editId !== null;
 
-  // Chef dropdown: populate hint text from ChefsAPI
   const chefSelect = document.getElementById('chefSelect');
   const chefHint   = document.getElementById('chefHint');
   let chefsData    = [];
@@ -284,7 +270,6 @@ function initRecipeForm() {
   });
 }
 
-/* ── DYNAMIC ROW HELPERS ── */
 function addIngredientRow(nameVal = '', qtyVal = '') {
   const container = document.getElementById('ingredientsList');
   const index = container.children.length + 1;
@@ -336,7 +321,6 @@ function collectSteps() {
     .filter(Boolean);
 }
 
-/* ── INIT ── */
 document.addEventListener('DOMContentLoaded', () => {
   initDashboard();
   initRecipeForm();
