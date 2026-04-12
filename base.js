@@ -310,48 +310,69 @@ function initRecipeGallery() {
     }).join('');
 }
 
-function loadFavorites() {
-    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-    let container = document.getElementById("favoritesList");
+function addToFavorites(recipeName, recipeFile) {
+    let data = localStorage.getItem("favorites");
+    let favs = data ? JSON.parse(data) : [];
 
-    if (!container) return; // important if page doesn't have it
-
-    container.innerHTML = "";
-
-    if (favorites.length === 0) {
-        container.innerHTML = "<p>No favorite recipes yet.</p>";
+    // Check for duplicates
+    if (favs.some(f => f.name === recipeName)) {
+        alert("Already in favorites!");
         return;
     }
 
-    favorites.forEach((recipe, index) => {
-       container.innerHTML += `
-    <hr>
-    <h2><a href="${recipe.link}">${recipe.name}</a></h2>
-    ${recipe.description ? `<p>${recipe.description}</p>` : ""}
-    <button onclick="removeFavorite(${index})">
-        Remove from Favorites
-    </button>
-    `;
-    });
+    // Save both values
+    favs.push({ name: recipeName, link: recipeFile });
+    localStorage.setItem("favorites", JSON.stringify(favs));
+    alert("Saved: " + recipeName);
 }
 
+function loadFavorites() {
+    const container = document.getElementById("favoritesList");
+    if (!container) return;
+
+    const data = localStorage.getItem("favorites");
+    const favs = data ? JSON.parse(data) : [];
+
+    if (favs.length === 0) {
+        container.innerHTML = "<p>Empty favorites.</p>";
+        return;
+    }
+
+    let html = "";
+    favs.forEach((recipe, index) => {
+        html += `<fieldset style="margin-bottom:15px; padding:10px;">
+                    <legend><strong>${recipe.name}</strong></legend>
+                    <a href="${recipe.link}">View Recipe</a><br><br>
+                    <button onclick="removeFavorite(${index})">Remove</button>
+                 </fieldset>`;
+    });
+    container.innerHTML = html;
+}
+
+// Helper to remove items
+window.removeFavorite = function(i) {
+    let favs = JSON.parse(localStorage.getItem("favorites"));
+    favs.splice(i, 1);
+    localStorage.setItem("favorites", JSON.stringify(favs));
+    loadFavorites();
+};
+
+// Start the loader
+window.addEventListener('load', loadFavorites);
+// THIS PART IS CRITICAL: It forces the function to run when the page opens
+window.addEventListener('load', loadFavorites);
+
+// 3. The Remove Function
 function removeFavorite(index) {
-    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    var favorites = JSON.parse(localStorage.getItem("favorites")) || [];
     favorites.splice(index, 1);
     localStorage.setItem("favorites", JSON.stringify(favorites));
-    loadFavorites();
+    loadFavorites(); // Refresh the list
 }
 
-function addToFavorites(name, link) {
-    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-
-    let exists = favorites.some(recipe => recipe.name === name);
-
-    if (!exists) {
-        favorites.push({ name, link });
-        localStorage.setItem("favorites", JSON.stringify(favorites));
-        alert("Added to favorites!");
-    } else {
-        alert("Already in favorites!");
+// 4. Force a check when the page loads
+window.addEventListener('load', function() {
+    if (document.getElementById("favoritesList")) {
+        loadFavorites();
     }
-}
+});
