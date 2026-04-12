@@ -326,3 +326,49 @@ function initRecipeGallery() {
         `;
     }).join('');
 }
+
+function loadFavorites() {
+    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    let container = document.getElementById("favoritesList");
+
+    if (!container) return; // important if page doesn't have it
+
+    container.innerHTML = "";
+
+    if (favorites.length === 0) {
+        container.innerHTML = "<p>No favorite recipes yet.</p>";
+        return;
+    }
+
+    favorites.forEach((recipe, index) => {
+       container.innerHTML += `
+    <hr>
+    <h2><a href="${recipe.link}">${recipe.name}</a></h2>
+    ${recipe.description ? `<p>${recipe.description}</p>` : ""}
+    <button onclick="removeFavorite(${index})">
+        Remove from Favorites
+    </button>
+    `;
+    });
+}
+
+function removeFavorite(index) {
+    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    favorites.splice(index, 1);
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+    loadFavorites();
+}
+
+function addToFavorites(name, link) {
+    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+    let exists = favorites.some(recipe => recipe.name === name);
+
+    if (!exists) {
+        favorites.push({ name, link });
+        localStorage.setItem("favorites", JSON.stringify(favorites));
+        alert("Added to favorites!");
+    } else {
+        alert("Already in favorites!");
+    }
+}
