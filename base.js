@@ -238,7 +238,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initSignup();
   initLogin();
   initSearch();
-  initRecipeGallery(); // This
+  initRecipeGallery();
+  loadFavorites();
 });
 
 
@@ -291,7 +292,7 @@ function initRecipeGallery() {
     const galleryContainer = document.getElementById('dynamicRecipes');
     if (!galleryContainer) return;
 
-    const localRecipes = RecipeStore.getAll();
+    const localRecipes = JSON.parse(localStorage.getItem('sofra_recipes')) || [];
     if (!localRecipes.length) return;
 
     galleryContainer.innerHTML = localRecipes.map(function (recipe) {
@@ -349,30 +350,3 @@ function loadFavorites() {
     container.innerHTML = html;
 }
 
-// Helper to remove items
-window.removeFavorite = function(i) {
-    let favs = JSON.parse(localStorage.getItem("favorites"));
-    favs.splice(i, 1);
-    localStorage.setItem("favorites", JSON.stringify(favs));
-    loadFavorites();
-};
-
-// Start the loader
-window.addEventListener('load', loadFavorites);
-// THIS PART IS CRITICAL: It forces the function to run when the page opens
-window.addEventListener('load', loadFavorites);
-
-// 3. The Remove Function
-function removeFavorite(index) {
-    var favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-    favorites.splice(index, 1);
-    localStorage.setItem("favorites", JSON.stringify(favorites));
-    loadFavorites(); // Refresh the list
-}
-
-// 4. Force a check when the page loads
-window.addEventListener('load', function() {
-    if (document.getElementById("favoritesList")) {
-        loadFavorites();
-    }
-});
