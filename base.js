@@ -288,42 +288,25 @@ function initSearch() {
 }
 
 function initRecipeGallery() {
-    // Look for a place to put the new recipes
-    let galleryContainer = document.getElementById('dynamicRecipes');
-    
-    // If it doesn't exist yet, create it and add it to the body
-    if (!galleryContainer && document.title === "Recipes List") {
-        galleryContainer = document.createElement('div');
-        galleryContainer.id = 'dynamicRecipes';
-        document.body.appendChild(galleryContainer);
-    }
+    const galleryContainer = document.getElementById('dynamicRecipes');
+    if (!galleryContainer) return;
 
-    if (!galleryContainer)
-      {
-        return;
-      }
     const localRecipes = RecipeStore.getAll();
-    
-    if (localRecipes.length === 0)
-      {
-        return;
-      } 
-    // Generate fieldsets for new recipes to match your existing design
-    galleryContainer.innerHTML = localRecipes.map(function(recipe) {
-        return `
-            <fieldset>
-                <legend style="font-weight: bold; font-size: large;">
-                    <a href="recipe_details.html?id=${recipe.id}">${recipe.name}</a>
-                </legend>
-                ${recipe.imageUrl 
-                    ? `<img src="${recipe.imageUrl}" width="225" height="150">` 
-                    : '<div style="width:225px; height:150px; background:#eee; display:flex; align-items:center; justify-content:center;">No Image</div>'}
-                <p>
-                    <strong>Course: ${recipe.course}</strong><br>
-                    ${recipe.description}
-                </p>
-            </fieldset>
-        `;
+    if (!localRecipes.length) return;
+
+    galleryContainer.innerHTML = localRecipes.map(function (recipe) {
+        return '<fieldset>' +
+            '<legend style="font-weight: bold; font-size: large;">' +
+            '<a href="recipe_details.html?id=' + recipe.id + '">' + recipe.name + '</a>' +
+            '</legend>' +
+            (recipe.imageUrl
+                ? '<img src="' + recipe.imageUrl + '" width="225" height="150">'
+                : '') +
+            '<p style="max-width: 400px;">' + recipe.description + '</p>' +
+            '<button onclick="addToFavorites(\'' + recipe.name + '\', \'recipe_details.html?id=' + recipe.id + '\')">' +
+            'Add to Favorites' +
+            '</button>' +
+            '</fieldset>';
     }).join('');
 }
 

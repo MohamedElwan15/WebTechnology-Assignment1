@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Recipe</title>
+    <link rel="stylesheet" href="base.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .recipe-container {
+            max-width: 860px;
+            margin: 2.5rem auto;
+            padding: 0 1.5rem;
+        }
+
+            .recipe-container img {
+                border-radius: 12px;
+                margin: 1.5rem 0;
+                box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+            }
+
+            .recipe-container h2 {
+                color: var(--clr-orange);
+                margin-bottom: 0.5rem;
+            }
+
+            .recipe-container h3 {
+                color: var(--clr-orange-lt);
+                margin: 2rem 0 0.75rem;
+                padding-bottom: 0.4rem;
+                border-bottom: 1px solid var(--clr-border);
+            }
+
+            .recipe-container ul,
+            .recipe-container ol {
+                padding-left: 1.5rem;
+                color: var(--clr-text);
+            }
+
+                .recipe-container ul li,
+                .recipe-container ol li {
+                    margin-bottom: 0.5rem;
+                    opacity: 0.88;
+                }
+
+            .recipe-container .back-link {
+                display: inline-block;
+                margin-top: 2rem;
+                color: var(--clr-orange);
+                font-weight: 600;
+            }
+
+                .recipe-container .back-link:hover {
+                    color: var(--clr-orange-lt);
+                }
+    </style>
+</head>
+<body>
+    <nav>
+        <strong>FCAI-SOFRA</strong>
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        <a href="homepage.html">Home</a>
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        <a href="recList.html">All Recipes</a>
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        <a href="search.html">Search</a>
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        <a href="favorites.html">My Favorites</a>
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        <a href="admin_recipes.html">Admin Dashboard</a>
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        <a href="EntryPage.html">Logout</a>
+        <button id="themeToggle" class="theme-toggle" style="margin-left: auto;">
+            <i class="fas fa-moon"></i>
+        </button>
+    </nav>
+
+    <hr />
+
+    <div class="recipe-container">
+        <h1>Recipe Instructions</h1>
+        <hr>
+
+        <h2 id="detailName"></h2>
+        <p id="detailDescription"></p>
+        <img id="detailImage" src="" alt="" width="500" height="400" style="display:none;">
+
+        <h3>Ingredients</h3>
+        <ul id="detailIngredients"></ul>
+
+        <h3>Cooking Instructions</h3>
+        <ol id="detailSteps"></ol>
+
+        <a href="recList.html" class="back-link">Back to Recipes List</a>
+    </div>
+
+    <div id="toast"></div>
+    <script src="base.js"></script>
+    <script src="admin.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var params = new URLSearchParams(window.location.search);
+            var id = params.get('id');
+            if (!id) { showToast('No recipe selected.'); return; }
+
+            var recipe = RecipeStore.getById(id);
+            if (!recipe) { showToast('Recipe not found.'); return; }
+
+            document.getElementById('detailName').textContent = recipe.name;
+            document.getElementById('detailDescription').textContent = recipe.description;
+
+            if (recipe.imageUrl) {
+                var img = document.getElementById('detailImage');
+                img.src = recipe.imageUrl;
+                img.alt = recipe.name;
+                img.style.display = 'block';
+            }
+
+            var ingList = document.getElementById('detailIngredients');
+            recipe.ingredients.forEach(function (ing) {
+                var li = document.createElement('li');
+                li.textContent = ing.name + ' — ' + ing.qty;
+                ingList.appendChild(li);
+            });
+
+            var stepList = document.getElementById('detailSteps');
+            recipe.steps.forEach(function (step) {
+                var li = document.createElement('li');
+                li.textContent = step;
+                stepList.appendChild(li);
+            });
+        });
+    </script>
+</body>
+</html>
