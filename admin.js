@@ -54,7 +54,7 @@ async function saveRecipeToServer(recipe) {
 async function deleteRecipeFromServer(id) {
   try {
     await fetch('/api/recipes/' + id, { method: 'DELETE' });
-  } catch { /* fallback: localStorage only */ }
+  } catch {}
   RecipeStore.delete(id);
 }
 

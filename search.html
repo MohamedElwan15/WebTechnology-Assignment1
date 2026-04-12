@@ -35,7 +35,7 @@
       <input type="search" id="searchInput" placeholder="e.g. Koshari, garlic, molokhia…" autocomplete="off">
       <button id="searchBtn"><i class="fas fa-search"></i> Search</button>
     </div>
-    <!-- Hidden clear button, shown when there's a query -->
+    
     <button id="clearBtn" style="display:none;background:none;border:1px solid var(--clr-border);color:var(--clr-muted);padding:6px 14px;border-radius:20px;cursor:pointer;font-size:0.82rem;margin-top:0.5rem;">
       <i class="fas fa-times"></i> Clear
     </button>
@@ -54,7 +54,6 @@
     <div class="filter-group">
       <span class="filter-group__label">Chef:</span>
       <button class="sf-btn active" data-chef="all" id="chefAllBtn">All Chefs</button>
-      <!-- Chef buttons injected dynamically by search.js -->
       <span id="chefFilters"></span>
     </div>
   </div>

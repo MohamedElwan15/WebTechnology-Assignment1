@@ -179,7 +179,7 @@ nav strong {
   letter-spacing: 0.04em;
   margin-right: 1.5rem;
   white-space: nowrap;
-  transition: color 0.3s ease;  /* ADD THIS LINE */
+  transition: color 0.3s ease;
 }
 
 nav a {
@@ -190,7 +190,7 @@ nav a {
   text-transform: uppercase;
   padding: 6px 12px;
   border-radius: 6px;
-  transition: color 0.3s ease, background 0.3s ease;  /* UPDATE THIS LINE */
+  transition: color 0.3s ease, background 0.3s ease;
   white-space: nowrap;
 }
 
@@ -200,7 +200,7 @@ nav a.active {
   background: rgba(255,107,26,0.08);
 }
 
-/* Hide the &nbsp;|&nbsp; separators injected by old HTML */
+
 nav br { display: none; }
 
 /* ── MAIN CONTENT WRAPPER ── */

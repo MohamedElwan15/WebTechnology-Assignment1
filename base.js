@@ -186,16 +186,20 @@ function initThemeToggle() {
 
 /* ── FAVORITES (localStorage) ── */
 const Favorites = {
-  getAll() { return Store.get('sofra_favorites') || []; },
+  _key() {
+    const user = Session.getUser();
+    return user ? 'sofra_favorites_' + user.username : 'sofra_favorites';
+  },
+  getAll() { return Store.get(this._key()) || []; },
   add(recipeId) {
     const favs = this.getAll();
     if (!favs.includes(recipeId)) {
       favs.push(recipeId);
-      Store.set('sofra_favorites', favs);
+      Store.set(this._key(), favs);
     }
   },
   remove(recipeId) {
-    Store.set('sofra_favorites', this.getAll().filter(id => id !== recipeId));
+    Store.set(this._key(), this.getAll().filter(id => id !== recipeId));
   },
   has(recipeId) { return this.getAll().includes(recipeId); }
 };

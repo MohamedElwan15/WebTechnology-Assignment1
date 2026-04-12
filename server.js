@@ -6,7 +6,7 @@ const url = require('url');
 const RECIPES_FILE = path.join(__dirname, 'recipes.json');
 const PORT = 3000;
 
-// MIME types for serving static files
+
 const MIME = {
   '.html': 'text/html',
   '.css': 'text/css',
@@ -78,7 +78,7 @@ const server = http.createServer((req, res) => {
       try {
         const recipe = JSON.parse(body);
 
-        // Basic validation
+        
         if (!recipe.name || !recipe.course) {
           res.writeHead(400, { 'Content-Type': 'application/json' });
           res.end(JSON.stringify({ error: 'name and course are required' }));
@@ -92,7 +92,7 @@ const server = http.createServer((req, res) => {
 
         const recipes = readRecipes();
 
-        // Update if exists, otherwise append
+        
         const existingIndex = recipes.findIndex(r => r.id === recipe.id);
         if (existingIndex !== -1) {
           recipes[existingIndex] = recipe;

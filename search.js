@@ -143,7 +143,7 @@ async function buildChefFilters() {
   if (!container) return;
 
   let chefs = [];
-  try { chefs = await ChefsAPI.getAll(); } catch { /* use empty */ }
+  try { chefs = await ChefsAPI.getAll(); } catch {  }
 
   const selfMadeBtn = `<button class="sf-btn" data-chef="__selfmade__">Self-Made</button>`;
   const chefBtns = chefs.map(c => `<button class="sf-btn" data-chef="${c.name}">${c.name}</button>`).join('');
@@ -151,7 +151,6 @@ async function buildChefFilters() {
 
   container.querySelectorAll('.sf-btn[data-chef]').forEach(btn => {
     btn.addEventListener('click', () => {
-      // deactivate all chef btns including the "All Chefs" one
       document.getElementById('chefAllBtn').classList.remove('active');
       container.querySelectorAll('.sf-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
