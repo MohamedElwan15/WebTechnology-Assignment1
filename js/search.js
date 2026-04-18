@@ -184,15 +184,6 @@ async function init() {
   const searchBtn = document.getElementById('searchBtn');
   const clearBtn  = document.getElementById('clearBtn');
 
-  let debounceTimer;
-  input.addEventListener('input', () => {
-    clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(() => {
-      activeQuery = input.value.trim();
-      clearBtn.style.display = activeQuery ? 'inline-flex' : 'none';
-      renderResults();
-    }, 220);
-  });
 
   searchBtn.addEventListener('click', () => {
     activeQuery = input.value.trim();
@@ -223,14 +214,6 @@ async function init() {
       renderResults();
     });
   });
-
-  const params = new URLSearchParams(window.location.search);
-  const q = params.get('q');
-  if (q) {
-    input.value = q;
-    activeQuery = q;
-    clearBtn.style.display = 'inline-flex';
-  }
 
   document.getElementById('emptyState').style.display = 'none';
   renderResults();
