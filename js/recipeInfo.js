@@ -1,7 +1,6 @@
 /* ============================================================
    FCAI - SOFRA  |  RECIPE INFO TEMPLATE JS
    ============================================================ */
-
 let currentRecipe = null;
 
 function courseLabel(course) {
@@ -40,22 +39,14 @@ window.handleFav = function () {
 async function init() {
   const params = new URLSearchParams(window.location.search);
   const id = params.get('id');
-
-  if (!id) {
-    showNotFound();
-    return;
-  }
+  if (!id) { showNotFound(); return; }
 
   let recipe = await RecipesAPI.getById(id);
   if (!recipe) {
     const local = Store.get('sofra_recipes') || [];
     recipe = local.find(r => r.id === id) || null;
   }
-
-  if (!recipe) {
-    showNotFound();
-    return;
-  }
+  if (!recipe) { showNotFound(); return; }
 
   currentRecipe = recipe;
   renderRecipe(recipe);
@@ -76,47 +67,48 @@ function renderRecipe(recipe) {
   } else {
     heroImg.style.background = 'linear-gradient(135deg, #1a0a00, #2a1000)';
   }
+
   document.getElementById('heroCourse').textContent = courseLabel(recipe.course);
-  document.getElementById('heroTitle').textContent = recipe.name;
+  document.getElementById('heroTitle').textContent  = recipe.name;
 
   if (recipe.chef) {
     document.getElementById('heroChef').innerHTML = `
-      <img src="${recipe.chefImg || ''}" alt="${recipe.chef}"
-           onerror="this.style.display='none'">
+      <img src="${recipe.chefImg || ''}" alt="${recipe.chef}" onerror="this.style.display='none'">
       <span>By ${recipe.chef}</span>`;
   }
 
-  // Description
   document.getElementById('recipeDesc').textContent = recipe.description || '';
 
-  // Ingredients
+  /* ── INGREDIENTS as checklist ── */
   const ingList = document.getElementById('recipeIngredients');
   if (recipe.ingredients && recipe.ingredients.length) {
-    ingList.innerHTML = recipe.ingredients.map(ing => `
-      <li>
-        <span class="ri-ing-name">${ing.name}</span>
-        <span class="ri-ing-qty">${ing.qty}</span>
+    ingList.innerHTML = recipe.ingredients.map((ing, i) => `
+      <li class="checklist-item">
+        <input type="checkbox" id="ing-${i}" class="checklist-cb">
+        <label for="ing-${i}" class="checklist-label">
+          <span class="ri-ing-name">${ing.name}</span>
+          <span class="ri-ing-qty">${ing.qty}</span>
+        </label>
       </li>`).join('');
   } else {
     ingList.innerHTML = '<li style="color:var(--clr-muted)">No ingredients listed.</li>';
   }
 
-  // Steps
+  /* ── STEPS as checklist ── */
   const stepList = document.getElementById('recipeSteps');
   if (recipe.steps && recipe.steps.length) {
-    stepList.innerHTML = recipe.steps.map(step => `<li>${step}</li>`).join('');
+    stepList.innerHTML = recipe.steps.map((step, i) => `
+      <li class="checklist-item">
+        <input type="checkbox" id="step-${i}" class="checklist-cb">
+        <label for="step-${i}" class="checklist-label checklist-label--step">${step}</label>
+      </li>`).join('');
   } else {
     stepList.innerHTML = '<li style="color:var(--clr-muted)">No steps listed.</li>';
   }
 
-  // Show content
   document.getElementById('recipeContent').style.display = 'block';
-
   renderFavBtn(recipe);
-
-  if (typeof initScrollReveal === 'function') {
-    setTimeout(initScrollReveal, 80);
-  }
+  if (typeof initScrollReveal === 'function') setTimeout(initScrollReveal, 80);
 }
 
 document.addEventListener('DOMContentLoaded', init);
