@@ -215,14 +215,6 @@ async function init() {
     });
   });
 
-  const params = new URLSearchParams(window.location.search);
-  const q = params.get('q');
-  if (q) {
-    input.value = q;
-    activeQuery = q;
-    clearBtn.style.display = 'inline-flex';
-  }
-
   document.getElementById('emptyState').style.display = 'none';
   renderResults();
 }
