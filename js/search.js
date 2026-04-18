@@ -14,7 +14,7 @@ const courseMap = {
 };
 function courseLabel(c) { return courseMap[c] || c; }
 
-/* ── returns match score + what matched ── */
+/* =========== returns match score and what is matched ========== */
 function matchRecipe(recipe, query) {
   if (!query) return null;
   const q   = query.toLowerCase();
@@ -30,7 +30,6 @@ function matchRecipe(recipe, query) {
   if (desc.includes(q))  hits.push({ label: 'in description', priority: 3 });
   if (chef.includes(q))  hits.push({ label: 'by chef', priority: 4 });
 
-  // Partial word match (each word in query)
   const words = q.split(/\s+/).filter(Boolean);
   if (!hits.length && words.length > 1) {
     const allMatch = words.every(w => name.includes(w) || ings.includes(w) || desc.includes(w));
@@ -46,7 +45,7 @@ function highlight(text, query) {
   return text.replace(new RegExp(`(${escaped})`, 'gi'), '<span class="hl">$1</span>');
 }
 
-/* ── BUILD RESULT ROW HTML ── */
+/* ========= Build Result row HTML ========= */
 function buildResultRow(recipe, query, delay) {
   const chefHtml = recipe.chef
     ? `<span class="result-row__chef"><img src="${recipe.chefImg||''}" onerror="this.style.display='none'">${recipe.chef}</span>`
@@ -79,7 +78,7 @@ function buildResultRow(recipe, query, delay) {
     </a>`;
 }
 
-/* ── RENDER RESULTS ── */
+/* ======== Render Results ======= */
 function renderResults() {
   const list   = document.getElementById('resultsList');
   const status = document.getElementById('searchStatus');
@@ -136,7 +135,7 @@ function renderResults() {
   list.innerHTML = results.map((r, i) => buildResultRow(r, activeQuery.trim(), i * 0.04)).join('');
 }
 
-/* ── BUILD CHEF FILTER BUTTONS dynamically ── */
+/* ========== Build Chef Filter Buttons dynamically ======== */
 async function buildChefFilters() {
   const container = document.getElementById('chefFilters');
   if (!container) return;
@@ -169,7 +168,7 @@ async function buildChefFilters() {
   }
 }
 
-/* ── INIT ── */
+/* ===== Init =====*/
 async function init() {
   try {
     allRecipes = await RecipesAPI.getAll();
@@ -216,7 +215,6 @@ async function init() {
     renderResults();
   });
 
-  // Course filter buttons
   document.querySelectorAll('.sf-btn[data-course]').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.sf-btn[data-course]').forEach(b => b.classList.remove('active'));
@@ -234,7 +232,6 @@ async function init() {
     clearBtn.style.display = 'inline-flex';
   }
 
-  // On first load: show all recipes (no query = browse mode)
   document.getElementById('emptyState').style.display = 'none';
   renderResults();
 }

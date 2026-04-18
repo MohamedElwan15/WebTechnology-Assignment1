@@ -4,14 +4,14 @@
 
 let allRecipes = [];
 let currentFilter = 'all';
-let currentView   = 'grid'; // 'grid' | 'list'
+let currentView   = 'grid';
 
 function courseLabel(course) {
   const map = { main_course: 'Main Course', appetizers: 'Appetizers', dessert: 'Dessert' };
   return map[course] || course;
 }
 
-/* ── GRID CARD ── */
+/* ===== Grid Card ===== */
 function buildCard(recipe, isAdmin) {
   const isFav      = Favorites.has(recipe.id);
   const heartClass = isFav ? 'fav-active' : '';
@@ -41,7 +41,7 @@ function buildCard(recipe, isAdmin) {
     </div>`;
 }
 
-/* ── LIST / BAR ROW ── */
+/* == List / Bar Row == */
 function buildRow(recipe, isAdmin) {
   const isFav  = Favorites.has(recipe.id);
   const heartBtn = isAdmin ? '' : `
@@ -98,13 +98,13 @@ window.toggleFav = function(recipeId, btn) {
     btn.classList.remove('fav-active');
     btn.title = 'Add to favorites';
     btn.innerHTML = '<i class="far fa-heart"></i>';
-    showToast('💔 Removed from favorites');
+    showToast('Removed from favorites');
   } else {
     Favorites.add(recipeId);
     btn.classList.add('fav-active');
     btn.title = 'Remove from favorites';
     btn.innerHTML = '<i class="fas fa-heart"></i>';
-    showToast('❤️ Added to favorites!');
+    showToast('Added to favorites!');
   }
 };
 
