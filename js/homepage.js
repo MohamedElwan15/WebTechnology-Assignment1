@@ -99,7 +99,6 @@ async function buildFeaturedRecipes() {
   let recipes = [];
   try {
     recipes = await RecipesAPI.getAll();
-    // Also include localStorage recipes (admin-added when no server)
     const local = Store.get('sofra_recipes') || [];
     local.forEach(lr => {
       if (!recipes.find(r => r.id === lr.id)) recipes.push(lr);

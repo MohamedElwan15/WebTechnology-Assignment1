@@ -43,7 +43,6 @@ function buildFavCard(recipe) {
 window.removeFav = function (recipeId) {
   Favorites.remove(recipeId);
 
-  // Animate card out
   const card = document.getElementById(`fav-${recipeId}`);
   if (card) {
     card.style.transition = 'all 0.35s ease';
@@ -51,7 +50,6 @@ window.removeFav = function (recipeId) {
     card.style.transform = 'scale(0.88)';
     setTimeout(() => {
       card.remove();
-      // Show empty state if no cards remain
       if (!document.querySelector('.fav-card')) {
         document.getElementById('favEmpty').style.display = 'block';
         document.getElementById('favGrid').style.display = 'none';
@@ -78,7 +76,6 @@ async function init() {
   let allRecipes = [];
   try {
     allRecipes = await RecipesAPI.getAll();
-    // Merge localStorage recipes
     const local = Store.get('sofra_recipes') || [];
     local.forEach(lr => {
       if (!allRecipes.find(r => r.id === lr.id)) allRecipes.push(lr);

@@ -46,7 +46,6 @@ async function init() {
     return;
   }
 
-  // Try JSON file first, then localStorage fallback
   let recipe = await RecipesAPI.getById(id);
   if (!recipe) {
     const local = Store.get('sofra_recipes') || [];
@@ -71,7 +70,6 @@ function showNotFound() {
 function renderRecipe(recipe) {
   document.title = `FCAI - SOFRA | ${recipe.name}`;
 
-  // Hero
   const heroImg = document.getElementById('heroImg');
   if (recipe.imageUrl) {
     heroImg.style.backgroundImage = `url('${recipe.imageUrl}')`;
@@ -114,10 +112,8 @@ function renderRecipe(recipe) {
   // Show content
   document.getElementById('recipeContent').style.display = 'block';
 
-  // Fav button
   renderFavBtn(recipe);
 
-  // Scroll reveal
   if (typeof initScrollReveal === 'function') {
     setTimeout(initScrollReveal, 80);
   }

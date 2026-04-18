@@ -4,7 +4,7 @@
    ============================================================ */
 
 /* ── CONFIG ── */
-const API_BASE = ''; // empty = same origin (server.js serves static + API)
+const API_BASE = '';
 
 /* ── RECIPES JSON LOADER ── */
 const RecipesAPI = {
@@ -12,15 +12,13 @@ const RecipesAPI = {
   async getAll() {
     if (this._cache) return this._cache;
     try {
-      // Use /api/recipes so server always reads from disk (no browser cache issues)
       const res = await fetch(API_BASE + '/api/recipes');
       if (res.ok) {
         this._cache = await res.json();
         return this._cache;
       }
-    } catch { /* server not running, fall through */ }
-    try {
-      // Fallback: static JSON file with cache-bust
+    } catch {  }
+    try {      
       const res = await fetch(API_BASE + '/recipes.json?t=' + Date.now());
       this._cache = await res.json();
       return this._cache;
@@ -39,10 +37,9 @@ const RecipesAPI = {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(recipe)
       });
-      this._cache = null; // invalidate cache
+      this._cache = null;
       return await res.json();
     } catch {
-      // Fallback: store in localStorage if server not running
       const recipes = Store.get('sofra_recipes') || [];
       const idx = recipes.findIndex(r => r.id === recipe.id);
       if (idx !== -1) recipes[idx] = recipe; else recipes.push(recipe);
@@ -149,7 +146,6 @@ const Session = {
 };
 
 /* ── NAV ROLE-BASED VISIBILITY ── */
-/* Uses display:none so no ghost space is left */
 function applyNavRoles() {
   const user = Session.getUser();
   const favLink   = document.querySelector('nav a[href="favorites.html"]');
@@ -278,7 +274,126 @@ function initLogin() {
   });
 }
 
+/* ── SEED Demo RECIPES ── */
+function seedDemocodedRecipes() {
+    if (Store.get('sofra_hardcoded_seeded')) return;
+
+    const hardcoded = [
+        {
+            id: 'RCP-HARDCODED-001',
+            name: 'Macaroni Bashamel',
+            course: 'main_course',
+            description: 'A popular Egyptian baked pasta dish made with layers of pasta, rich meat sauce, creamy bechamel sauce, and melted mozzarella cheese.',
+            imageUrl: 'images/Bashamel2.jpg',
+            chef: 'Chef El Sherbiny',
+            chefImg: 'https://assets.minly.com/assets/avatars/zPtgfPwF2LsozVn2g6MEl.jpg',
+            adminName: 'system',
+            ingredients: [
+                { name: 'Minced Beef', qty: '500g' },
+                { name: 'Onion', qty: '1' },
+                { name: 'Garlic', qty: '3 cloves' },
+                { name: 'Tomato Paste', qty: '½ cup' },
+                { name: 'Butter', qty: '5 tbsp' },
+                { name: 'All-Purpose Flour', qty: '5 tbsp' },
+                { name: 'Whole Milk', qty: '5-6 cups' },
+                { name: 'Penne Pasta', qty: '600g' },
+                { name: 'Mozzarella Cheese', qty: '2 cups' }
+            ],
+            steps: [
+                'Boil pasta in salted water until almost cooked, then drain.',
+                'Cook onion and garlic in a pan until soft, add minced beef and brown.',
+                'Add tomato paste, salt, pepper and water. Simmer 10 minutes.',
+                'Melt butter, add flour, gradually add milk stirring to make bechamel.',
+                'Layer pasta, meat sauce, bechamel in a baking dish.',
+                'Bake at 180°C for 30 minutes until golden.'
+            ]
+        },
+        {
+            id: 'RCP-HARDCODED-002',
+            name: 'Koshari',
+            course: 'main_course',
+            description: "A famous Egyptian street food made with layers of rice, pasta, and lentils, topped with a rich tomato sauce, crispy fried onions, and chickpeas.",
+            imageUrl: 'images/koshary.png',
+            chef: 'Chef Hassan',
+            chefImg: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJYSpXwt07ODmH4Lw1r8uQLuTHqijHV-bZmA&s',
+            adminName: 'system',
+            ingredients: [
+                { name: 'Brown Lentils', qty: '1 cup' },
+                { name: 'Rice', qty: '1 cup' },
+                { name: 'Ditalini Pasta', qty: '1 cup' },
+                { name: 'Chickpeas', qty: '1 can' },
+                { name: 'Onions', qty: '2 large' },
+                { name: 'Garlic', qty: '4 cloves' },
+                { name: 'Tomato Sauce', qty: '1 cup' },
+                { name: 'White Vinegar', qty: '2 tbsp' },
+                { name: 'Ground Cumin', qty: '1 tsp' }
+            ],
+            steps: [
+                'Cook rice and lentils separately until done.',
+                'Cook pasta in salted water, drain.',
+                'Fry sliced onions until crispy and golden.',
+                'Make tomato sauce with garlic, tomatoes, cumin and vinegar.',
+                'Layer rice, lentils and pasta, top with sauce and onions.'
+            ]
+        },
+        {
+            id: 'RCP-HARDCODED-003',
+            name: 'Molokhia',
+            course: 'main_course',
+            description: 'A traditional Egyptian dish made from finely chopped jute leaves, cooked with garlic and coriander, served over rice.',
+            imageUrl: 'images/molokhya.png',
+            chef: 'Chef Hassan',
+            chefImg: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJYSpXwt07ODmH4Lw1r8uQLuTHqijHV-bZmA&s',
+            adminName: 'system',
+            ingredients: [
+                { name: 'Molokhia Leaves', qty: '500g' },
+                { name: 'Whole Chicken', qty: '1' },
+                { name: 'Chicken Broth', qty: '6 cups' },
+                { name: 'Garlic', qty: '6 cloves' },
+                { name: 'Ground Coriander', qty: '2 tsp' },
+                { name: 'Butter', qty: '2 tbsp' }
+            ],
+            steps: [
+                'Boil chicken in broth until cooked, shred and keep broth.',
+                'Add molokhia to hot broth and simmer 5-7 minutes.',
+                'Fry garlic and coriander in butter until fragrant.',
+                'Pour garlic mix into molokhia and stir.',
+                'Serve over rice with shredded chicken.'
+            ]
+        },
+        {
+            id: 'RCP-HARDCODED-004',
+            name: 'Chicken Ranch Pizza',
+            course: 'main_course',
+            description: 'A delicious pizza with creamy ranch sauce, grilled chicken, and melted mozzarella on a crispy crust.',
+            imageUrl: 'images/chickenranch.png',
+            chef: 'Chef Nadia El Sayed',
+            chefImg: 'https://yt3.googleusercontent.com/wEwWYlGQVCpenDDdkc_CNYQiFHzzixW6Bd7gGlGrOlbnq3XpPzytMa3mOq48Wxcj_qOx1xmXOw=s900-c-k-c0x00ffffff-no-rj',
+            adminName: 'system',
+            ingredients: [
+                { name: 'Pizza Dough', qty: '1 ball' },
+                { name: 'Ranch Sauce', qty: '1 cup' },
+                { name: 'Cooked Chicken Breast', qty: '2 cups' },
+                { name: 'Mozzarella Cheese', qty: '2 cups' },
+                { name: 'Bell Peppers', qty: '½ cup' },
+                { name: 'Onions', qty: '½ cup' }
+            ],
+            steps: [
+                'Preheat oven to 200°C.',
+                'Roll out dough and spread ranch sauce evenly.',
+                'Add shredded chicken, bell peppers and onions.',
+                'Cover with mozzarella cheese.',
+                'Bake 15-20 minutes until golden.'
+            ]
+        }
+    ];
+
+    const existing = Store.get('sofra_recipes') || [];
+    Store.set('sofra_recipes', [...hardcoded, ...existing]);
+    Store.set('sofra_hardcoded_seeded', true);
+}
 /* ── INIT ON EVERY PAGE ── */
+seedDemocodedRecipes();
 document.addEventListener('DOMContentLoaded', () => {
   initThemeToggle();
   setActiveNavLink();

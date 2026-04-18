@@ -80,7 +80,6 @@ async function loadChefRecipes() {
   const container = document.getElementById('chefRecipesContainer');
   if (!container) return;
 
-  // CHEF_NAME is defined inline in each chef HTML file
   const chefName = (typeof CHEF_NAME !== 'undefined') ? CHEF_NAME : null;
   if (!chefName) {
     container.innerHTML = '<p style="color:var(--clr-muted)">No chef name set.</p>';
@@ -90,7 +89,6 @@ async function loadChefRecipes() {
   let allRecipes = [];
   try {
     allRecipes = await RecipesAPI.getAll();
-    // Also merge localStorage recipes
     const local = Store.get('sofra_recipes') || [];
     local.forEach(lr => { if (!allRecipes.find(r => r.id === lr.id)) allRecipes.push(lr); });
   } catch {

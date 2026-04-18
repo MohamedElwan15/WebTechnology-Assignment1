@@ -49,7 +49,7 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  // ── API: GET /api/recipes ──────────────────────────────
+  // ── API: GET /api/recipes
   if (req.method === 'GET' && pathname === '/api/recipes') {
     const recipes = readRecipes();
     res.writeHead(200, { 'Content-Type': 'application/json' });
@@ -57,7 +57,7 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  // ── API: GET /api/chefs ────────────────────────────────
+  // ── API: GET /api/chefs 
   if (req.method === 'GET' && pathname === '/api/chefs') {
     try {
       const chefs = JSON.parse(fs.readFileSync(path.join(__dirname, 'chefs.json'), 'utf8'));
@@ -70,7 +70,7 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  // ── API: POST /api/recipes ─────────────────────────────
+  // ── API: POST /api/recipes 
   if (req.method === 'POST' && pathname === '/api/recipes') {
     let body = '';
     req.on('data', chunk => { body += chunk.toString(); });
@@ -112,7 +112,7 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  // ── API: DELETE /api/recipes/:id ───────────────────────
+  // ── API: DELETE /api/recipes/:id 
   if (req.method === 'DELETE' && pathname.startsWith('/api/recipes/')) {
     const id = pathname.replace('/api/recipes/', '');
     const recipes = readRecipes();
@@ -123,10 +123,9 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  // ── STATIC FILE SERVING ────────────────────────────────
+  // ── STATIC FILE SERVING 
   let filePath = path.join(__dirname, pathname === '/' ? 'homepage.html' : pathname);
 
-  // Security: prevent directory traversal
   if (!filePath.startsWith(__dirname)) {
     res.writeHead(403);
     res.end('Forbidden');

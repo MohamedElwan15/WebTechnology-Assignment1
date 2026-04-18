@@ -109,7 +109,6 @@ window.toggleFav = function(recipeId, btn) {
 };
 
 async function init() {
-  // Read ?course= from URL and pre-activate that filter
   const params = new URLSearchParams(window.location.search);
   const courseParam = params.get('course');
   if (courseParam) {

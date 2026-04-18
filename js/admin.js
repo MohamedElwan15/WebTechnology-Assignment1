@@ -180,7 +180,6 @@ function initRecipeForm() {
       options[i].selected = (options[i].value === recipe.course);
     }
 
-    // Restore chef selection
     if (chefSelect && recipe.chef) {
       chefSelect.value = recipe.chef;
     }
@@ -239,7 +238,6 @@ function initRecipeForm() {
     const preview  = document.getElementById('imagePreview');
     const imageUrl = (preview && preview.style.display !== 'none') ? preview.src : '';
 
-    // Resolve selected chef name + img
     const selectedChefName = (chefSelect && chefSelect.value) ? chefSelect.value : '';
     const selectedChef     = chefsData.find(c => c.name === selectedChefName) || null;
     const chefName         = selectedChef ? selectedChef.name : (selectedChefName || '');

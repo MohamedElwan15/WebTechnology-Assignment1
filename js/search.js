@@ -14,7 +14,7 @@ const courseMap = {
 };
 function courseLabel(c) { return courseMap[c] || c; }
 
-/* ── FUZZY-ISH MATCH: returns match score + what matched ── */
+/* ── returns match score + what matched ── */
 function matchRecipe(recipe, query) {
   if (!query) return null;
   const q   = query.toLowerCase();
@@ -40,7 +40,6 @@ function matchRecipe(recipe, query) {
   return hits.length ? { recipe, hit: hits[0] } : null;
 }
 
-/* ── HIGHLIGHT query inside text ── */
 function highlight(text, query) {
   if (!query || !text) return text;
   const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -159,7 +158,6 @@ async function buildChefFilters() {
     });
   });
 
-  // Wire the static "All Chefs" button
   const chefAllBtn = document.getElementById('chefAllBtn');
   if (chefAllBtn) {
     chefAllBtn.addEventListener('click', () => {
@@ -187,7 +185,6 @@ async function init() {
   const searchBtn = document.getElementById('searchBtn');
   const clearBtn  = document.getElementById('clearBtn');
 
-  // Live-search as user types (debounced)
   let debounceTimer;
   input.addEventListener('input', () => {
     clearTimeout(debounceTimer);
@@ -229,7 +226,6 @@ async function init() {
     });
   });
 
-  // Pre-fill from ?q= URL param
   const params = new URLSearchParams(window.location.search);
   const q = params.get('q');
   if (q) {
