@@ -184,15 +184,6 @@ async function init() {
   const searchBtn = document.getElementById('searchBtn');
   const clearBtn  = document.getElementById('clearBtn');
 
-  let debounceTimer;
-  input.addEventListener('input', () => {
-    clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(() => {
-      activeQuery = input.value.trim();
-      clearBtn.style.display = activeQuery ? 'inline-flex' : 'none';
-      renderResults();
-    }, 220);
-  });
 
   searchBtn.addEventListener('click', () => {
     activeQuery = input.value.trim();
