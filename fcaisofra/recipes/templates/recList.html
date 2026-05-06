@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FCAI - SOFRA | All Recipes</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/recList.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+<nav>
+  <strong>FCAI - SOFRA</strong>
+  <a href="/">Home</a>
+  <a href="{% url 'all_recipes' %}">All Recipes</a>
+  <a href="#">Search</a>
+  <a href="#">My Favorites</a>
+  <a href="/admin/">Admin Dashboard</a>
+  <button id="themeToggle" class="theme-toggle" style="margin-left: auto;">
+    <i class="fas fa-moon"></i>
+  </button>
+</nav>
+
+<main>
+  <div class="rl-grid" id="recipeGrid">
+    {% for recipe in recipes %}
+        <div class="rl-card reveal">
+            <div class="rl-card__img-wrap">
+                <!-- Using static tag for database image paths -->
+                <img class="rl-card__img" src="{% static recipe.image_url %}" alt="{{ recipe.name }}"
+                     onerror="this.src='https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=75'">
+                <span class="rl-card__course">{{ recipe.course }}</span>
+            </div>
+
+            <div class="rl-card__body">
+                <div class="rl-card__title">{{ recipe.name }}</div>
+                <p class="rl-card__desc">{{ recipe.description|truncatechars:100 }}</p>
+
+                <div class="rl-card__footer">
+                    <span class="rl-card__chef">{{ recipe.chef|default:"Self-Made" }}</span>
+                    <!-- Dynamic link to the recipeDetail view -->
+                    <a class="rl-card__view" href="{% url 'recipe_detail' recipe.recipe_id %}">View <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <div class="rl-empty">
+            <h3>No recipes found in the database.</h3>
+        </div>
+    {% endfor %}
+  </div>
+</main>
+
+<script src="{% static 'js/base.js' %}"></script>
+<!-- recList.js is no longer needed for rendering the grid -->
+</body>
+</html>
