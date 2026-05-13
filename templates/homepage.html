@@ -54,7 +54,7 @@
   <div class="recipe-grid" id="featuredGrid">
       {% for recipe in featured_recipes %}
           <div class="recipe-card">
-              <img src="{% static recipe.image_url %}" alt="{{ recipe.name }}">
+              <img src="{{ recipe.get_image_url }}" alt="{{ recipe.name }}">
               <div class="recipe-card__body">
                   <h3>{{ recipe.name }}</h3>
                   <p>{{ recipe.description|truncatechars:80 }}</p>
