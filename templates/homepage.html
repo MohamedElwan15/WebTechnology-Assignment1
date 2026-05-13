@@ -1,35 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FCAI - Sofra | Home</title>
-    <link rel="icon" type="image/x-icon" href="images\favicon.ico">
+{% extends 'base.html' %}
+{% load static %}
 
-    <!-- CSS Files -->
-    <link rel="stylesheet" href="css\base.css">
-    <link rel="stylesheet" href="css\homepage.css">
+{% block title %}Home{% endblock %}
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
-<body>
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/homepage.css' %}">
+{% endblock %}
 
+{% block content %}
 <a name="top"></a>
-
-<!-- Navigation -->
-<nav>
-  <strong>FCAI - SOFRA</strong>
-  <a href="homepage.html">Home</a>
-  <a href="recList.html">All Recipes</a>
-  <a href="search.html">Search</a>
-  <a href="favorites.html">My Favorites</a>
-  <a href="admin_recipes.html">Admin Dashboard</a>
-  <a href="EntryPage.html">Logout</a>
-  <button id="themeToggle" class="theme-toggle" style="margin-left: auto;">
-    <i class="fas fa-moon"></i>
-  </button>
-</nav>
 
 <!-- Hero Section -->
 <section class="hero">
@@ -40,8 +19,8 @@
     <h1 class="hero__title">FCAI - SOFRA</h1>
     <p class="hero__subtitle" style="color: rgba(255,255,255,0.9) !important;">A curated collection of recipes crafted by Egypt's most celebrated chefs. From light appetizers to rich desserts — every dish, at your fingertips.</p>
     <div class="hero__actions">
-      <a href="recList.html" class="btn btn-primary"><i class="fas fa-book-open"></i> Explore Recipes</a>
-      <a href="search.html" class="btn btn-outline"><i class="fas fa-search"></i> Search by Dish</a>
+      <a href="{% url 'all_recipes' %}" class="btn btn-primary"><i class="fas fa-book-open"></i> Explore Recipes</a>
+      <a href="#" class="btn btn-outline"><i class="fas fa-search"></i> Search by Dish</a>
     </div>
   </div>
 </section>
@@ -56,7 +35,7 @@
   <div class="search-section">
     <h3>Find a Recipe</h3>
     <p>Search the full collection by dish name or by a specific ingredient you have on hand.</p>
-    <form action="search.html" method="get" class="search-bar" id="homeSearchForm">
+    <form action="#" method="get" class="search-bar" id="homeSearchForm">
       <input type="text" name="query" id="home-search" placeholder="e.g. grilled chicken, garlic, tiramisu...">
       <button type="submit"><i class="fas fa-search"></i> Search</button>
     </form>
@@ -71,9 +50,22 @@
   <!-- Featured Recipes -->
   <div class="orange-divider"><span>FEATURED THIS WEEK</span></div>
   <h2 style="text-align:center">Featured Recipes</h2>
-  <div class="recipe-grid" id="featuredGrid"></div>
+  
+  <div class="recipe-grid" id="featuredGrid">
+      {% for recipe in featured_recipes %}
+          <div class="recipe-card">
+              <img src="{% static recipe.image_url %}" alt="{{ recipe.name }}">
+              <div class="recipe-card__body">
+                  <h3>{{ recipe.name }}</h3>
+                  <p>{{ recipe.description|truncatechars:80 }}</p>
+                  <a href="{% url 'recipe_detail' recipe.recipe_id %}" class="btn-link">View Details</a>
+              </div>
+          </div>
+      {% endfor %}
+  </div>
+
   <div class="view-all-wrap">
-    <a href="recList.html" class="btn btn-outline"><i class="fas fa-arrow-right"></i> View Full Collection</a>
+    <a href="{% url 'all_recipes' %}" class="btn btn-outline"><i class="fas fa-arrow-right"></i> View Full Collection</a>
   </div>
 </main>
 
@@ -81,10 +73,8 @@
   <small>FCAI - SOFRA • Authentic Egyptian Flavors</small><br>
   <a href="#top" style="font-size:0.8rem;">Back to Top <i class="fas fa-chevron-up"></i></a>
 </footer>
+{% endblock %}
 
-<div id="toast"></div>
-<script src="js\base.js"></script>
-<script src="js\homepage.js"></script>
-
-</body>
-</html>
+{% block extra_js %}
+    <script src="{% static 'js/homepage.js' %}"></script>
+{% endblock %}
