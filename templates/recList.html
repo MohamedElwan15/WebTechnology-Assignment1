@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}All Recipes{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/recList.css' %}">
+{% endblock %}
+
+{% block content %}
+  <div class="rl-grid" id="recipeGrid">
+    {% for recipe in recipes %}
+        <div class="rl-card reveal">
+            <div class="rl-card__img-wrap">
+                <img class="rl-card__img" src="{% static recipe.image_url %}" alt="{{ recipe.name }}"
+                     onerror="this.src='https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=75'">
+                <span class="rl-card__course">{{ recipe.course }}</span>
+            </div>
+
+            <div class="rl-card__body">
+                <div class="rl-card__title">{{ recipe.name }}</div>
+                <p class="rl-card__desc">{{ recipe.description|truncatechars:100 }}</p>
+
+                <div class="rl-card__footer">
+                    <span class="rl-card__chef">{{ recipe.chef|default:"Self-Made" }}</span>
+                    <a class="rl-card__view" href="{% url 'recipe_detail' recipe.recipe_id %}">View <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <div class="rl-empty">
+            <h3>No recipes found in the database.</h3>
+        </div>
+    {% endfor %}
+  </div>
+{% endblock %}
