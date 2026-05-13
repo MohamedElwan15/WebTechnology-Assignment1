@@ -2,100 +2,82 @@
    FCAI - SOFRA  |  FAVORITES PAGE JS
    ============================================================ */
 
-function courseLabel(c) {
-  return { main_course: 'Main Course', appetizers: 'Appetizers', dessert: 'Dessert' }[c] || c;
+const favGrid    = document.getElementById('favGrid');
+const favLoading = document.getElementById('favLoading');
+const favEmpty   = document.getElementById('favEmpty');
+
+function getCookie(name) {
+    const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    return match ? match[2] : '';
 }
 
-function buildFavCard(recipe) {
-  return `
-    <div class="fav-card" id="fav-${recipe.id}">
-      <div class="fav-card__img-wrap">
-        <img class="fav-card__img"
-             src="${recipe.imageUrl || 'https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=75'}"
-             alt="${recipe.name}"
-             onerror="this.src='https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=75'">
-        <span class="fav-card__course">${courseLabel(recipe.course)}</span>
-        <button class="fav-card__remove"
-                title="Remove from favorites"
-                onclick="removeFav('${recipe.id}')">
-          <i class="fas fa-trash-alt"></i>
-        </button>
-      </div>
-      <div class="fav-card__body">
-        <div class="fav-card__title">${recipe.name}</div>
-        <p class="fav-card__desc">${recipe.description || ''}</p>
-        <div class="fav-card__footer">
-          <span class="fav-card__chef">
-            <img class="fav-card__chef-img"
-                 src="${recipe.chefImg || ''}"
-                 alt="${recipe.chef || ''}"
-                 onerror="this.style.display='none'">
-            ${recipe.chef || ''}
-          </span>
-          <a class="fav-card__view" href="recipeInfo.html?id=${recipe.id}">
-            View <i class="fas fa-arrow-right"></i>
-          </a>
-        </div>
-      </div>
-    </div>`;
+async function loadFavorites() {
+    try {
+        const res  = await fetch('/api/favorites/', { credentials: 'same-origin' });
+        const data = await res.json();
+
+        favLoading.style.display = 'none';
+
+        if (data.favorites.length === 0) {
+            favEmpty.style.display = 'flex';
+            return;
+        }
+
+        favGrid.innerHTML = data.favorites.map(r => `
+            <div class="recipe-card" data-id="${r.recipe_id}">
+                <img src="${r.image_url || 'images/placeholder.jpg'}" alt="${r.name}">
+                <div class="recipe-card__body">
+                    <span class="recipe-card__category">${r.course}</span>
+                    <h3>${r.name}</h3>
+                    <p>${r.description}</p>
+                    <small><i class="fas fa-user"></i> ${r.chef}</small>
+                    <div class="recipe-card__footer">
+                        <a href="/recipes/${r.recipe_id}/" class="btn btn-primary">
+                            <i class="fas fa-eye"></i> View Recipe
+                        </a>
+                        <button class="btn-unfav" onclick="removeFavorite('${r.recipe_id}', this)">
+                            <i class="fas fa-heart-broken"></i> Remove
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+
+    } catch (err) {
+        favLoading.innerHTML = '<p>Failed to load. Are you logged in?</p>';
+        console.error(err);
+    }
 }
 
-window.removeFav = function (recipeId) {
-  Favorites.remove(recipeId);
+async function removeFavorite(recipeId, btn) {
+    btn.disabled = true;
+    try {
+        const res  = await fetch('/api/favorites/toggle/', {
+            method:      'POST',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken':  getCookie('csrftoken'),
+            },
+            body: JSON.stringify({ recipe_id: recipeId }),
+        });
+        const data = await res.json();
 
-  const card = document.getElementById(`fav-${recipeId}`);
-  if (card) {
-    card.style.transition = 'all 0.35s ease';
-    card.style.opacity = '0';
-    card.style.transform = 'scale(0.88)';
-    setTimeout(() => {
-      card.remove();
-      if (!document.querySelector('.fav-card')) {
-        document.getElementById('favEmpty').style.display = 'block';
-        document.getElementById('favGrid').style.display = 'none';
-      }
-    }, 350);
-  }
-  showToast('🗑️ Removed from favorites');
-};
-
-async function init() {
-  const loading = document.getElementById('favLoading');
-  const empty   = document.getElementById('favEmpty');
-  const grid    = document.getElementById('favGrid');
-
-  const favIds = Favorites.getAll();
-
-  if (!favIds.length) {
-    loading.style.display = 'none';
-    empty.style.display = 'block';
-    return;
-  }
-
-  // Load all recipes, then filter to saved ones
-  let allRecipes = [];
-  try {
-    allRecipes = await RecipesAPI.getAll();
-    const local = Store.get('sofra_recipes') || [];
-    local.forEach(lr => {
-      if (!allRecipes.find(r => r.id === lr.id)) allRecipes.push(lr);
-    });
-  } catch {
-    allRecipes = Store.get('sofra_recipes') || [];
-  }
-
-  const favRecipes = favIds
-    .map(id => allRecipes.find(r => r.id === id))
-    .filter(Boolean);
-
-  loading.style.display = 'none';
-
-  if (!favRecipes.length) {
-    empty.style.display = 'block';
-    return;
-  }
-
-  grid.innerHTML = favRecipes.map(buildFavCard).join('');
+        if (data.status === 'removed') {
+            const card = favGrid.querySelector(`[data-id="${recipeId}"]`);
+            card.style.transition = 'opacity 0.3s';
+            card.style.opacity    = '0';
+            setTimeout(() => {
+                card.remove();
+                if (!favGrid.querySelector('.recipe-card')) {
+                    favEmpty.style.display = 'flex';
+                }
+            }, 300);
+        }
+    } catch (err) {
+        console.error('Remove failed:', err);
+        btn.disabled = false;
+    }
 }
 
-document.addEventListener('DOMContentLoaded', init);
+loadFavorites();
