@@ -20,7 +20,7 @@
     <p class="hero__subtitle" style="color: rgba(255,255,255,0.9) !important;">A curated collection of recipes crafted by Egypt's most celebrated chefs. From light appetizers to rich desserts — every dish, at your fingertips.</p>
     <div class="hero__actions">
       <a href="{% url 'all_recipes' %}" class="btn btn-primary"><i class="fas fa-book-open"></i> Explore Recipes</a>
-      <a href="#" class="btn btn-outline"><i class="fas fa-search"></i> Search by Dish</a>
+      <a href="{% url 'search' %}" class="btn btn-outline"><i class="fas fa-search"></i> Search by Dish</a>
     </div>
   </div>
 </section>
@@ -35,7 +35,7 @@
   <div class="search-section">
     <h3>Find a Recipe</h3>
     <p>Search the full collection by dish name or by a specific ingredient you have on hand.</p>
-    <form action="#" method="get" class="search-bar" id="homeSearchForm">
+    <form action="{% url 'search' %}" method="get" class="search-bar" id="homeSearchForm">
       <input type="text" name="query" id="home-search" placeholder="e.g. grilled chicken, garlic, tiramisu...">
       <button type="submit"><i class="fas fa-search"></i> Search</button>
     </form>

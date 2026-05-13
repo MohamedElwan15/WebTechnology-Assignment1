@@ -1,27 +1,63 @@
-# FCAI - SOFRA
+# FCAI - SOFRA | Egyptian Culinary Excellence
 
-## How to Run
+FCAI-SOFRA is a dynamic web application dedicated to showcasing the rich culinary heritage of Egypt. It features recipes from celebrated Egyptian chefs, allowing users to discover, search, and save their favorite dishes in a modern, responsive environment.
 
-### With backend (recommended — allows adding recipes permanently)
+## 🚀 Key Features
+
+- **Immersive Entry Page:** A full-screen, high-impact welcome experience for new visitors.
+- **Dynamic Chef Profiles:** Dedicated pages for each chef featuring their biography, quick facts, and full recipe catalog.
+- **Server-Side Search:** A robust, database-driven search engine that filters by dish name, ingredients, or chef.
+- **Recipe Management:** Full CRUD (Create, Read, Update, Delete) capabilities for authorized chefs/staff.
+- **User System:** Role-based authentication (Regular User vs. Chef/Staff) with personalized "My Favorites" saving.
+- **Modern UI:** Adaptive Dark/Light mode theme with high-contrast hero sections.
+
+## 🛠️ Tech Stack
+
+- **Backend:** Python 3.x, Django 5.x
+- **Frontend:** Vanilla CSS (Custom properties, Grid, Flexbox), JavaScript (ES6+)
+- **Database:** SQLite (Default for development)
+- **Icons/Fonts:** FontAwesome 6, Google Fonts (Playfair Display, DM Sans)
+
+## 📥 Getting Started
+
+### 1. Prerequisites
+Ensure you have Python installed. It is recommended to use a virtual environment.
+
+### 2. Installation
 ```bash
-node server.js
+# Clone the repository (or navigate to the folder)
+cd WebTechnology-Assignment1
+
+# Create and activate virtual environment
+python -m venv venv
+.\venv\Scripts\activate
+
+# Install dependencies
+pip install django
 ```
-Then open: http://localhost:3000
 
-### Without backend (open HTML files directly)
-Open `homepage.html` directly in your browser.
-Recipes added by admin will be stored in localStorage only (not in `recipes.json`).
+### 3. Database Setup
+```bash
+# Apply migrations
+python manage.py migrate
 
-## File Structure
-- `server.js`     — Minimal Node.js server (no npm install needed)
-- `recipes.json`  — Single source of truth for all recipes
-- `recipeInfo.html` — Template page for any recipe (loaded by ID from JSON)
-- `recList.html`  — All recipes page
-- `favorites.html` — User favorites page
-- `admin_add.html` — Add/edit recipe (admin only)
-- `admin_recipes.html` — Admin dashboard
+# Load initial chef data
+python manage.py load_chefs
+```
 
-## API (when server is running)
-- `GET  /api/recipes`       — Get all recipes
-- `POST /api/recipes`       — Add or update a recipe (appended to recipes.json)
-- `DELETE /api/recipes/:id` — Delete a recipe from recipes.json
+### 4. Running the Server
+```bash
+python manage.py runserver
+```
+Visit `http://127.0.0.1:8000` to view the application.
+
+## 📂 Project Structure
+
+- `recipes/`: Core application logic (Models, Views, URLs).
+- `root_config/`: Django project settings and routing.
+- `static/`: Global CSS, JS, and asset files.
+- `templates/`: Django HTML templates (Base, Home, Search, Profiles).
+- `media/`: User-uploaded recipe images.
+
+---
+*Developed for Web Technology Course - Assignment 1*

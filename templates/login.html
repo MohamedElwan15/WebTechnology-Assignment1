@@ -20,6 +20,7 @@
     <h2>Login to FCAI - SOFRA</h2>
     <form method="POST">
         {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}">
         {{ form.as_p }}
         <button type="submit">Login</button>
     </form>

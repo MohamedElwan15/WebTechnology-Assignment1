@@ -19,32 +19,35 @@ async function loadFavorites() {
         favLoading.style.display = 'none';
 
         if (data.favorites.length === 0) {
-            favEmpty.style.display = 'flex';
+            favEmpty.style.display = 'block';
             return;
         }
 
         favGrid.innerHTML = data.favorites.map(r => `
-            <div class="recipe-card" data-id="${r.recipe_id}">
-                <img src="${r.image_url || 'images/placeholder.jpg'}" alt="${r.name}">
-                <div class="recipe-card__body">
-                    <span class="recipe-card__category">${r.course}</span>
-                    <h3>${r.name}</h3>
-                    <p>${r.description}</p>
-                    <small><i class="fas fa-user"></i> ${r.chef}</small>
-                    <div class="recipe-card__footer">
-                        <a href="/recipes/${r.recipe_id}/" class="btn btn-primary">
-                            <i class="fas fa-eye"></i> View Recipe
-                        </a>
-                        <button class="btn-unfav" onclick="removeFavorite('${r.recipe_id}', this)">
-                            <i class="fas fa-heart-broken"></i> Remove
-                        </button>
+            <div class="rl-card reveal" data-id="${r.recipe_id}">
+                <div class="rl-card__img-wrap">
+                    <img class="rl-card__img" src="${r.image_url || '/static/images/macarona.png'}" alt="${r.name}"
+                         onerror="this.src='https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=75'">
+                    <span class="rl-card__course">${r.course}</span>
+                    <button class="rl-card__heart fav-active" onclick="removeFavorite('${r.recipe_id}', this)" title="Remove from favorites">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                </div>
+
+                <div class="rl-card__body">
+                    <div class="rl-card__title">${r.name}</div>
+                    <p class="rl-card__desc">${r.description}</p>
+
+                    <div class="rl-card__footer">
+                        <span class="rl-card__chef">${r.chef || 'Self-Made'}</span>
+                        <a class="rl-card__view" href="/recipe/${r.recipe_id}/">View <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
         `).join('');
 
     } catch (err) {
-        favLoading.innerHTML = '<p>Failed to load. Are you logged in?</p>';
+        favLoading.innerHTML = '<i class="fas fa-exclamation-circle"></i><p>Failed to load. Are you logged in?</p>';
         console.error(err);
     }
 }
@@ -65,18 +68,21 @@ async function removeFavorite(recipeId, btn) {
 
         if (data.status === 'removed') {
             const card = favGrid.querySelector(`[data-id="${recipeId}"]`);
-            card.style.transition = 'opacity 0.3s';
+            card.style.transition = 'all 0.4s ease';
             card.style.opacity    = '0';
+            card.style.transform  = 'scale(0.9) translateY(20px)';
             setTimeout(() => {
                 card.remove();
-                if (!favGrid.querySelector('.recipe-card')) {
-                    favEmpty.style.display = 'flex';
+                if (!favGrid.querySelector('.rl-card')) {
+                    favEmpty.style.display = 'block';
                 }
-            }, 300);
+            }, 400);
+            showToast("Removed from favorites");
         }
     } catch (err) {
         console.error('Remove failed:', err);
         btn.disabled = false;
+        showToast("Error removing favorite");
     }
 }
 

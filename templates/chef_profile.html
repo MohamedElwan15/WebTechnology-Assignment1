@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ chef.name }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/chef-profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<a name="top"></a>
+
+<section class="chef-hero">
+  <div class="chef-hero__bg" style="background-image: url('https://amazingfoodanddrink.com/wp-content/uploads/2022/03/Gemini_Generated_Ima._imresizer.jpg');"></div>
+  <div class="chef-hero__overlay"></div>
+  <div class="chef-hero__content">
+    <img class="chef-avatar" src="{{ chef.img }}" alt="{{ chef.name }}">
+    <div class="chef-hero__text">
+      <div class="chef-hero__eyebrow">{{ chef.eyebrow }}</div>
+      <h1 class="chef-hero__name">{{ chef.name }}</h1>
+      <div class="chef-hero__specialty">{{ chef.specialty }}</div>
+    </div>
+  </div>
+</section>
+
+<main class="profile-body">
+
+  <div class="profile-section reveal">
+    <h2>Quick Facts</h2>
+    <table class="facts-table">
+        {% for label, value in chef.facts.items %}
+        <tr><td>{{ label }}</td><td>{{ value }}</td></tr>
+        {% endfor %}
+    </table>
+  </div>
+
+  <div class="profile-section reveal">
+    <h2>Biography</h2>
+    <p>{{ chef.biography|linebreaksbr }}</p>
+  </div>
+
+  <div class="profile-section reveal">
+    <h2>Culinary Philosophy</h2>
+    <p>{{ chef.philosophy|linebreaksbr }}</p>
+  </div>
+
+  <!-- Recipes -->
+  <div class="profile-section reveal" id="chefRecipesSection">
+    <h2>Recipes on FCAI - Sofra</h2>
+    <div class="results-list" style="display: flex; flex-direction: column; gap: 20px;">
+        {% for recipe in recipes %}
+        <a class="result-row" href="{% url 'recipe_detail' recipe.recipe_id %}" style="text-decoration: none; color: inherit; display: flex; gap: 20px; background: var(--clr-card-bg); padding: 15px; border-radius: 12px; border: 1px solid var(--clr-border);">
+            <img src="{{ recipe.get_image_url }}" alt="{{ recipe.name }}" style="width: 120px; height: 120px; object-fit: cover; border-radius: 8px;">
+            <div class="result-row__body">
+              <div class="result-row__name" style="font-size: 1.25rem; font-weight: bold; margin-bottom: 5px; color: var(--clr-orange);">{{ recipe.name }}</div>
+              <div class="result-row__meta">
+                <span class="result-row__badge" style="background: rgba(255,107,26,0.1); color: var(--clr-orange); padding: 2px 8px; border-radius: 4px; font-size: 0.85rem;">{{ recipe.course }}</span>
+              </div>
+              <p class="result-row__desc" style="margin-top: 10px; color: var(--clr-muted); font-size: 0.95rem;">{{ recipe.description|truncatechars:150 }}</p>
+            </div>
+        </a>
+        {% empty %}
+        <p style="color:var(--clr-muted)">No recipes found for this chef.</p>
+        {% endfor %}
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <small>FCAI - SOFRA • Authentic Egyptian Flavors</small><br>
+  <a href="#top" style="color: var(--clr-orange); text-decoration: none;">Back to Top <i class="fas fa-chevron-up"></i></a>
+</footer>
+{% endblock %}
