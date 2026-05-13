@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}My Favorites{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/recList.css' %}">
+    <link rel="stylesheet" href="{% static 'css/favorites.css' %}">
+{% endblock %}
+
+{% block content %}
+<!-- Page Hero -->
+<section class="page-hero fav-hero">
+  <div class="page-hero__overlay"></div>
+  <div class="page-hero__content">
+    <span class="page-hero__eyebrow"><i class="fas fa-heart"></i> Your Collection</span>
+    <h1 class="page-hero__title">My Favorites</h1>
+    <p class="page-hero__sub">Recipes you've saved for later.</p>
+  </div>
+</section>
+
+<main style="max-width: 1200px; margin: 0 auto; padding: 40px 20px 60px 20px;">
+  <!-- Loading state -->
+  <div class="rl-loading" id="favLoading">
+    <i class="fas fa-heart fa-spin"></i>
+    <p>Loading your favorites...</p>
+  </div>
+
+  <!-- Empty state -->
+  <div class="fav-empty" id="favEmpty" style="display:none;">
+    <div class="fav-empty__icon">
+      <i class="far fa-heart"></i>
+    </div>
+    <h3>No favorites yet</h3>
+    <p>Browse our recipe collection and tap the <i class="fas fa-heart" style="color:var(--clr-orange)"></i> to save dishes you love.</p>
+    <a href="{% url 'all_recipes' %}" class="btn btn-primary">
+        <i class="fas fa-book-open"></i> Browse Recipes
+    </a>
+  </div>
+
+  <!-- Favorites grid (using All Recipes classes for consistency) -->
+  <div class="rl-grid" id="favGrid"></div>
+</main>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'js/favorites.js' %}"></script>
+{% endblock %}

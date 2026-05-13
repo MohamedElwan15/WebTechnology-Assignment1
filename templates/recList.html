@@ -22,7 +22,13 @@
                 <p class="rl-card__desc">{{ recipe.description|truncatechars:100 }}</p>
 
                 <div class="rl-card__footer">
-                    <span class="rl-card__chef">{{ recipe.chef|default:"Self-Made" }}</span>
+                    <span class="rl-card__chef">
+                        {% if recipe.chef %}
+                            <a href="{% url 'chef_detail' recipe.chef.slug %}" style="color: inherit; text-decoration: none;">{{ recipe.get_chef_name }}</a>
+                        {% else %}
+                            {{ recipe.get_chef_name }}
+                        {% endif %}
+                    </span>
                     <a class="rl-card__view" href="{% url 'recipe_detail' recipe.recipe_id %}">View <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>

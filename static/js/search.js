@@ -60,7 +60,7 @@ function buildResultRow(recipe, query, delay) {
   const hlSnippet = highlight(snippet, query);
 
   return `
-    <a class="result-row" href="recipeInfo.html?id=${recipe.id}" style="animation-delay:${delay}s">
+    <a class="result-row" href="/recipe/${recipe.id}/" style="animation-delay:${delay}s">
       <img class="result-row__img"
            src="${recipe.imageUrl || 'https://images.unsplash.com/photo-1547592180-85f173990554?w=200&q=70'}"
            alt="${recipe.name}"
@@ -172,10 +172,8 @@ async function buildChefFilters() {
 async function init() {
   try {
     allRecipes = await RecipesAPI.getAll();
-    const local = Store.get('sofra_recipes') || [];
-    local.forEach(lr => { if (!allRecipes.find(r => r.id === lr.id)) allRecipes.push(lr); });
   } catch {
-    allRecipes = Store.get('sofra_recipes') || [];
+    allRecipes = [];
   }
 
   await buildChefFilters();

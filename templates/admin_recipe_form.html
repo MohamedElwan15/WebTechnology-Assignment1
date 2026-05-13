@@ -78,9 +78,9 @@
             <label for="chefSelect">Chef</label>
             <select id="chefSelect" name="chefSelect">
                 <option value="">Self-Made (No Chef)</option>
-                <option value="Chef El Sherbiny" {% if recipe.chef == 'Chef El Sherbiny' %}selected{% endif %}>Chef El Sherbiny</option>
-                <option value="Chef Hassan" {% if recipe.chef == 'Chef Hassan' %}selected{% endif %}>Chef Hassan</option>
-                <option value="Chef Nadia El Sayed" {% if recipe.chef == 'Chef Nadia El Sayed' %}selected{% endif %}>Chef Nadia El Sayed</option>
+                {% for c in chefs %}
+                <option value="{{ c.id }}" {% if recipe.chef.id == c.id or recipe.chef_name_legacy == c.name %}selected{% endif %}>{{ c.name }}</option>
+                {% endfor %}
             </select>
         </div>
         <div>

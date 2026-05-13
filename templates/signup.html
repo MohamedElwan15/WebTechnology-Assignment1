@@ -25,6 +25,15 @@
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
+        
+        <div style="margin: 20px 0; display: flex; align-items: center; gap: 10px; background: rgba(255,107,26,0.05); padding: 12px; border-radius: 8px; border: 1px dashed var(--clr-orange);">
+            <input type="checkbox" id="is_admin" name="is_admin" style="width: auto; cursor: pointer;">
+            <label for="is_admin" style="cursor: pointer; font-size: 0.9rem; color: var(--clr-text);">
+                <strong>Register as Admin/Chef</strong><br>
+                <small style="color: var(--clr-muted);">Allows you to add and manage your own recipes.</small>
+            </label>
+        </div>
+
         <button type="submit">Sign Up</button>
     </form>
     <div class="auth-links">

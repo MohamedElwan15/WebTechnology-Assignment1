@@ -10,6 +10,19 @@
   background: linear-gradient(135deg, #0d0d0d 0%, #1a0a00 50%, #0d0d0d 100%);
   overflow: hidden;
 }
+
+/* Light Mode Overrides */
+body.light-mode .search-hero {
+  background: linear-gradient(135deg, #f8f8f8 0%, #ffffff 50%, #f8f8f8 100%);
+  border-bottom: 1px solid var(--clr-border);
+}
+body.light-mode .search-hero::before {
+  background-image: radial-gradient(circle, rgba(255,107,26,0.05) 1px, transparent 1px);
+}
+body.light-mode .search-hero__overlay {
+  background: radial-gradient(ellipse at 50% 100%, rgba(255,107,26,0.06) 0%, transparent 65%);
+}
+
 .search-hero::before {
   content: '';
   position: absolute;
@@ -48,7 +61,7 @@
   font-family: var(--ff-display);
   font-size: clamp(2rem, 5vw, 3.2rem);
   font-weight: 900;
-  color: var(--clr-text);
+  color: #ffffff !important;
   margin: 0 0 0.5rem;
 }
 .search-hero__sub {

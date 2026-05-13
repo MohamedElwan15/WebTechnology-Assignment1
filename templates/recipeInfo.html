@@ -18,10 +18,16 @@
     <span class="ri-hero__course">{{ recipe.course|title }}</span>
     <h1 class="ri-hero__title">{{ recipe.name }}</h1>
     <div class="ri-hero__chef">
-      {% if recipe.chef_img %}
-        <img src="{{ recipe.chef_img }}" alt="{{ recipe.chef }}" onerror="this.style.display='none'">
+      {% if recipe.get_chef_img %}
+        <img src="{{ recipe.get_chef_img }}" alt="{{ recipe.get_chef_name }}" onerror="this.style.display='none'">
       {% endif %}
-      <span>By {{ recipe.chef|default:"Self-Made" }}</span>
+      <span>
+        {% if recipe.chef %}
+          By <a href="{% url 'chef_detail' recipe.chef.slug %}" style="color: inherit; text-decoration: underline;">{{ recipe.get_chef_name }}</a>
+        {% else %}
+          By {{ recipe.get_chef_name }}
+        {% endif %}
+      </span>
     </div>
   </div>
 </section>
@@ -68,8 +74,8 @@
         </div>
 
         <button class="ri-fav-btn" id="favBtn" onclick="handleFav()">
-          <i class="far fa-heart"></i>
-          <span>Add to Favorites</span>
+          <i class="far fa-heart" id="favIcon"></i>
+          <span id="favText">Add to Favorites</span>
         </button>
       </aside>
 
@@ -80,9 +86,63 @@
 
 {% block extra_js %}
 <script>
-    function handleFav() {
-        // Logic for favorites could be added here or kept in base.js
-        showToast("Favorite clicked! (Implement backend logic if needed)");
+    const recipeId = "{{ recipe.recipe_id }}";
+    const favBtn = document.getElementById('favBtn');
+    const favIcon = document.getElementById('favIcon');
+    const favText = document.getElementById('favText');
+
+    function getCookie(name) {
+        const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+        return match ? match[2] : '';
     }
+
+    async function checkFavStatus() {
+        try {
+            const res = await fetch('/api/favorites/');
+            const data = await res.json();
+            const isFav = data.favorites.some(f => f.recipe_id === recipeId);
+            if (isFav) {
+                favIcon.classList.replace('far', 'fas');
+                favText.textContent = "Remove from Favorites";
+            }
+        } catch (err) { console.error(err); }
+    }
+
+    async function handleFav() {
+        {% if not user.is_authenticated %}
+            showToast("Please login to save favorites.");
+            return;
+        {% endif %}
+
+        favBtn.disabled = true;
+        try {
+            const res = await fetch('/api/favorites/toggle/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken'),
+                },
+                body: JSON.stringify({ recipe_id: recipeId }),
+            });
+            const data = await res.json();
+            
+            if (data.status === 'added') {
+                favIcon.classList.replace('far', 'fas');
+                favText.textContent = "Remove from Favorites";
+                showToast("Added to favorites!");
+            } else {
+                favIcon.classList.replace('fas', 'far');
+                favText.textContent = "Add to Favorites";
+                showToast("Removed from favorites.");
+            }
+        } catch (err) {
+            console.error(err);
+            showToast("Something went wrong.");
+        } finally {
+            favBtn.disabled = false;
+        }
+    }
+
+    checkFavStatus();
 </script>
 {% endblock %}

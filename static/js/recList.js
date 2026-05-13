@@ -13,7 +13,9 @@ function courseLabel(course) {
 
 /* ===== Grid Card ===== */
 function buildCard(recipe, isAdmin) {
-  const isFav      = Favorites.has(recipe.id);
+  // Check if favorites is available from Django context or API
+  // For now we still use localStorage if not logged in, but better to check API
+  const isFav = Favorites.has(recipe.id);
   const heartClass = isFav ? 'fav-active' : '';
   const heartIcon  = isFav ? 'fas fa-heart' : 'far fa-heart';
   const heartBtn = isAdmin ? '' : `
@@ -35,7 +37,7 @@ function buildCard(recipe, isAdmin) {
             <img class="rl-card__chef-img" src="${recipe.chefImg||''}" alt="${recipe.chef||''}" onerror="this.style.display='none'">
             ${recipe.chef||'Self-Made'}
           </span>
-          <a class="rl-card__view" href="recipeInfo.html?id=${recipe.id}">View <i class="fas fa-arrow-right"></i></a>
+          <a class="rl-card__view" href="/recipe/${recipe.id}/">View <i class="fas fa-arrow-right"></i></a>
         </div>
       </div>
     </div>`;
@@ -62,7 +64,7 @@ function buildRow(recipe, isAdmin) {
       </div>
       <div class="rl-row__actions">
         ${heartBtn}
-        <a class="rl-row__view" href="recipeInfo.html?id=${recipe.id}">View <i class="fas fa-arrow-right"></i></a>
+        <a class="rl-row__view" href="/recipe/${recipe.id}/">View <i class="fas fa-arrow-right"></i></a>
       </div>
     </div>`;
 }
@@ -79,8 +81,9 @@ function renderGrid(recipes) {
     return;
   }
   empty.style.display = 'none';
+  
+  // isAdmin logic should ideally come from Django, but we'll check Session for now
   const isAdmin = Session.isAdmin();
-  if (isAdmin) document.body.classList.add('admin-view');
 
   if (currentView === 'list') {
     grid.className = 'rl-list';
@@ -93,6 +96,8 @@ function renderGrid(recipes) {
 }
 
 window.toggleFav = function(recipeId, btn) {
+  // If we wanted to use Django API, we'd fetch('/api/favorites/toggle/') here.
+  // For now keeping it compatible with current JS structure.
   if (Favorites.has(recipeId)) {
     Favorites.remove(recipeId);
     btn.classList.remove('fav-active');
@@ -120,10 +125,8 @@ async function init() {
 
   try {
     allRecipes = await RecipesAPI.getAll();
-    const localRecipes = Store.get('sofra_recipes') || [];
-    localRecipes.forEach(lr => { if (!allRecipes.find(r => r.id === lr.id)) allRecipes.push(lr); });
   } catch {
-    allRecipes = Store.get('sofra_recipes') || [];
+    allRecipes = [];
   }
 
   renderGrid(allRecipes);
