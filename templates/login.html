@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block extra_css %}
+<style>
+    .auth-container { max-width: 400px; margin: 50px auto; padding: 30px; background: var(--clr-card-bg); border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+    .auth-container h2 { text-align: center; margin-bottom: 25px; color: var(--clr-orange); }
+    .auth-container form p { margin-bottom: 15px; }
+    .auth-container form input { width: 100%; padding: 10px; border: 1px solid var(--clr-border); border-radius: 6px; background: var(--clr-bg); color: var(--clr-text); }
+    .auth-container button { width: 100%; padding: 12px; background: var(--clr-orange); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+    .auth-links { text-align: center; margin-top: 20px; }
+    .auth-links a { color: var(--clr-orange); text-decoration: none; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <h2>Login to FCAI - SOFRA</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+    </form>
+    <div class="auth-links">
+        Don't have an account? <a href="{% url 'signup' %}">Sign up here</a>
+    </div>
+</div>
+{% endblock %}

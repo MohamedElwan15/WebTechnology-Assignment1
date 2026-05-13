@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{% if recipe %}Edit{% else %}Add{% endif %} Recipe{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/admin.css' %}">
+<style>
+    .row-remove-btn { background: #e74c3c; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; }
+    .ingredient-row, .step-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .ingredient-row input, .step-row input { flex: 1; padding: 8px; border: 1px solid var(--clr-border); border-radius: 4px; background: var(--clr-card-bg); color: var(--clr-text); }
+    
+    /* File Upload Styling */
+    .file-upload-wrapper { position: relative; margin-top: 10px; }
+    .file-upload-label {
+        display: inline-block;
+        padding: 12px 24px;
+        background: var(--clr-orange);
+        color: white;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+    }
+    .file-upload-label:hover { background: #d35400; transform: translateY(-2px); }
+    .file-upload-label i { margin-right: 8px; }
+    #recipe_img {
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+    }
+    .file-name-display { margin-top: 8px; font-size: 0.9rem; color: var(--clr-muted); font-style: italic; }
+</style>
+{% endblock %}
+
+{% block content %}
+<header>
+    <h1><i class="fas {% if recipe %}fa-pencil-alt{% else %}fa-plus-circle{% endif %}"></i> {% if recipe %}Edit{% else %}Add{% endif %} Recipe</h1>
+</header>
+<main>
+    <form action="" method="POST" id="addRecipeForm" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div>
+            <label for="Recipe_name">Recipe Name</label>
+            <input required type="text" id="Recipe_name" placeholder="Ex- White sauce pasta" name="RecipeName" value="{{ recipe.name|default:'' }}">
+        </div>
+        <div>
+            <label>Recipe Image</label>
+            <div class="file-upload-wrapper">
+                <label for="recipe_img" class="file-upload-label">
+                    <i class="fas fa-cloud-upload-alt"></i> Choose Image
+                    <input type="file" id="recipe_img" name="recipe_img" accept="image/*" onchange="updateFileName(this)">
+                </label>
+                <div id="fileName" class="file-name-display">No file chosen</div>
+            </div>
+            {% if recipe.get_image_url %}
+            <div style="margin-top: 15px;">
+                <p style="margin-bottom: 8px; font-weight: 600;">Current Image:</p>
+                <img src="{{ recipe.get_image_url }}" alt="Preview" style="width:220px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+            </div>
+            {% endif %}
+        </div>
+        <div>
+            <label for="course">Course</label>
+            <select name="Courses" id="course" required>
+                <option value="" disabled {% if not recipe %}selected{% endif %}>Select a course...</option>
+                <option value="appetizers" {% if recipe.course == 'appetizers' %}selected{% endif %}>Appetizers</option>
+                <option value="main_course" {% if recipe.course == 'main_course' %}selected{% endif %}>Main Course</option>
+                <option value="dessert" {% if recipe.course == 'dessert' %}selected{% endif %}>Dessert</option>
+            </select>
+        </div>
+        <div>
+            <label for="chefSelect">Chef</label>
+            <select id="chefSelect" name="chefSelect">
+                <option value="">Self-Made (No Chef)</option>
+                <option value="Chef El Sherbiny" {% if recipe.chef == 'Chef El Sherbiny' %}selected{% endif %}>Chef El Sherbiny</option>
+                <option value="Chef Hassan" {% if recipe.chef == 'Chef Hassan' %}selected{% endif %}>Chef Hassan</option>
+                <option value="Chef Nadia El Sayed" {% if recipe.chef == 'Chef Nadia El Sayed' %}selected{% endif %}>Chef Nadia El Sayed</option>
+            </select>
+        </div>
+        <div>
+            <label for="Descriptionn">Description</label>
+            <br>
+            <textarea required name="Description" id="Descriptionn" cols="40" rows="3" placeholder="Recipe Description">{{ recipe.description|default:'' }}</textarea>
+        </div>
+        
+        <fieldset>
+            <legend><i class="fas fa-list"></i> Ingredients</legend>
+            <div id="ingredientsList">
+                {% if recipe %}
+                    {% for ing in recipe.ingredients %}
+                    <div class="ingredient-row">
+                        <input type="text" name="ing_name[]" placeholder="Name" value="{{ ing.name }}">
+                        <input type="text" name="ing_qty[]" placeholder="Quantity" value="{{ ing.qty }}">
+                        <button type="button" class="row-remove-btn" onclick="this.parentElement.remove()"><i class="fas fa-times"></i></button>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                <div class="ingredient-row">
+                    <input type="text" name="ing_name[]" placeholder="Name">
+                    <input type="text" name="ing_qty[]" placeholder="Quantity">
+                    <button type="button" class="row-remove-btn" onclick="this.parentElement.remove()"><i class="fas fa-times"></i></button>
+                </div>
+                {% endif %}
+            </div>
+            <button type="button" id="addIngredientBtn" style="background: var(--clr-orange); color: white; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; margin-top: 10px;">
+                <i class="fas fa-plus"></i> Add Ingredient
+            </button> 
+        </fieldset>
+
+        <fieldset>
+            <legend><i class="fas fa-clipboard-list"></i> Instructions</legend>
+            <div id="stepsList">
+                {% if recipe %}
+                    {% for step in recipe.steps %}
+                    <div class="step-row">
+                        <input type="text" name="step[]" placeholder="Step description" value="{{ step }}">
+                        <button type="button" class="row-remove-btn" onclick="this.parentElement.remove()"><i class="fas fa-times"></i></button>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                <div class="step-row">
+                    <input type="text" name="step[]" placeholder="Step description">
+                    <button type="button" class="row-remove-btn" onclick="this.parentElement.remove()"><i class="fas fa-times"></i></button>
+                </div>
+                {% endif %}
+            </div>
+            <button type="button" id="addStepBtn" style="background: var(--clr-orange); color: white; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; margin-top: 10px;">
+                <i class="fas fa-plus"></i> Add Step
+            </button>
+        </fieldset>
+
+        <button type="submit" style="background: var(--clr-orange); color: white; border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer; font-size: 1.1rem; margin-top: 20px; font-weight: bold;">
+            <i class="fas fa-save"></i> Save Recipe
+        </button>
+    </form>
+</main>
+
+<script>
+    function updateFileName(input) {
+        const fileNameDisplay = document.getElementById('fileName');
+        if (input.files && input.files[0]) {
+            fileNameDisplay.textContent = input.files[0].name;
+        } else {
+            fileNameDisplay.textContent = 'No file chosen';
+        }
+    }
+
+    document.getElementById('addIngredientBtn').addEventListener('click', () => {
+        const container = document.getElementById('ingredientsList');
+        const row = document.createElement('div');
+        row.className = 'ingredient-row';
+        row.innerHTML = `
+            <input type="text" name="ing_name[]" placeholder="Name">
+            <input type="text" name="ing_qty[]" placeholder="Quantity">
+            <button type="button" class="row-remove-btn" onclick="this.parentElement.remove()"><i class="fas fa-times"></i></button>
+        `;
+        container.appendChild(row);
+    });
+
+    document.getElementById('addStepBtn').addEventListener('click', () => {
+        const container = document.getElementById('stepsList');
+        const row = document.createElement('div');
+        row.className = 'step-row';
+        row.innerHTML = `
+            <input type="text" name="step[]" placeholder="Step description">
+            <button type="button" class="row-remove-btn" onclick="this.parentElement.remove()"><i class="fas fa-times"></i></button>
+        `;
+        container.appendChild(row);
+    });
+</script>
+{% endblock %}

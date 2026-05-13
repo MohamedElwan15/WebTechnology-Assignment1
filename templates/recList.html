@@ -12,7 +12,7 @@
     {% for recipe in recipes %}
         <div class="rl-card reveal">
             <div class="rl-card__img-wrap">
-                <img class="rl-card__img" src="{% static recipe.image_url %}" alt="{{ recipe.name }}"
+                <img class="rl-card__img" src="{{ recipe.get_image_url }}" alt="{{ recipe.name }}"
                      onerror="this.src='https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=75'">
                 <span class="rl-card__course">{{ recipe.course }}</span>
             </div>
