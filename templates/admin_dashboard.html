@@ -35,8 +35,8 @@
                 <td style="padding: 12px;">{{ recipe.name }}</td>
                 <td style="padding: 12px;">{{ recipe.course }}</td>
                 <td style="padding: 12px;">
-                    {% if recipe.image_url %}
-                    <img src="{{ recipe.image_url }}" alt="{{ recipe.name }}" width="80" style="border-radius:6px;">
+                    {% if recipe.get_image_url %}
+                    <img src="{{ recipe.get_image_url }}" alt="{{ recipe.name }}" width="80" style="border-radius:6px;">
                     {% else %}
                     No image
                     {% endif %}

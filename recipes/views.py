@@ -24,8 +24,15 @@ def home(request):
 
 def recipesList(request):
     all_recipes = Recipe.objects.all()
+    
+    # Filter by course if provided
+    course = request.GET.get('course', 'all')
+    if course != 'all':
+        all_recipes = all_recipes.filter(course=course)
+    
     context = {
-        'recipes': all_recipes
+        'recipes': all_recipes,
+        'active_course': course
     }
     return render(request, 'recList.html', context)
 
@@ -58,7 +65,21 @@ def search(request):
         if chef_slug == '__selfmade__':
             results = results.filter(chef__isnull=True, chef_name_legacy__isnull=True)
         else:
-            results = results.filter(models.Q(chef__slug=chef_slug) | models.Q(chef__name=chef_slug))
+            # Try to find chef by slug first
+            chef_obj = Chef.objects.filter(slug=chef_slug).first()
+            if chef_obj:
+                # Match both by ForeignKey and by legacy name
+                results = results.filter(
+                    models.Q(chef=chef_obj) | 
+                    models.Q(chef__slug=chef_slug) | 
+                    models.Q(chef_name_legacy=chef_obj.name)
+                )
+            else:
+                # Fallback: try matching by slug or name directly
+                results = results.filter(
+                    models.Q(chef__slug=chef_slug) | 
+                    models.Q(chef__name=chef_slug)
+                )
 
     context = {
         'query': query,
@@ -114,7 +135,7 @@ def favorites_page(request):
 
 @staff_member_required
 def admin_dashboard(request):
-    recipes = Recipe.objects.filter(creator=request.user)
+    recipes = Recipe.objects.all()
     return render(request, 'admin_dashboard.html', {'recipes': recipes})
 
 @staff_member_required
@@ -122,7 +143,7 @@ def admin_recipe_upsert(request, recipe_id=None):
     recipe = None
     chefs = Chef.objects.all()
     if recipe_id:
-        recipe = get_object_or_404(Recipe, recipe_id=recipe_id, creator=request.user)
+        recipe = get_object_or_404(Recipe, recipe_id=recipe_id)
 
     if request.method == 'POST':
         name = request.POST.get('RecipeName')

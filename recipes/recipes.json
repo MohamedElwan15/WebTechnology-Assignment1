@@ -2,7 +2,7 @@
   {
     "id": "koshary-001",
     "name": "Koshary",
-    "course": "Main Course",
+    "course": "main_course",
     "description": "Egypt's beloved national dish — a hearty mix of rice, lentils, pasta, and chickpeas topped with a spiced tomato sauce and crispy fried onions.",
     "imageUrl": "images/koshary.png",
     "chef": "Chef Hassan",
@@ -34,7 +34,7 @@
   {
     "id": "molokhya-002",
     "name": "Molokhya",
-    "course": "Main Course",
+    "course": "main_course",
     "description": "A rich, velvety green soup made from jute leaves, simmered with chicken broth and finished with a fragrant garlic and coriander ta'leya.",
     "imageUrl": "images/molokhya.png",
     "chef": "Chef El Sherbiny",
@@ -62,7 +62,7 @@
   {
     "id": "bashamel-003",
     "name": "Macarona Bashamel",
-    "course": "Main Course",
+    "course": "main_course",
     "description": "Egypt's iconic baked pasta — layers of macaroni and spiced minced meat smothered in a thick, creamy béchamel sauce and baked until golden.",
     "imageUrl": "images/Bashamel.jpg",
     "chef": "Chef Nadia El Sayed",
@@ -93,7 +93,7 @@
   {
     "id": "chicken-ranch-004",
     "name": "Chicken Ranch",
-    "course": "Main Course",
+    "course": "main_course",
     "description": "Tender grilled chicken marinated in ranch spices, served with a tangy homemade ranch dipping sauce and fresh vegetables.",
     "imageUrl": "images/chickenranch.png",
     "chef": "Chef Hassan",
@@ -122,7 +122,7 @@
   {
     "id": "macarona-005",
     "name": "Macarona bil Lahma",
-    "course": "Main Course",
+    "course": "main_course",
     "description": "A comforting Egyptian stovetop pasta — macaroni simmered in a rich, spiced tomato and beef sauce until it soaks up all the flavour.",
     "imageUrl": "images/macarona.png",
     "chef": "Chef El Sherbiny",
@@ -146,5 +146,179 @@
       "Cook on medium heat, stirring occasionally, until pasta is tender and sauce is absorbed.",
       "Adjust seasoning and serve hot."
     ]
+  },
+  {
+    "id": "hummus-006",
+    "name": "Hummus",
+    "course": "appetizers",
+    "description": "Creamy and smooth chickpea dip infused with tahini, lemon, and garlic — a classic Egyptian appetizer served with warm pita bread.",
+    "imageUrl": "https://images.unsplash.com/photo-1599599810694-dcf7a6d49bbc?w=600&q=75",
+    "chef": "Chef El Sherbiny",
+    "chefImg": "https://assets.minly.com/assets/avatars/zPtgfPwF2LsozVn2g6MEl.jpg",
+    "featured": false,
+    "ingredients": [
+      { "name": "Canned chickpeas", "qty": "2 cans (800g)" },
+      { "name": "Tahini", "qty": "1/4 cup" },
+      { "name": "Lemon juice", "qty": "3 tbsp" },
+      { "name": "Garlic cloves", "qty": "3 cloves" },
+      { "name": "Olive oil", "qty": "3 tbsp" },
+      { "name": "Salt", "qty": "to taste" },
+      { "name": "Cumin", "qty": "1/2 tsp" },
+      { "name": "Paprika", "qty": "for garnish" }
+    ],
+    "steps": [
+      "Drain chickpeas and reserve 1/2 cup of the canning liquid.",
+      "Add chickpeas, tahini, lemon juice, and garlic to a food processor.",
+      "Blend until smooth, adding chickpea liquid gradually until you reach desired consistency.",
+      "Season with salt and cumin.",
+      "Transfer to a serving bowl and drizzle with olive oil.",
+      "Garnish with paprika and serve with pita bread."
+    ]
+  },
+  {
+    "id": "baba-ganoush-007",
+    "name": "Baba Ganoush",
+    "course": "appetizers",
+    "description": "Smoky and silky eggplant dip made with tahini and lemon, perfect as a starter or mezze platter addition.",
+    "imageUrl": "https://images.unsplash.com/photo-1541519611525-c61ec36c3fe5?w=600&q=75",
+    "chef": "Chef Nadia El Sayed",
+    "chefImg": "https://yt3.googleusercontent.com/wEwWYlGQVCpenDDdkc_CNYQiFHzzixW6Bd7gGlGrOlbnq3XpPzytMa3mOq48Wxcj_qOx1xmXOw=s900-c-k-c0x00ffffff-no-rj",
+    "featured": false,
+    "ingredients": [
+      { "name": "Eggplants", "qty": "2 large" },
+      { "name": "Tahini", "qty": "3 tbsp" },
+      { "name": "Lemon juice", "qty": "3 tbsp" },
+      { "name": "Garlic cloves", "qty": "3 cloves" },
+      { "name": "Olive oil", "qty": "2 tbsp" },
+      { "name": "Salt & pepper", "qty": "to taste" },
+      { "name": "Pomegranate seeds", "qty": "for garnish" }
+    ],
+    "steps": [
+      "Prick eggplants and roast over open flame or in oven at 200°C until charred and soft (20-30 minutes).",
+      "Let cool, then scoop out the flesh and discard the skin.",
+      "Add eggplant flesh, tahini, lemon juice, and garlic to a food processor.",
+      "Blend until creamy and smooth.",
+      "Season with salt and pepper.",
+      "Drizzle with olive oil and garnish with pomegranate seeds.",
+      "Serve with pita bread or vegetables."
+    ]
+  },
+  {
+    "id": "muhammarah-008",
+    "name": "Muhammarah",
+    "course": "appetizers",
+    "description": "A vibrant red pepper and walnut dip with a tangy pomegranate twist, a delicious appetizer from the Levantine tradition.",
+    "imageUrl": "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&q=75",
+    "chef": "Chef Hassan",
+    "chefImg": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJYSpXwt07ODmH4Lw1r8uQLuTHqijHV-bZmA&s",
+    "featured": false,
+    "ingredients": [
+      { "name": "Red bell peppers", "qty": "3 large" },
+      { "name": "Walnuts", "qty": "1 cup" },
+      { "name": "Pomegranate molasses", "qty": "2 tbsp" },
+      { "name": "Breadcrumbs", "qty": "1/2 cup" },
+      { "name": "Garlic cloves", "qty": "2 cloves" },
+      { "name": "Olive oil", "qty": "3 tbsp" },
+      { "name": "Salt & cumin", "qty": "to taste" }
+    ],
+    "steps": [
+      "Roast red peppers over an open flame until charred on all sides.",
+      "Place in a plastic bag for 10 minutes to steam, then peel off the skin.",
+      "Remove stems and seeds, then chop the peppers.",
+      "In a food processor, blend peppers, walnuts, pomegranate molasses, breadcrumbs, and garlic.",
+      "Add olive oil and blend until smooth and creamy.",
+      "Season with salt and cumin.",
+      "Serve with pita bread and drizzle with more olive oil."
+    ]
+  },
+  {
+    "id": "kunafa-009",
+    "name": "Kunafa",
+    "course": "dessert",
+    "description": "A crispy and sweet Egyptian pastry layered with cheese and shredded pastry, baked until golden and drizzled with fragrant simple syrup.",
+    "imageUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=75",
+    "chef": "Chef Nadia El Sayed",
+    "chefImg": "https://yt3.googleusercontent.com/wEwWYlGQVCpenDDdkc_CNYQiFHzzixW6Bd7gGlGrOlbnq3XpPzytMa3mOq48Wxcj_qOx1xmXOw=s900-c-k-c0x00ffffff-no-rj",
+    "featured": false,
+    "ingredients": [
+      { "name": "Kunafa pastry (shredded)", "qty": "500g" },
+      { "name": "Akkawi cheese", "qty": "500g" },
+      { "name": "Butter", "qty": "200g" },
+      { "name": "Sugar", "qty": "1 cup" },
+      { "name": "Water", "qty": "1 cup" },
+      { "name": "Lemon juice", "qty": "1 tbsp" },
+      { "name": "Rose water", "qty": "1 tbsp" },
+      { "name": "Pistachios", "qty": "for garnish" }
+    ],
+    "steps": [
+      "Make simple syrup: boil sugar and water for 10 minutes, add lemon juice and rose water, then cool completely.",
+      "Soak kunafa pastry in melted butter until well coated.",
+      "Layer half the buttered kunafa in a greased baking dish.",
+      "Slice akkawi cheese thinly and layer over the pastry.",
+      "Top with remaining kunafa and press gently.",
+      "Bake at 180°C for 25-30 minutes until golden brown.",
+      "Pour cooled syrup over the hot kunafa immediately after baking.",
+      "Garnish with crushed pistachios and serve warm."
+    ]
+  },
+  {
+    "id": "basboosa-010",
+    "name": "Basboosa",
+    "course": "dessert",
+    "description": "Sweet coconut and semolina cake topped with an almond, soaked in aromatic simple syrup — a beloved Egyptian treat.",
+    "imageUrl": "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600&q=75",
+    "chef": "Chef El Sherbiny",
+    "chefImg": "https://assets.minly.com/assets/avatars/zPtgfPwF2LsozVn2g6MEl.jpg",
+    "featured": false,
+    "ingredients": [
+      { "name": "Semolina", "qty": "2 cups" },
+      { "name": "Shredded coconut", "qty": "1 cup" },
+      { "name": "Yogurt", "qty": "1 cup" },
+      { "name": "Sugar", "qty": "1/4 cup" },
+      { "name": "Baking powder", "qty": "1 tsp" },
+      { "name": "Whole almonds", "qty": "25-30" },
+      { "name": "Sugar", "qty": "1 cup (for syrup)" },
+      { "name": "Water", "qty": "1 cup (for syrup)" },
+      { "name": "Rose water", "qty": "1 tbsp" }
+    ],
+    "steps": [
+      "Mix semolina, coconut, yogurt, sugar, and baking powder until well combined.",
+      "Press the mixture into a greased 9x13 inch pan, smoothing the top.",
+      "Cut into diamond or square shapes and place an almond in the center of each piece.",
+      "Bake at 160°C for 25-30 minutes until light golden.",
+      "Meanwhile, boil sugar and water for 10 minutes, add rose water, then cool completely.",
+      "Pour cold syrup over hot basboosa immediately after removing from oven.",
+      "Let cool before serving. Store in an airtight container."
+    ]
+  },
+  {
+    "id": "umm-ali-011",
+    "name": "Umm Ali",
+    "course": "dessert",
+    "description": "A luxurious Egyptian bread pudding made with puff pastry, milk, and nuts — traditionally served warm as the ultimate comfort dessert.",
+    "imageUrl": "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&q=75",
+    "chef": "Chef Hassan",
+    "chefImg": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJYSpXwt07ODmH4Lw1r8uQLuTHqijHV-bZmA&s",
+    "featured": false,
+    "ingredients": [
+      { "name": "Puff pastry sheets", "qty": "3 sheets" },
+      { "name": "Whole milk", "qty": "1 litre" },
+      { "name": "Coconut milk", "qty": "1 cup" },
+      { "name": "Sugar", "qty": "1/2 cup" },
+      { "name": "Mixed nuts (almonds, pistachios)", "qty": "1 cup" },
+      { "name": "Raisins", "qty": "1/2 cup" },
+      { "name": "Vanilla extract", "qty": "1 tsp" },
+      { "name": "Cinnamon", "qty": "for garnish" }
+    ],
+    "steps": [
+      "Layer puff pastry sheets on a baking tray and bake at 200°C for 10-12 minutes until golden and crispy.",
+      "Cool pastry, then tear into large bite-sized pieces and layer in a baking dish.",
+      "Scatter nuts and raisins over the pastry pieces.",
+      "Heat milk and coconut milk together, then stir in sugar until dissolved.",
+      "Add vanilla extract, then pour the hot milk mixture over the pastry.",
+      "Bake at 180°C for 15-20 minutes until the top is light brown.",
+      "Serve warm, garnished with cinnamon and additional nuts."
+    ]
   }
 ]
+

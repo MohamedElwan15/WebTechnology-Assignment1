@@ -8,6 +8,16 @@
 {% endblock %}
 
 {% block content %}
+  <!-- Filter Buttons -->
+  <div class="recipe-filters" style="padding: 2rem; text-align: center; border-bottom: 1px solid var(--clr-border);">
+    <div class="filter-group" style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+      <a href="?course=all" class="filter-btn {% if active_course == 'all' %}active{% endif %}" data-course="all" style="padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid var(--clr-border); cursor: pointer; text-decoration: none; {% if active_course == 'all' %}background: var(--clr-primary); color: white;{% endif %}">All</a>
+      <a href="?course=appetizers" class="filter-btn {% if active_course == 'appetizers' %}active{% endif %}" data-course="appetizers" style="padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid var(--clr-border); cursor: pointer; text-decoration: none; {% if active_course == 'appetizers' %}background: var(--clr-primary); color: white;{% endif %}">Appetizers</a>
+      <a href="?course=main_course" class="filter-btn {% if active_course == 'main_course' %}active{% endif %}" data-course="main_course" style="padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid var(--clr-border); cursor: pointer; text-decoration: none; {% if active_course == 'main_course' %}background: var(--clr-primary); color: white;{% endif %}">Main Course</a>
+      <a href="?course=dessert" class="filter-btn {% if active_course == 'dessert' %}active{% endif %}" data-course="dessert" style="padding: 0.5rem 1rem; border-radius: 20px; border: 1px solid var(--clr-border); cursor: pointer; text-decoration: none; {% if active_course == 'dessert' %}background: var(--clr-primary); color: white;{% endif %}">Desserts</a>
+    </div>
+  </div>
+
   <div class="rl-grid" id="recipeGrid">
     {% for recipe in recipes %}
         <div class="rl-card reveal">

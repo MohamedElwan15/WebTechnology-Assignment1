@@ -332,9 +332,11 @@
 }
 
 .recipe-card__img-wrap {
-  height: 180px;
+  height: 220px;
   overflow: hidden;
   position: relative;
+  aspect-ratio: 1 / 0.75;
+  background: var(--clr-border);
 }
 
 .recipe-card__img {
@@ -342,6 +344,7 @@
   height: 100%;
   object-fit: cover;
   transition: transform 0.4s;
+  display: block;
 }
 
 .recipe-card:hover .recipe-card__img {
