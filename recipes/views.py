@@ -250,7 +250,7 @@ def list_favorites(request):
             "course":      f.recipe.course,
             "description": f.recipe.description,
             "image_url":   f.recipe.get_image_url,
-            "chef":        f.recipe.chef or "",
+            "chef":        f.recipe.get_chef_name,
         }
         for f in favs
     ]

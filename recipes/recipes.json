@@ -1,0 +1,150 @@
+[
+  {
+    "id": "koshary-001",
+    "name": "Koshary",
+    "course": "Main Course",
+    "description": "Egypt's beloved national dish — a hearty mix of rice, lentils, pasta, and chickpeas topped with a spiced tomato sauce and crispy fried onions.",
+    "imageUrl": "images/koshary.png",
+    "chef": "Chef Hassan",
+    "chefImg": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJYSpXwt07ODmH4Lw1r8uQLuTHqijHV-bZmA&s",
+    "featured": true,
+    "ingredients": [
+      { "name": "White rice", "qty": "1 cup" },
+      { "name": "Brown lentils", "qty": "1 cup" },
+      { "name": "Elbow macaroni", "qty": "1 cup" },
+      { "name": "Chickpeas (cooked)", "qty": "1 cup" },
+      { "name": "Crushed tomatoes", "qty": "2 cups" },
+      { "name": "White vinegar", "qty": "2 tbsp" },
+      { "name": "Garlic cloves", "qty": "4 cloves" },
+      { "name": "Large onion", "qty": "2" },
+      { "name": "Cumin", "qty": "1 tsp" },
+      { "name": "Salt & pepper", "qty": "to taste" },
+      { "name": "Oil", "qty": "for frying" }
+    ],
+    "steps": [
+      "Cook lentils in salted water until tender, then drain.",
+      "Cook rice separately and mix with lentils while warm.",
+      "Boil macaroni until al dente, drain and set aside.",
+      "Fry sliced onions in oil until deeply golden and crispy. Remove and drain.",
+      "In the same pan, sauté garlic, add crushed tomatoes, vinegar, cumin, salt, and pepper. Simmer 15 minutes.",
+      "To serve: layer rice-lentil mix, then macaroni, then chickpeas.",
+      "Top with tomato sauce and crispy onions."
+    ]
+  },
+  {
+    "id": "molokhya-002",
+    "name": "Molokhya",
+    "course": "Main Course",
+    "description": "A rich, velvety green soup made from jute leaves, simmered with chicken broth and finished with a fragrant garlic and coriander ta'leya.",
+    "imageUrl": "images/molokhya.png",
+    "chef": "Chef El Sherbiny",
+    "chefImg": "https://assets.minly.com/assets/avatars/zPtgfPwF2LsozVn2g6MEl.jpg",
+    "featured": true,
+    "ingredients": [
+      { "name": "Frozen molokhya leaves", "qty": "400g" },
+      { "name": "Chicken broth", "qty": "3 cups" },
+      { "name": "Garlic cloves", "qty": "6 cloves" },
+      { "name": "Ground coriander", "qty": "1 tbsp" },
+      { "name": "Butter", "qty": "2 tbsp" },
+      { "name": "Salt", "qty": "to taste" },
+      { "name": "White rice", "qty": "for serving" }
+    ],
+    "steps": [
+      "Bring chicken broth to a boil in a large pot.",
+      "Add frozen molokhya and stir until fully thawed and simmering.",
+      "Season with salt and simmer on low for 5 minutes.",
+      "Crush garlic with a pinch of salt until it forms a paste.",
+      "Melt butter in a small pan, add garlic paste and ground coriander. Fry 30 seconds until fragrant.",
+      "Pour the garlic ta'leya into the soup and stir immediately.",
+      "Serve hot over white rice with a side of chicken and bread."
+    ]
+  },
+  {
+    "id": "bashamel-003",
+    "name": "Macarona Bashamel",
+    "course": "Main Course",
+    "description": "Egypt's iconic baked pasta — layers of macaroni and spiced minced meat smothered in a thick, creamy béchamel sauce and baked until golden.",
+    "imageUrl": "images/Bashamel.jpg",
+    "chef": "Chef Nadia El Sayed",
+    "chefImg": "https://yt3.googleusercontent.com/wEwWYlGQVCpenDDdkc_CNYQiFHzzixW6Bd7gGlGrOlbnq3XpPzytMa3mOq48Wxcj_qOx1xmXOw=s900-c-k-c0x00ffffff-no-rj",
+    "featured": true,
+    "ingredients": [
+      { "name": "Penne or macaroni", "qty": "500g" },
+      { "name": "Minced beef", "qty": "400g" },
+      { "name": "Onion", "qty": "1 large" },
+      { "name": "Tomato paste", "qty": "2 tbsp" },
+      { "name": "Butter", "qty": "100g" },
+      { "name": "All-purpose flour", "qty": "6 tbsp" },
+      { "name": "Milk", "qty": "1 litre" },
+      { "name": "Egg", "qty": "2" },
+      { "name": "Nutmeg", "qty": "1/4 tsp" },
+      { "name": "Salt & pepper", "qty": "to taste" }
+    ],
+    "steps": [
+      "Cook pasta until al dente, drain and set aside.",
+      "Sauté diced onion until soft, add minced beef and cook until browned. Stir in tomato paste, salt, and pepper.",
+      "Make béchamel: melt butter, whisk in flour for 1 minute, then gradually add milk whisking constantly until thick.",
+      "Remove béchamel from heat, season with nutmeg and salt, then beat in eggs quickly.",
+      "In a greased baking dish layer: half the pasta, all the meat, remaining pasta.",
+      "Pour béchamel over the top, spreading evenly.",
+      "Bake at 180°C for 35–40 minutes until the top is deep golden."
+    ]
+  },
+  {
+    "id": "chicken-ranch-004",
+    "name": "Chicken Ranch",
+    "course": "Main Course",
+    "description": "Tender grilled chicken marinated in ranch spices, served with a tangy homemade ranch dipping sauce and fresh vegetables.",
+    "imageUrl": "images/chickenranch.png",
+    "chef": "Chef Hassan",
+    "chefImg": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJYSpXwt07ODmH4Lw1r8uQLuTHqijHV-bZmA&s",
+    "featured": false,
+    "ingredients": [
+      { "name": "Chicken breasts", "qty": "4 pieces" },
+      { "name": "Olive oil", "qty": "3 tbsp" },
+      { "name": "Garlic powder", "qty": "1 tsp" },
+      { "name": "Onion powder", "qty": "1 tsp" },
+      { "name": "Dried dill", "qty": "1 tsp" },
+      { "name": "Dried parsley", "qty": "1 tsp" },
+      { "name": "Paprika", "qty": "1/2 tsp" },
+      { "name": "Salt & pepper", "qty": "to taste" },
+      { "name": "Lemon juice", "qty": "2 tbsp" }
+    ],
+    "steps": [
+      "Mix olive oil, garlic powder, onion powder, dill, parsley, paprika, salt, pepper, and lemon juice.",
+      "Score the chicken breasts and coat thoroughly with the marinade.",
+      "Cover and refrigerate for at least 1 hour, ideally overnight.",
+      "Grill over medium-high heat for 6–7 minutes per side until cooked through.",
+      "Let rest 5 minutes before slicing.",
+      "Serve with ranch dipping sauce and a fresh salad."
+    ]
+  },
+  {
+    "id": "macarona-005",
+    "name": "Macarona bil Lahma",
+    "course": "Main Course",
+    "description": "A comforting Egyptian stovetop pasta — macaroni simmered in a rich, spiced tomato and beef sauce until it soaks up all the flavour.",
+    "imageUrl": "images/macarona.png",
+    "chef": "Chef El Sherbiny",
+    "chefImg": "https://assets.minly.com/assets/avatars/zPtgfPwF2LsozVn2g6MEl.jpg",
+    "featured": false,
+    "ingredients": [
+      { "name": "Short macaroni", "qty": "400g" },
+      { "name": "Minced beef", "qty": "300g" },
+      { "name": "Tomato sauce", "qty": "2 cups" },
+      { "name": "Onion", "qty": "1 medium" },
+      { "name": "Garlic", "qty": "3 cloves" },
+      { "name": "Mixed spices (7-spice)", "qty": "1 tsp" },
+      { "name": "Salt & pepper", "qty": "to taste" },
+      { "name": "Oil", "qty": "2 tbsp" }
+    ],
+    "steps": [
+      "Sauté diced onion and garlic in oil until golden.",
+      "Add minced beef and cook until browned, breaking up any lumps.",
+      "Stir in tomato sauce, 7-spice, salt, and pepper. Simmer 10 minutes.",
+      "Add raw macaroni to the sauce with enough water to cover by 2cm.",
+      "Cook on medium heat, stirring occasionally, until pasta is tender and sauce is absorbed.",
+      "Adjust seasoning and serve hot."
+    ]
+  }
+]

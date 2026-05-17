@@ -27,8 +27,8 @@ class Command(BaseCommand):
                     'course': item['course'],
                     'description': item['description'],
                     'image_url': item.get('imageUrl', ''),
-                    'chef': item.get('chef', ''),
-                    'chef_img': item.get('chefImg', ''),
+                    'chef_name_legacy': item.get('chef', ''),
+                    'chef_img_legacy': item.get('chefImg', ''),
                     'featured': item.get('featured', False),
                     'ingredients': item.get('ingredients', []),
                     'steps': item.get('steps', [])
